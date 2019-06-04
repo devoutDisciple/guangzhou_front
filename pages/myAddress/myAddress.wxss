@@ -1,0 +1,68 @@
+.myAddress{
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	font-size: 14px;
+	color: #333;
+}
+.myAddress_content{
+	height: calc(100vh - 50px);
+	width: calc(100vw - 20px);
+	margin-left: 10px;
+}
+.myAddress_content_item{
+	height: 70px;
+	border-bottom: 1px solid #ebebeb;
+	position: relative;
+	padding: 10px 0;
+}
+.myAddress_content_item_radio{
+	width: 30px;
+	height: 100%;
+	padding-top: 25px;
+	line-height: 100%;
+}
+.myAddress_content_item_desc{
+	width: calc(100vw - 50px);
+	height: 100%;
+}
+.myAddress_content_item_desc_address_item{
+	margin-right: 10px;
+}
+.myAddress_content_item_desc_address{
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+}
+.myAddress_content_item_desc_person{
+	height: 40px;
+	line-height: 40px;
+	color: #bebebe;
+}
+.myAddress_content_item_desc_sex{
+	margin-left: 20px;
+}
+.myAddress_content_item_desc_phone{
+	margin-left: 30px;
+}
+.myAddress_content_item_edit{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+}
+.myAddress_content_item_edit image{
+	width: 100%;
+	height: 100%;
+}
+
+.myAddress_footer{
+	height: 50px;
+	width: 100%;
+	border-top: 1px solid #ebebeb;
+	color: #07c2a4;
+	line-height: 50px;
+	text-align: center;
+	font-size: 16px;
+}

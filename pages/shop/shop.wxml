@@ -1,0 +1,147 @@
+<view class="shop">
+    <!-- 头部导航 -->
+    <van-row custom-class="shop_header">
+        <van-col custom-class="shop_header_img">
+            <image src="{{shopDetail.url}}" />
+        </van-col>
+        <van-col custom-class="shop_header_desc">
+           <van-row custom-class="shop_header_desc_text">
+                公告：{{shopDetail.desc}}
+           </van-row>
+           <van-row custom-class="shop_header_desc_send">
+               起送 ￥{{shopDetail.start_price}} 配送 ￥{{shopDetail.send_price}}
+           </van-row>
+           <van-row custom-class="shop_header_desc_tag">
+                <van-tag
+                    custom-class="shop_header_desc_tag_item"
+                    type="danger"
+                    wx:for="{{shopDetail.special}}"
+                    wx:key="{{index}}">
+                    满{{item.origin}}减{{item.discount}}
+                </van-tag>
+           </van-row>
+        </van-col>
+    </van-row>
+    <van-row custom-class="{{active == 0 ? 'shop_content' : 'shop_content_nofooter'}}">
+        <van-tabs active="{{ active }}" animated bind:click="onChangeTab">
+            <van-tab title="菜单">
+                <van-row custom-class="shop_content_list" wx:if="{{types.length != 0}}">
+                    <van-col custom-class="shop_content_list_type">
+                        <scroll-view class="shop_content_list_type_scroll" scroll-y>
+                            <van-row
+                                bindtap="changeSelectIndex"
+                                custom-class="{{item == selectTypes ? 'shop_content_list_type_item_active' : 'shop_content_list_type_item'}}"
+                                data-type="{{item}}"
+                                wx:for="{{types}}"
+                                wx:key="{{index}}">
+                                {{item}}
+                            </van-row>
+                        </scroll-view>
+                    </van-col>
+                    <van-col custom-class="shop_content_list_goods">
+                        <scroll-view class="shop_content_list_goods_scroll" scroll-y>
+                            <van-row custom-class="shop_content_list_goods_title">{{selectTypes}}</van-row>
+                            <van-row
+                                custom-class="shop_content_list_goods_item"
+								wx:if="{{item.type == selectTypes}}"
+                                wx:for="{{goodsList}}"
+                                wx:key="{{index}}">
+                                <van-col custom-class="shop_content_list_goods_item_img">
+                                    <image src="{{item.url}}" />
+                                </van-col>
+                                <van-col custom-class="shop_content_list_goods_item_introduce">
+                                    <van-row custom-class="shop_content_list_goods_item_introduce_title">
+                                        {{item.name}}
+                                    </van-row>
+                                    <van-row custom-class="shop_content_list_goods_item_introduce_desc">
+                                        {{item.desc}}
+                                    </van-row>
+                                    <van-row custom-class="shop_content_list_goods_item_introduce_sale">
+                                        月售 {{item.sales}}
+                                    </van-row>
+                                    <van-row custom-class="shop_content_list_goods_item_introduce_send">
+                                        <van-col span="5" custom-class="shop_content_list_goods_item_introduce_send_price">
+                                            ￥{{item.price}}
+                                        </van-col>
+										<van-col span="5" wx:if="{{item.discount && item.discount != 0}}" custom-class="shop_content_list_goods_item_introduce_send_discount">
+                                            ￥{{item.discount}}
+										</van-col>
+										<van-col span="14" custom-class="shop_content_list_goods_item_introduce_send_icon">
+											<van-col bindtap="subFood" data-food="{{item2}}" wx:if="{{item2.id == item.id}}" wx:for="{{orderList}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" custom-class="shop_content_list_goods_item_introduce_send_icon_sub">
+												<image src="/asserts/imgs/sub.png" />
+											</van-col>
+											<van-col wx:if="{{item2.id == item.id}}" wx:for="{{orderList}}" wx:for-item="item2" wx:for-index="index2" wx:key="{{index2}}" custom-class="shop_content_list_goods_item_introduce_send_icon_num">
+												{{item2.num}}
+											</van-col>
+											<van-col bindtap="addFood" data-food="{{item}}" custom-class="shop_content_list_goods_item_introduce_send_icon_add">
+												<image src="/asserts/imgs/add.png" />
+											</van-col>
+										</van-col>
+                                    </van-row>
+                                </van-col>
+                            </van-row>
+                        </scroll-view>
+                    </van-col>
+				</van-row>
+				<van-row custom-class="shop_content_empty" wx:if="{{types.length == 0}}">暂无数据</van-row>
+			</van-tab>
+			<van-tab title="评价">
+				<van-row custom-class="{{active == 0 ? 'shop_content_list' : 'shop_content_list_nofooter'}}" wx:if="{{evaluateList.length != 0}}">
+ 					<scroll-view class="shop_content_list_evaluate_scroll" scroll-y>
+						 <!-- <van-row custom-class="shop_content_list_evaluate_item"></van-row> -->
+						<van-row custom-class="shop_content_list_evaluate_item" wx:for="{{evaluateList}}" wx:key="{{index}}">
+							<van-row custom-class="shop_content_list_evaluate_item_title">
+								<van-col custom-class="shop_content_list_evaluate_item_title_img">
+									<image src="{{item.avatarUrl}}"/>
+								</van-col>
+								<van-col custom-class="shop_content_list_evaluate_item_title_right">
+									<van-col custom-class="shop_content_list_evaluate_item_title_right_name">
+										<van-row custom-class="shop_content_list_evaluate_item_title_right_name_user">
+											{{item.username}}
+										</van-row>
+										<van-row custom-class="shop_content_list_evaluate_item_title_right_name_grade">
+											<van-rate value="{{item.shop_grade}}" size="{{12}}" readonly />
+										</van-row>
+									</van-col>
+									<van-col custom-class="shop_content_list_evaluate_item_title_right_time">
+										{{item.create_time}}
+									</van-col>
+								</van-col>
+							</van-row>
+							<van-row custom-class="shop_content_list_evaluate_item_content">
+								<text wx:if="{{item.desc}}">
+									{{item.desc}}
+								</text>
+								<text wx:if="{{!item.desc}}">
+									该用户暂无评价
+								</text>
+							</van-row>
+						</van-row>
+					 </scroll-view>
+				</van-row>
+				<van-row custom-class="shop_content_empty" wx:if="{{evaluateList.length == 0}}">暂无数据</van-row>
+			</van-tab>
+            <van-tab title="商家">
+				<van-row custom-class="shop_content_empty">暂无数据</van-row>
+			</van-tab>
+        </van-tabs>
+    </van-row>
+
+
+   <!-- 底部菜单 -->
+    <van-row custom-class="shop_footer" wx:if="{{active == 0}}">
+		<van-col wx:if="{{totalPrice == 0}}" custom-class="shop_footer_car">
+			<image src="/asserts/imgs/car.png" />
+		</van-col>
+		<van-col wx:if="{{totalPrice != 0}}" custom-class="shop_footer_car shop_footer_car_select">
+			<image src="/asserts/imgs/carSelect.png" />
+			<view class="shop_footer_car_select_badge">{{totalNum}}</view>
+		</van-col>
+		<van-col custom-class="shop_footer_total">￥{{totalPrice}}元</van-col>
+		<van-col custom-class="shop_footer_send">另需配送费￥{{shopDetail.send_price}}元</van-col>
+		<!-- <van-col custom-class="shop_footer_accounts">￥{{shopDetail.start_price}}元起送</van-col> -->
+		<van-col wx:if="{{totalPrice == 0 }}" custom-class="shop_footer_accounts">￥{{shopDetail.start_price}}元起送</van-col>
+		<van-col wx:if="{{totalPrice < shopDetail.start_price && totalPrice != 0}}" custom-class="shop_footer_accounts">还差{{shopDetail.start_price - totalPrice}}元起送</van-col>
+		<van-col bindtap="settleAccounts" wx:if="{{totalPrice >= shopDetail.start_price}}" custom-class="shop_footer_accounts shop_footer_accounts_active">去结算</van-col>
+    </van-row>
+</view>

@@ -1,0 +1,24 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+  <button open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo">
+  获取用户信息
+</button>
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <text>{{id}}</text>
+  <block wx:for="{{list}}" wx:key="{{item}}">
+    <van-button type="default" bind:click="hello" data-id="{{item}}">{{item}}</van-button>
+  </block>
+  <van-button type="default" bind:click="hello" data-id="10">默认按钮</van-button>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+  <van-action-sheet show="{{ show }}"  bind:close="onClose">
+ <van-picker title="hello" show-toolbar="{{true}}" columns="{{ columns }}" bind:change="onChange" />
+</van-action-sheet>
+</view>

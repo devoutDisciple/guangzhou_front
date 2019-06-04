@@ -1,0 +1,70 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/accounts/accounts",
+    "pages/shop/shop",
+    "pages/order/order",
+    "pages/orderEvaluate/orderEvaluate",
+    "pages/orderDetail/orderDetail",
+    "pages/myAddress/myAddress",
+    "pages/address/address",
+    "pages/my/my",
+    "pages/custom/custom",
+    "pages/type/type",
+    "pages/index/index",
+    "pages/option/option"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "雀送",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#9c9c9c",
+    "selectedColor": "#333",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "主页",
+        "iconPath": "asserts/imgs/home.png",
+        "selectedIconPath": "asserts/imgs/homeSelect.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订单",
+        "iconPath": "asserts/imgs/order.png",
+        "selectedIconPath": "asserts/imgs/orderSelect.png"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "text": "我的",
+        "iconPath": "asserts/imgs/my.png",
+        "selectedIconPath": "asserts/imgs/mySelect.png"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-button": "dist/button/index",
+    "van-action-sheet": "dist/action-sheet/index",
+    "van-picker": "dist/picker/index",
+    "van-row": "dist/row/index",
+    "van-col": "dist/col/index",
+    "van-icon": "dist/icon/index",
+    "van-search": "dist/search/index",
+    "van-popup": "dist/popup/index",
+    "van-card": "dist/card/index",
+    "van-tab": "dist/tab/index",
+    "van-tabs": "dist/tabs/index",
+    "van-tag": "dist/tag/index",
+    "van-goods-action": "dist/goods-action/index",
+    "van-goods-action-icon": "dist/goods-action-icon/index",
+    "van-goods-action-button": "dist/goods-action-button/index",
+    "van-radio": "dist/radio/index",
+    "van-radio-group": "dist/radio-group/index",
+    "van-checkbox": "dist/checkbox/index",
+    "van-rate": "dist/rate/index",
+    "van-dialog": "dist/dialog/index"
+  },
+  "sitemapLocation": "sitemap85.json"
+}

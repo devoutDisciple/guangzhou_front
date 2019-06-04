@@ -1,0 +1,187 @@
+<!--pages/home/home.wxml-->
+<view class="home">
+  <!-- 头部导航 -->
+  <van-row custom-class="home_header">
+    <van-row custom-class="home_header_location">
+        <van-col span="2">
+          <van-icon name="location-o" />
+        </van-col>
+        <van-col span="16">
+          <!-- <button bindtap="onShowPositionDialog">开关</button> -->
+          <view bindtap="onShowPositionDialog" class="home_header_location_text">
+            <text>{{position}}</text>
+            <van-icon custom-class="home_header_location_icon" name="arrow-down" />
+          </view>
+        </van-col>
+        <!-- <van-col span="4">分享</van-col> -->
+      </van-row>
+    <van-row>
+        <van-search
+          value="{{ value }}"
+          placeholder="请输入"
+          use-action-slot
+          bind:search="onSearch">
+          <!-- <view slot="action" bindtap="onSearch">搜索</view> -->
+        </van-search>
+    </van-row>
+  </van-row>
+  <!-- <van-row></van-row> -->
+
+  <scroll-view
+    scroll-y
+    class="home_content">
+    <!-- 轮播图 -->
+    <van-row custom-class="home_content_swiper">
+      <swiper
+        indicator-dots="{{true}}"
+		autoplay="{{true}}"
+        interval="{{interval}}"
+        duration="{{duration}}">
+        <block wx:for="{{swiperUrls}}" wx:key="{{index}}">
+          <swiper-item catchtap="swiperClick" data-shopid="{{item.shopid}}">
+            <image src="{{item.url}}" class="slide-image"/>
+          </swiper-item>
+        </block>
+      </swiper>
+    </van-row>
+    <!-- 分类 -->
+    <van-row custom-class="home_content_type">
+      <van-col bindtap="toTypeListPage" data-id="{{item.id}}" custom-class="home_content_type_item" span="6" wx:for="{{type}}" wx:key="{{index}}">
+        <van-row custom-class="home_content_type_item_icon">
+          <image src="{{item.url}}" />
+        </van-row>
+        <van-row custom-class="home_content_type_item_text">
+          {{item.name}}
+        </van-row>
+      </van-col>
+    </van-row>
+    <!-- 免费霸王餐 -->
+    <van-row custom-class="home_content_free" wx:if="{{freeList && freeList.length != 0}}">
+      <van-row custom-class="home_content_free_title"><text>免费霸王餐</text></van-row>
+      <scroll-view scroll-x class="home_content_free_content">
+        <view class="home_content_free_item" wx:for="{{freeList}}" wx:key="{{index}}" bindtap="toFreeCount" data-item="{{item}}" wx:if="{{item.total > 0}}">
+          <van-row class="home_content_free_item_img">
+            <image src="{{item.goodsDetail.url}}" />
+          </van-row>
+          <van-row class="home_content_free_item_desc">
+            <text>{{item.goodsDetail.name}}</text>
+		  </van-row>
+		  <van-row class="home_content_free_item_desc_total" wx:if="{{item.total > 0}}">
+            剩余：{{item.total}}份
+		  </van-row>
+		  <van-row class="home_content_free_item_desc_total" wx:if="{{item.total == 0}}">
+            已售罄
+          </van-row>
+          <van-row class="home_content_free_item_price">
+            <text class="home_content_free_item_price_origin">￥0.00</text>
+            <text class="home_content_free_item_price_discount">￥{{item.goodsDetail.price}}</text>
+          </van-row>
+        </view>
+      </scroll-view>
+	</van-row>
+	<!-- 限时抢购 -->
+	<van-row custom-class="home_content_time" wx:if="{{timeList && timeList.length != 0}}">
+      <van-row custom-class="home_content_free_title"><text>限时抢购</text></van-row>
+      <scroll-view scroll-x class="home_content_time_content">
+        <view class="home_content_free_item" wx:for="{{timeList}}" wx:key="{{index}}" bindtap="toTimeCount" data-item="{{item}}" wx:if="{{item.total > 0}}">
+          <van-row class="home_content_free_item_img">
+            <image src="{{item.goodsDetail.url}}" />
+          </van-row>
+          <van-row class="home_content_free_item_desc">
+            <text>{{item.goodsDetail.name}}</text>
+		  </van-row>
+		  <van-row class="home_content_free_item_desc_total" wx:if="{{item.total > 0}}">
+            剩余：{{item.total}}份
+		  </van-row>
+		  <van-row class="home_content_free_item_desc_total" wx:if="{{item.total == 0}}">
+            已售罄
+          </van-row>
+          <van-row class="home_content_free_item_price">
+            <text class="home_content_free_item_price_origin">￥{{item.goodsDetail.price}}</text>
+            <text class="home_content_free_item_price_discount">￥{{item.goodsDetail.discount}}</text>
+		  </van-row>
+		  <van-row class="home_content_free_item_time">{{item.timeText}}</van-row>
+        </view>
+      </scroll-view>
+	</van-row>
+    <!-- 商品列表 -->
+    <van-row custom-class="home_content_goods">
+      <van-row custom-class="home_content_goods_title">附近商家</van-row>
+      <van-row custom-class="home_content_goods_type">
+        <van-tabs active="{{ 0 }}" bind:change="onChange">
+          <van-tab title="综合排序">
+            <van-row bind:tap="shopClick" data-id="{{item.id}}" custom-class="home_content_goods_item" wx:for="{{shop}}" wx:key="{{index}}">
+              <van-col custom-class="home_content_goods_item_img">
+                <image src="{{item.url}}" />
+              </van-col>
+              <van-col custom-class="home_content_goods_item_introduce">
+                <van-row custom-class="home_content_goods_item_introduce_title">
+                  <text>{{item.name}}</text>
+                </van-row>
+                <van-row custom-class="home_content_goods_item_introduce_sale">
+                  <van-col span="16">
+                    <text>月售 {{item.sales}}</text>
+                  </van-col>
+                  <van-col span="8">
+                    <van-tag round type="primary">雀送到楼</van-tag>
+                  </van-col>
+                </van-row>
+                <van-row custom-class="home_content_goods_item_introduce_send">
+                  <text>起送 ￥{{item.start_price}}   配送 ￥{{item.send_price}}</text>
+                </van-row>
+                <van-row wx:if="{{item.special && item.special.lenght != 0}}" custom-class="home_content_goods_item_introduce_tag">
+                  <van-tag plain type="danger" wx:for="{{item.special}}" wx:for-item="item2" wx:key="{{index}}">满{{item2.origin}}减{{item2.discount}}</van-tag>
+                </van-row>
+              </van-col>
+            </van-row>
+          </van-tab>
+          <van-tab title="销量最高">
+			<van-row bind:tap="shopClick" data-id="{{item.id}}" custom-class="home_content_goods_item" wx:for="{{sortSelesData}}" wx:key="{{index}}">
+              <van-col custom-class="home_content_goods_item_img">
+                <image src="{{item.url}}" />
+              </van-col>
+              <van-col custom-class="home_content_goods_item_introduce">
+                <van-row custom-class="home_content_goods_item_introduce_title">
+                  <text>{{item.name}}</text>
+                </van-row>
+                <van-row custom-class="home_content_goods_item_introduce_sale">
+                  <van-col span="16">
+                    <text>月售 {{item.sales}}</text>
+                  </van-col>
+                  <van-col span="8">
+                    <van-tag round type="primary">雀送到楼</van-tag>
+                  </van-col>
+                </van-row>
+                <van-row custom-class="home_content_goods_item_introduce_send">
+                  <text>起送 ￥{{item.start_price}}   配送 ￥{{item.send_price}}</text>
+                </van-row>
+                <van-row wx:if="{{item.special && item.special.lenght != 0}}" custom-class="home_content_goods_item_introduce_tag">
+                  <van-tag plain type="danger" wx:for="{{item.special}}" wx:for-item="item2" wx:key="{{index}}">满{{item2.origin}}减{{item2.discount}}</van-tag>
+                </van-row>
+              </van-col>
+            </van-row>
+		  </van-tab>
+        </van-tabs>
+      </van-row>
+    </van-row>
+  </scroll-view>
+
+	<!-- 获取用户信息弹框 -->
+	<!-- <van-action-sheet
+		show="{{ app.globalData.showUserLoginDialog }}">
+		获取用户信息
+	</van-action-sheet> -->
+	<!-- 学校位置弹框 -->
+  	<van-action-sheet
+    	show="{{ positionDialogVisible }}"
+    	bind:close="onShowPositionDialog">
+    	<van-picker
+      		show-toolbar="{{true}}"
+      		columns="{{ columns }}"
+      		title=""
+      		bind:change="onChangePosition"
+      		bind:cancel="onShowPositionDialog"
+	  		bind:confirm="onConfirmPosition" />
+  </van-action-sheet>
+  <!--  -->
+</view>

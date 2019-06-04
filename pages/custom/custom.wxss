@@ -1,0 +1,41 @@
+/* pages/custom/custom.wxss */
+.custom{
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+}
+.custom_row{
+	width: 60%;
+	height: 100px;
+	border: 1px solid #6af5d0;
+	box-shadow: 1px 1px 6px #b5e2d6;
+	margin-left: 20%;
+	line-height: 100px;
+	text-align: center;
+	position: relative;
+	margin-top: 100px;
+}
+.custom_row2{
+	margin-top: 100px;
+}
+.custom_row_left{
+	text-align: right;
+	height: 100%;
+}
+.custom_row_left image{
+	width: 50px;
+	height: 50px;
+	margin-top: 25px;
+}
+.custom_row_right{
+	height: 100%;
+	text-align: left;
+}
+.custom_row_btn{
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}

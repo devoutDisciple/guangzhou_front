@@ -1,0 +1,25 @@
+<!--pages/custom/custom.wxml-->
+<!-- 在线客服 -->
+<view class="custom">
+	<van-row custom-class="custom_row">
+		<van-col custom-class='custom_row_left' span="10">
+			<image src="/asserts/imgs/headset.png" />
+		</van-col>
+		<van-col custom-class='custom_row_right' span="12" offset="2">
+			在线客服
+		</van-col>
+		<button
+			class='custom_row_btn'
+			type="default"
+			open-type="contact">
+		</button>
+	</van-row>
+	<van-row custom-class="custom_row custom_row2" bindtap="concatus">
+		<van-col custom-class='custom_row_left' span="10">
+			<image src="/asserts/imgs/phone.png" />
+		</van-col>
+		<van-col custom-class='custom_row_right' span="12" offset="2">
+			联系我们
+		</van-col>
+	</van-row>
+</view>

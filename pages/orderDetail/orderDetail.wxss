@@ -1,0 +1,142 @@
+/* pages/orderDetail/orderDetail.wxss */
+.orderDetail{
+	height: 100vh;
+	width: 100vw;
+	background: #f9f9f9;
+	font-size: 14px;
+	color: #333;
+}
+.orderDetail_content{
+	width: calc(100vw - 20px);
+	margin-left: 10px;
+}
+.orderDetail_title{
+	height: 90px;
+	background: #fff;
+	box-shadow: 1px 1px 5px #efefef;
+}
+.orderDetail_title_success{
+	height: 50px;
+	margin-left: 10px;
+	line-height: 50px;
+	font-size: 20px;
+	font-weight: 700;
+}
+.orderDetail_title_desc{
+	height: 40px;
+	font-size: 14px;
+	line-height: 40px;
+	margin-left: 20px;
+	color: #bebebe;
+}
+.orderDetail_order{
+	margin-top: 10px;
+	background: #fff;
+	min-height: 100px;
+}
+.orderDetail_order_item_title{
+	height: 30px;
+	position: relative;
+	padding: 10px;
+	border-bottom: 1px solid #f4f4f4;
+}
+.orderDetail_order_item_title_img{
+	width: 30px;
+	height: 30px;
+}
+.orderDetail_order_item_title_img image{
+	width: 100%;
+	height: 100%;
+}
+.orderDetail_order_item_title_name{
+	height: 30px;
+	margin-left: 10px;
+}
+.orderDetail_order_item_title_name_shop{
+	height: 20px;
+	line-height: 20px;
+	font-size: 14px;
+}
+.orderDetail_order_item_title_name_time{
+	height: 10px;
+	font-size: 10px;
+	color: #9e9e9e;
+	line-height: 10px;
+}
+.orderDetail_order_item_list{
+	height: 100px;
+	height: 30px;
+	margin: 10px;
+}
+.orderDetail_order_item_list_img{
+	height: 30px;
+	width: 30px;
+}
+.orderDetail_order_item_list_img image{
+	height: 30px;
+	width: 30px;
+}
+.orderDetail_order_item_list_name{
+	width: calc(100vw - 170px);
+	margin-left: 10px;
+	height: 30px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 30px;
+	font-size: 12px;
+}
+.orderDetail_order_item_list_num{
+	width: 40px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	text-align: center;
+}
+.orderDetail_order_item_list_price{
+	width: 50px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	text-align: center;
+}
+.orderDetail_order_send{
+	height: 30px;
+	margin: 10px;
+	line-height: 30px;
+}
+.orderDetail_order_send_tag{
+	width: 40px;
+	height: 16px;
+	text-align: center;
+	line-height: 16px;
+	font-size: 12px;
+	margin-top: 7px;
+	background: #55f1d6;
+	color: #fff;
+}
+.orderDetail_order_send_type{
+	width: calc(100vw - 140px);
+	margin-left: 10px;
+}
+.orderDetail_order_send_price{
+	width: 50px;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+	color: red;
+}
+.orderDetail_order_total{
+	height: 30px;
+	margin: 10px;
+	border-top: 1px solid #f4f4f4;
+	line-height: 30px;
+}
+.orderDetail_order_total_tag{
+	width: calc(100vw - 90px);
+	text-align: left;
+}
+.orderDetail_order_total_price{
+	width: 50px;
+	text-align: center;
+}

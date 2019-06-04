@@ -1,0 +1,237 @@
+/* pages/accounts/accounts.wxss */
+.accounts{
+	font-size: 14px;
+	color: #333;
+	overflow: hidden;
+	background: #f7f7f7;
+}
+.accounts_content{
+	height: calc(100vh - 50px);
+	width: 100%;
+}
+.accounts_content_address{
+	height: 100px;
+	background: #fff;
+	width: calc(100vw - 20px);
+	margin-left: 10px;
+	box-shadow: 1px 2px 9px #c5c2c2
+}
+.accounts_content_address_add{
+	height: 75px;
+	padding-top: 25px;
+	border-bottom: 2px solid #f3f3f3;
+}
+.accounts_content_address_add_btn{
+	height: 50px;
+	width: 60%;
+	border: 1px solid #2fac8c;
+	margin-left: 25%;
+	text-align: center;
+	border-radius: 26px;
+	line-height: 50px;
+	font-size: 18px;
+	color: #2fac8c;
+}
+.accounts_content_section{
+	margin: 10px 0;
+	background: #fff;
+	min-height: 100px;
+}
+.accounts_content_shop_title{
+	padding: 5px 10px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+}
+.accounts_content_shop_title image{
+	height: 20px;
+	width: 20px;
+	border-radius: 100%;
+	margin-right: 10px;
+}
+.accounts_content_shop_list{
+	background: #f8f8f8;
+}
+.accounts_content_shop_list_item{
+	height: 50px;
+	padding: 10px;
+	border-top: 1px solid #efefef;
+}
+.accounts_content_shop_list_item_img{
+	height: 50px;
+	width: 50px;
+	background: red;
+}
+.accounts_content_shop_list_item_img image{
+	width: 100%;
+	height: 100%;
+}
+.accounts_content_shop_list_item_intro{
+	width: calc(100vw - 90px);
+	margin-left: 10px;
+	height: 50px;
+}
+.accounts_content_shop_list_item_intro_desc{
+	height: 25px;
+	line-height: 25px;
+	position: relative;
+}
+.accounts_content_shop_list_item_intro_desc_price{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.accounts_content_shop_message{
+	padding: 10px;
+}
+.accounts_content_shop_message_row{
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+}
+.accounts_content_shop_message_row_last{
+	border-bottom: 1px solid #eeeeee;
+}
+.accounts_content_shop_message_row_left{
+	font-size: 12px;
+	width: 14px;
+	height: 14px;
+	background: #fabd65;
+	color: #fff;
+	line-height: 14px;
+	text-align: center;
+	margin-top: 8px;
+	margin-right: 5px;
+}
+.accounts_content_shop_message_row_center{
+	color: #9e9e9e;
+}
+.accounts_content_shop_message_row_right{
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.accounts_content_shop_message_row_right_sub{
+	color: red;
+}
+.accounts_content_shop_total{
+	height: 20px;
+	line-height: 20px;
+	text-align: right;
+	padding-right: 10px;
+	padding-bottom: 10px;
+}
+.accounts_content_shop_total_account{
+	font-size: 12px;
+	margin-right: 10px;
+	color: #919191;
+}
+.accounts_content_shop_total_total{
+	font-size: 14px;
+}
+.accounts_content_shop_total_money{
+	font-size: 14px;
+	color: red;
+}
+.accounts_content_other{
+	background: #fff;
+	margin-top: 10px;
+	min-height: 100px;
+	padding: 10px;
+}
+.accounts_content_other_row{
+	height: 20px;
+	border-bottom: 1px solid #eeeeee;
+	line-height: 20px;
+	padding: 10px 0;
+	position: relative;
+}
+.accounts_content_other_row_right{
+	position: absolute;
+	right: 0;
+	top: 9px;
+}
+.accounts_content_other_row_right_text{
+	color: #868686;
+}
+
+
+
+
+
+.accounts_content_address_item{
+	height: 80px;
+	padding-top: 10px;
+	padding-left: 20px;
+	position: relative;
+}
+.accounts_content_address_desc{
+	width: 100%;
+	height: 100%;
+}
+.accounts_content_address_desc_address{
+	height: 30px;
+	line-height: 30px;
+	font-size: 14px;
+}
+.accounts_content_address_desc_address_item{
+	margin-right: 10px;
+}
+.accounts_content_address_desc_person{
+	height: 40px;
+	line-height: 40px;
+	color: #bebebe;
+}
+.accounts_content_address_desc_sex{
+	margin-left: 20px;
+}
+.accounts_content_address_desc_phone{
+	margin-left: 30px;
+}
+.accounts_content_address_edit{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 10px;
+	bottom: 22px;
+}
+.accounts_content_address_edit image{
+	width: 100%;
+	height: 100%;
+}
+
+
+.accounts_comment_textarea{
+	border: 1px solid #ebebeb;
+	padding: 10px;
+	width: calc(100% - 20px);
+	margin-top: 10px;
+}
+
+
+
+
+.accounts_footer{
+	height: 50px;
+	line-height: 50px;
+	background: #474956;
+	position: relative;
+}
+.accounts_footer_total{
+	margin: 0 10px 0 20px;
+	font-size: 16px;
+	color: #fff;
+}
+.accounts_footer_discounts{
+	color: #9997a4;
+}
+.accounts_footer_order{
+	position: absolute;
+	right: 0;
+	top: 0;
+	height: 50px;
+	width: 100px;
+	color: #fff;
+	background: #98f1d2;
+	text-align: center;
+}

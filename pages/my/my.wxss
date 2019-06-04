@@ -1,0 +1,42 @@
+/* pages/my/my.wxss */
+.my{
+    background: #f9f9f9;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+.my_userinfo{
+    background: #fff;
+    height:50px;
+    overflow:hidden;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+.my_userinfo button{
+    width: 200px;
+}
+.my_userinfo image{
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+    border-radius: 100%;
+}
+.empty{
+    height: 10px;
+}
+.my_list{
+    background: #fff;
+}
+
+.my_list_item{
+    height: 50px;
+    border-bottom: 1px solid #ebebeb;
+    margin-left: 10px;
+    line-height: 50px;
+}
+.my_list_item_last{
+    border-bottom: none;
+}
+.my_list_item_icon{
+    color: #5df3d4;
+}

@@ -1,0 +1,114 @@
+<view class="address">
+	<!--
+		<van-row></van-row>
+		<van-col>一点点奶茶</van-col>
+	-->
+	<form bindsubmit="formSubmit" bindreset="formReset">
+		<van-row custom-class="address_row">
+			<van-col custom-class="address_row_label">联系人：</van-col>
+			<van-col custom-class="address_row_input">
+				<input name="username" value="{{username}}" placeholder="姓名"/>
+			</van-col>
+		</van-row>
+		<van-row custom-class="address_row">
+			<van-radio-group value="{{sexRedio}}" bind:change="onChangeSexRadio">
+				<van-col custom-class="address_row_label_special">联系人：</van-col>
+				<van-col custom-class="address_row_radio_col" span="9">
+					<van-radio name="1" checked-color="#74f7cd">男同学</van-radio>
+				</van-col>
+				<van-col custom-class="address_row_radio_col" span="9">
+					<van-radio name="2" checked-color="#74f7cd">女同学</van-radio>
+				</van-col>
+			</van-radio-group>
+		</van-row>
+
+		<van-row custom-class="address_row">
+			<van-col custom-class="address_row_label">电话：</van-col>
+			<van-col custom-class="address_row_input">
+				<input name="phone" value="{{phone}}" placeholder="请填写收货手机号码" type="number"/>
+			</van-col>
+		</van-row>
+		<van-row custom-class="address_row">
+			<van-col custom-class="address_row_label">备用联系电话：</van-col>
+			<van-col custom-class="address_row_input">
+				<input name="otherPhone" value="{{otherPhone}}" placeholder="请填写室友手机号码" type="number"/>
+			</van-col>
+		</van-row>
+		<van-row custom-class="address_row">
+			<van-radio-group value="{{campusRadio}}" bind:change="onChangeCampusRadio">
+				<van-col custom-class="address_row_label_special">联系人：</van-col>
+				<van-col custom-class="address_row_radio_col" span="9">
+					<van-radio name="1" checked-color="#74f7cd">校内</van-radio>
+				</van-col>
+				<van-col custom-class="address_row_radio_col" span="9">
+					<van-radio name="2" checked-color="#74f7cd">校外</van-radio>
+				</van-col>
+			</van-radio-group>
+		</van-row>
+		<van-row wx:if="{{campusRadio == 1}}">
+			<van-row custom-class="address_row">
+				<van-col custom-class="address_row_label">学校：</van-col>
+				<van-col custom-class="address_row_input">
+					<input value="{{campus}}" bind:tap="onShowPositionDialog" disabled name="campus" placeholder="请选择学校" />
+				</van-col>
+			</van-row>
+			<van-row custom-class="address_row">
+				<van-col custom-class="address_row_label">楼号：</van-col>
+				<van-col custom-class="address_row_input">
+					<input value="{{floor}}" bind:tap="onShowFloorDialog" disabled name="campus" name="floor" placeholder="例：学生宿舍9号楼" />
+				</van-col>
+			</van-row>
+			<van-row custom-class="address_row">
+				<van-col custom-class="address_row_label">宿舍号：</van-col>
+				<van-col custom-class="address_row_input">
+					<input name="home" value="{{home}}"  placeholder="例：520室" />
+				</van-col>
+			</van-row>
+			<van-row custom-class="address_row_btn">
+				<button form-type="submit">确定</button>
+			</van-row>
+		</van-row>
+		<van-row wx:if="{{campusRadio == 2}}">
+			<van-row custom-class="address_row">
+				<van-col custom-class="address_row_label">地址：</van-col>
+				<van-col custom-class="address_row_input">
+					<input name="family" value="{{family}}" placeholder="请输入收货地址" />
+				</van-col>
+			</van-row>
+			<van-row custom-class="address_row">
+				<van-col custom-class="address_row_label">门牌号：</van-col>
+				<van-col custom-class="address_row_input">
+					<input name="table" value="{{table}}"  placeholder="例：9号楼520室" />
+				</van-col>
+			</van-row>
+			<van-row custom-class="address_row_btn">
+				<button form-type="submit">确定</button>
+			</van-row>
+		</van-row>
+
+	</form>
+	<!-- 学校位置弹框 -->
+  	<van-action-sheet
+    	show="{{ positionDialogVisible }}"
+    	bind:close="onShowPositionDialog">
+    	<van-picker
+      		show-toolbar="{{true}}"
+      		columns="{{ positionColumns }}"
+      		title=""
+      		bind:change="onChangePosition"
+      		bind:cancel="onShowPositionDialog"
+	  		bind:confirm="onConfirmPosition" />
+  </van-action-sheet>
+  <!-- 宿舍号 -->
+  <van-action-sheet
+    	show="{{ floorDialogVisible }}"
+    	bind:close="onShowFloorDialog">
+    	<van-picker
+      		show-toolbar="{{true}}"
+      		columns="{{ floorColumns }}"
+      		title=""
+      		bind:change="onChangeFloor"
+      		bind:cancel="onShowFloorDialog"
+	  		bind:confirm="onConfirmFloor" />
+  </van-action-sheet>
+</view>

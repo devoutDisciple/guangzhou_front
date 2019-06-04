@@ -1,0 +1,75 @@
+<!--pages/type/type.wxml-->
+<!-- <van-row></van-row> -->
+<view class="type">
+    <van-row custom-class="type_search">
+        <van-search
+          value="{{ value }}"
+          placeholder="请输入"
+          use-action-slot
+          bind:search="onSearch">
+          <!-- <view slot="action" bindtap="onSearch">搜索</view> -->
+        </van-search>
+    </van-row>
+    <van-row custom-class="type_content">
+      <van-tabs active="{{ 0 }}" bind:change="onChange">
+        <van-tab title="综合排序">
+          <scroll-view wx:if="{{shop && shop.length != 0}}" scroll-y class="type_content_scroll">
+            <van-row bind:tap="shopClick" data-id="{{item.id}}" custom-class="home_content_goods_item" wx:for="{{shop}}" wx:key="{{index}}">
+              <van-col custom-class="home_content_goods_item_img">
+                <image src="{{item.url}}" />
+              </van-col>
+              <van-col custom-class="home_content_goods_item_introduce">
+                <van-row custom-class="home_content_goods_item_introduce_title">
+                  <text>{{item.name}}</text>
+                </van-row>
+                <van-row custom-class="home_content_goods_item_introduce_sale">
+                  <van-col span="16">
+                    <text>月售 {{item.sales}}</text>
+                  </van-col>
+                  <van-col span="8">
+                    <van-tag round type="primary">雀送到楼</van-tag>
+                  </van-col>
+                </van-row>
+                <van-row custom-class="home_content_goods_item_introduce_send">
+                  <text>起送 ￥{{item.start_price}}   配送 ￥{{item.send_price}}</text>
+                </van-row>
+                <van-row wx:if="{{item.special && item.special.lenght != 0}}" custom-class="home_content_goods_item_introduce_tag">
+                  <van-tag plain type="danger" wx:for="{{item.special}}" wx:for-item="item2" wx:key="{{index}}">满{{item2.origin}}减{{item2.discount}}</van-tag>
+                </van-row>
+              </van-col>
+            </van-row>
+		  </scroll-view>
+		  <van-row wx:if="{{!shop || shop.length == 0}}" custom-class="type_content_empty">暂无数据</van-row>
+        </van-tab>
+        <van-tab title="销量最高">
+			<scroll-view wx:if="{{sortSelesData && sortSelesData.length != 0}}" scroll-y class="type_content_scroll">
+            <van-row bind:tap="shopClick" data-id="{{item.id}}" custom-class="home_content_goods_item" wx:for="{{sortSelesData}}" wx:key="{{index}}">
+              <van-col custom-class="home_content_goods_item_img">
+                <image src="{{item.url}}" />
+              </van-col>
+              <van-col custom-class="home_content_goods_item_introduce">
+                <van-row custom-class="home_content_goods_item_introduce_title">
+                  <text>{{item.name}}</text>
+                </van-row>
+                <van-row custom-class="home_content_goods_item_introduce_sale">
+                  <van-col span="16">
+                    <text>月售 {{item.sales}}</text>
+                  </van-col>
+                  <van-col span="8">
+                    <van-tag round type="primary">雀送到楼</van-tag>
+                  </van-col>
+                </van-row>
+                <van-row custom-class="home_content_goods_item_introduce_send">
+                  <text>起送 ￥{{item.start_price}}   配送 ￥{{item.send_price}}</text>
+                </van-row>
+                <van-row wx:if="{{item.special && item.special.lenght != 0}}" custom-class="home_content_goods_item_introduce_tag">
+                  <van-tag plain type="danger" wx:for="{{item.special}}" wx:for-item="item2" wx:key="{{index}}">满{{item2.origin}}减{{item2.discount}}</van-tag>
+                </van-row>
+              </van-col>
+            </van-row>
+		  </scroll-view>
+		  <van-row wx:if="{{!sortSelesData || sortSelesData.length == 0}}" custom-class="type_content_empty">暂无数据</van-row>
+		</van-tab>
+      </van-tabs>
+    </van-row>
+</view>

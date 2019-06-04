@@ -1,0 +1,97 @@
+<view class="accounts">
+	<!-- <van-row></van-row> -->
+	<scroll-view scroll-y class="accounts_content">
+		<van-row custom-class="accounts_content_address">
+			<van-row wx:if="{{!address.phone}}" custom-class="accounts_content_address_add">
+				<view bind:tap="onClickAddAddress" class="accounts_content_address_add_btn">
+					＋ 新增收货地址
+				</view>
+			</van-row>
+			<van-row wx:else custom-class="accounts_content_address_item">
+				<van-col custom-class="accounts_content_address_desc">
+					<van-row wx:if="{{address.isSchool}}" custom-class="accounts_content_address_desc_address">
+						<van-col custom-class="accounts_content_address_desc_address_item">{{address.campus}}</van-col>
+						<van-col custom-class="accounts_content_address_desc_address_item">{{address.floor}}</van-col>
+						<van-col custom-class="accounts_content_address_desc_address_item">{{address.home}}</van-col>
+					</van-row>
+					<van-row wx:else custom-class="accounts_content_address_desc_address">
+						<van-col custom-class="accounts_content_address_desc_address_item">{{address.family}}</van-col>
+						<van-col custom-class="accounts_content_address_desc_address_item">{{address.table}}</van-col>
+					</van-row>
+					<van-row custom-class="accounts_content_address_desc_person">
+						<van-col custom-class="accounts_content_address_desc_name">{{address.username}}</van-col>
+						<van-col custom-class="accounts_content_address_desc_sex">{{address.sex == 1 ? "男同学" : "女同学"}}</van-col>
+						<van-col custom-class="accounts_content_address_desc_phone">{{address.phone}}</van-col>
+					</van-row>
+				</van-col>
+				<van-col custom-class="accounts_content_address_edit" bindtap="goEditPage" data-item="{{item}}" data-index="{{index}}">
+					<image src="/asserts/imgs/edit.png" />
+				</van-col>
+			</van-row>
+			<!-- <van-row custom-class="accounts_content_address_address"></van-row> -->
+		</van-row>
+		<van-row custom-class="accounts_content_section">
+			<van-row custom-class="accounts_content_shop_title">
+				<van-col><image src="{{shopDetail.url}}" /></van-col>
+				<van-col>{{shopDetail.name}}</van-col>
+				<!-- <van-col><van-icon name="arrow" /></van-col> -->
+			</van-row>
+			<van-row custom-class="accounts_content_shop_list">
+				<van-row custom-class="accounts_content_shop_list_item" wx:for="{{orderList}}" wx:key="{{index}}">
+					<van-col custom-class="accounts_content_shop_list_item_img"><image src="{{item.url}}" /></van-col>
+					<van-col custom-class="accounts_content_shop_list_item_intro">
+						<van-row custom-class="accounts_content_shop_list_item_intro_desc">
+							<van-col custom-class="accounts_content_shop_list_item_intro_desc_name">{{item.name}}</van-col>
+							<van-col custom-class="accounts_content_shop_list_item_intro_desc_price">￥{{item.num * item.price}}</van-col>
+						</van-row>
+						<van-row custom-class="accounts_content_shop_list_item_intro_num">x{{item.num}}</van-row>
+					</van-col>
+				</van-row>
+			</van-row>
+			<van-row custom-class="accounts_content_shop_message">
+				<van-row custom-class="accounts_content_shop_message_row">
+					餐盒费<van-col custom-class="accounts_content_shop_message_row_right">￥{{shopDetail.package_cost}}</van-col>
+				</van-row>
+				<van-row custom-class="accounts_content_shop_message_row">
+					配送费<van-col custom-class="accounts_content_shop_message_row_right">￥{{shopDetail.send_price}}</van-col>
+				</van-row>
+				<van-row custom-class="accounts_content_shop_message_row accounts_content_shop_message_row_last">
+					<van-col custom-class="accounts_content_shop_message_row_left">减</van-col>
+					<van-col custom-class="accounts_content_shop_message_row_center">满减优惠</van-col>
+					<van-col custom-class="accounts_content_shop_message_row_right accounts_content_shop_message_row_right_sub">-￥{{discountPrice}}</van-col>
+				</van-row>
+			</van-row>
+			<van-row custom-class="accounts_content_shop_total">
+				<text class="accounts_content_shop_total_account">已优惠￥{{discountPrice}}</text>
+				<text class="accounts_content_shop_total_total">合计</text>
+				<text class="accounts_content_shop_total_money">￥{{totalPrice}}</text>
+			</van-row>
+		</van-row>
+		<van-row custom-class="accounts_content_other">
+			<van-row custom-class="accounts_content_other_row" bindtap="addComment">
+				<text custom-class="accounts_content_other_row_left">备注</text>
+				<van-col custom-class="accounts_content_other_row_right">
+					<text class="accounts_content_other_row_right_text">{{showComment}}</text> >
+				</van-col>
+			</van-row>
+			<van-row custom-class="accounts_content_other_row">
+				支付方式<text class="accounts_content_other_row_right">在线支付</text>
+			</van-row>
+		</van-row>
+	</scroll-view>
+	<van-row custom-class="accounts_footer">
+		<van-col custom-class="accounts_footer_total">合计 ￥{{totalPrice}}</van-col>
+		<van-col custom-class="accounts_footer_discounts">已优惠￥{{discountPrice}}</van-col>
+		<van-col bind:tap="submitOrder" custom-class="accounts_footer_order">提交订单</van-col>
+	</van-row>
+	<van-dialog
+		use-slot
+		show="{{ show }}"
+		title="添加备注"
+		show-cancel-button
+		show-confirm-button
+		bind:cancel="cancelComment"
+		bind:confirm="confirmComment">
+		<textarea class="accounts_comment_textarea" auto-focus bindinput="textareaInput"></textarea>
+	</van-dialog>
+</view>

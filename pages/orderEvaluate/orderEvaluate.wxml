@@ -1,0 +1,42 @@
+<van-row custom-class="orderEvaluate">
+	<van-row custom-class="orderEvaluate_content">
+		<van-row custom-class="orderEvaluate_people">
+			<van-row custom-class="orderEvaluate_people_title">
+				<van-col custom-class="orderEvaluate_people_title_image">
+					<image src="/asserts/imgs/sendPeople.png" />
+				</van-col>
+				<van-col custom-class="orderEvaluate_people_title_name">
+					马云
+				</van-col>
+				<van-col custom-class="orderEvaluate_people_title_desc">
+					已对骑手匿名
+				</van-col>
+			</van-row>
+			<van-row custom-class="orderEvaluate_people_grade">
+				<van-rate value="{{peopleGrade}}" size="{{30}}" bind:change="onPeopleGradeChange" />
+			</van-row>
+		</van-row>
+		<van-row custom-class="orderEvaluate_people">
+			<van-row custom-class="orderEvaluate_people_title">
+				<van-col custom-class="orderEvaluate_people_title_image">
+					<image src="{{shopDetail.url}}" />
+				</van-col>
+				<van-col custom-class="orderEvaluate_people_title_name">
+					{{shopDetail.name}}
+				</van-col>
+				<van-col custom-class="orderEvaluate_people_title_desc">
+					匿名评价
+				</van-col>
+			</van-row>
+			<van-row custom-class="orderEvaluate_people_grade">
+				<van-rate value="{{shopGrade}}" size="{{30}}" bind:change="onShopGradeChange" />
+			</van-row>
+		</van-row>
+	</van-row>
+	<form bindsubmit="submit">
+		<textarea class='orderEvaluate_text_area' placeholder="请输入您的意见，方便我们为您提供更好的服务！" name="textarea"/>
+		<van-row custom-class="orderEvaluate_btn">
+			<button form-type="submit" class="{{success ? 'orderEvaluate_btn_active' : ''}}" disabled="{{!success}}">提交评价</button>
+		</van-row>
+	</form>
+</van-row>

@@ -1,0 +1,16 @@
+.option{
+	height: 100vh;
+	width: calc(100vw - 20px);
+	margin-left: 10px;
+	font-size: 14px;
+}
+.option_row_textarea{
+	background: #f8f8f8;
+	width: calc(100vw - 40px);
+	padding: 10px;
+}
+.option_row_btn{
+	background: #6af5d0;
+	margin-top: 10px;
+	color: #fff;
+}

@@ -1,0 +1,45 @@
+<view class="my">
+    <van-row custom-class="my_userinfo">
+        <button type="primary" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+        <block wx:else>
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </block>
+    </van-row>
+    <van-row custom-class="empty"></van-row>
+    <van-row custom-class="my_list">
+        <van-row custom-class="my_list_item">
+            <van-col custom-class="my_list_item_icon" span="2">
+                <van-icon name="location-o" />
+            </van-col>
+            <van-col bind:tap="onClickAddAddress" span="20">
+                <text>我的收货地址</text>
+            </van-col>
+            <van-col span="2">
+                <van-icon name="arrow" />
+            </van-col>
+        </van-row>
+        <van-row custom-class="my_list_item" bindtap="onClickMyService">
+            <van-col custom-class="my_list_item_icon" span="2">
+                <van-icon name="service-o" />
+            </van-col>
+            <van-col span="20">
+                <text>我的客服</text>
+            </van-col>
+            <van-col span="2">
+                <van-icon name="arrow" />
+            </van-col>
+        </van-row>
+        <van-row custom-class="my_list_item my_list_item_last"  bindtap="onClickOption">
+            <van-col custom-class="my_list_item_icon" span="2">
+                <van-icon name="location-o" />
+            </van-col>
+            <van-col span="20">
+                <text>意见反馈</text>
+            </van-col>
+            <van-col span="2">
+                <van-icon name="arrow" />
+            </van-col>
+        </van-row>
+    </van-row>
+</view>
