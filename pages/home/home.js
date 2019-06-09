@@ -92,11 +92,11 @@ Page({
 			this.setData({
 				columns: [
 					{
-						values: ["上海"],
+						values: ["广州"],
 						className: "column1"
 					},
 					{
-						values: ["上海"],
+						values: ["广州"],
 						className: "column2"
 					},
 					{
