@@ -1,0 +1,16 @@
+<view class='goods'>
+	<van-row custom-class='goods_tab'>
+		<van-tabs active="{{ 0 }}">
+			<van-tab wx:for="{{type}}" wx:key="{{index}}" title="{{item.name}}" data-name="{{item.name}}" />
+		</van-tabs>
+	</van-row>
+	<scroll-view scroll-y class='goods_content'>
+		<van-col custom-class="goods_content_item" wx:for="{{todayNum}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onGoodsItemClick">
+			<van-row custom-class="goods_content_item_img">
+			<image src="/asserts/imgs/goods1.jpeg" />
+			</van-row>
+			<van-row custom-class="goods_content_item_name">艾尔割裂克山杨茹甘洛（8-9个月） 180g Manchego 9 months</van-row>
+			<van-row custom-class="goods_content_item_price">￥93</van-row>
+		</van-col>
+	</scroll-view>
+</view>

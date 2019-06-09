@@ -68,6 +68,13 @@ Page({
 			url: "/pages/option/option"
 		});
 	},
+	// 点击我的订单
+	onClickMyOrder() {
+		console.log(123);
+		wx.navigateTo({
+			url: "/pages/order/order"
+		});
+	},
 	// 登录按钮点击的时候
 	getUserInfo: function(e) {
 		app.globalData.userInfo = e.detail.userInfo;

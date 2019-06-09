@@ -1,0 +1,12 @@
+<view class="car">
+	<scroll-view scroll-y class='car_content'>
+		<van-row custom-class="car_content_list"></van-row>
+	</scroll-view>
+	<view class="car_footer">
+		<van-submit-bar
+			price="{{ 3050 }}"
+			button-text="结算"
+			bind:submit="onSubmitOrder">
+			</van-submit-bar>
+	</view>
+</view>

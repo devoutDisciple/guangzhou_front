@@ -1,0 +1,138 @@
+.goodsDetail{
+	height: 100vh;
+	width: 100vw;
+	font-size: 14px;
+	color: #333;
+}
+.goodsDetail_content{
+	width: 100vw;
+	height: calc(100vh - 50px);
+}
+.goodsDetail_content_goods{
+	min-height: 100px;
+	width: 100vw;
+}
+.goodsDetail_content_goods_img{
+	min-height: 100px;
+	width: 100vw;
+}
+.goodsDetail_content_goods_img image{
+	width: 100vw;
+}
+.goodsDetail_content_goods_name{
+	width: calc(100vw - 20px);
+	height: 60px;
+	line-height: 30px;
+	font-size: 16px;
+	color: #333;
+	margin-left: 10px;
+	overflow: hidden;
+}
+.goodsDetail_content_goods_price{
+	width: calc(100vw - 20px);
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	color: red;
+	margin-left: 10px;
+	border-bottom: 1px solid #ebebeb;
+}
+/* 评论 */
+.goodsDetail_content_evaluate{
+	min-height: 50px;
+	width: calc(100vw - 20px);
+	margin-left: 10px;
+	font-size: 12px;
+	color: #9b9b9b;
+	margin: 10px;
+	margin-right: 0;
+}
+.goodsDetail_content_evaluate_title{
+	height: 40px;
+	padding: 10px 0;
+	border-bottom: 1px solid #ebebeb;
+	border-top: 1px solid #ebebeb;
+}
+.goodsDetail_content_evaluate_title_num{
+	height: 20px;
+	line-height: 20px;
+}
+.goodsDetail_content_evaluate_title_icon{
+	height: 20px;
+	line-height: 20px;
+}
+.goodsDetail_content_evaluate_item{
+	min-height: 70px;
+	padding-top: 10px;
+	width: 100%;
+	border-bottom: 1px solid #ebebeb;
+}
+.goodsDetail_content_evaluate_item:last-child{
+	border: none;
+}
+
+.goodsDetail_content_evaluate_item_title{
+	height: 30px;
+}
+.goodsDetail_content_evaluate_item_title_img{
+	height: 30px;
+	width: 30px;
+}
+.goodsDetail_content_evaluate_item_title_img image{
+	height: 30px;
+	width: 30px;
+}
+.goodsDetail_content_evaluate_item_title_right_name{
+	width: calc(100vw - 180px);
+	height: 30px;
+	margin-left: 10px;
+	font-size: 12px;
+}
+.goodsDetail_content_evaluate_item_title_right_name_user{
+	color: #9c9c9c;
+	height: 15px;
+	width: 100%;
+}
+.goodsDetail_content_evaluate_item_title_right_name_grade{
+	height: 15px;
+	width: 100%;
+}
+.goodsDetail_content_evaluate_item_title_right_time{
+	color: #9c9c9c;
+	width: 120px;
+	height: 30px;
+	font-size: 12px;
+	text-align: right;
+	line-height: 30px;
+}
+.goodsDetail_content_evaluate_item_content{
+	min-height: 20px;
+	padding-bottom: 10px;
+	font-size: 12px;
+
+	color: #8e8e8e;
+}
+.goodsDetail_content_evaluate_more{
+	height: 30px;
+	line-height: 30px;
+	color: #757f97;
+	border-bottom: 1px solid #ebebeb;
+	position: relative;
+}
+.goodsDetail_content_evaluate_more_icon{
+	position: absolute;
+	right: 0;
+	top: 0;
+	font-size: 14px;
+}
+
+/* 商品详情下面的图片 */
+.goodsDetail_content_detail{
+	min-height: 100px;
+	width: calc(100vw - 20px);
+	margin-left: 10px;
+}
+.goodsDetail_content_detail image{
+	width: calc(100vw - 20px);
+	overflow: hidden;
+}

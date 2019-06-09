@@ -2,7 +2,6 @@
 const config = require("./utils/config");
 App({
 	onLaunch: function () {
-
 		// 登录
 		wx.login({
 			success: data => {
@@ -16,10 +15,9 @@ App({
 						grant_type: config.grant_type,
 					}),
 					success: res => {
-						if(res.data && res.data.code == 200) {
+						if (res.data && res.data.code == 200) {
 							this.globalData.openid = res.data.data.data;
-						}
-						else{
+						} else {
 							wx.showModal({
 								title: "提示",
 								content: "网络异常",
