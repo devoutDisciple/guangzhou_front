@@ -35,14 +35,14 @@
 			{
 				"pagePath": "pages/goods/goods",
 				"text": "商品",
-				"iconPath": "asserts/imgs/order.png",
-				"selectedIconPath": "asserts/imgs/orderSelect.png"
+				"iconPath": "asserts/imgs/shop.png",
+				"selectedIconPath": "asserts/imgs/shopSelect.png"
 			},
 			{
 				"pagePath": "pages/car/car",
 				"text": "购物车",
-				"iconPath": "asserts/imgs/order.png",
-				"selectedIconPath": "asserts/imgs/orderSelect.png"
+				"iconPath": "asserts/imgs/car.png",
+				"selectedIconPath": "asserts/imgs/carSelect.png"
 			},
 			{
 				"pagePath": "pages/my/my",

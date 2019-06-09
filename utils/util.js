@@ -1,19 +1,12 @@
-const formatTime = date => {
-	const year = date.getFullYear();
-	const month = date.getMonth() + 1;
-	const day = date.getDate();
-	const hour = date.getHours();
-	const minute = date.getMinutes();
-	const second = date.getSeconds();
-
-	return [year, month, day].map(formatNumber).join("/") + " " + [hour, minute, second].map(formatNumber).join(":");
+//  删除数组的指定元素
+const removeArrItem = (arr, val) => {
+	let index = -1;
+	for (var i = 0; i < arr.length; i++) {
+		if (arr[i] == val) index = i;
+	}
+	arr.splice(index, 1);
+	return arr;
 };
-
-const formatNumber = n => {
-	n = n.toString();
-	return n[1] ? n : "0" + n;
-};
-
 module.exports = {
-	formatTime: formatTime
+	removeArrItem: removeArrItem
 };
