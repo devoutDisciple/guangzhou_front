@@ -1,11 +1,5 @@
-// pages/home/home.js
-// const app = getApp();
 const request = require("../../utils/request");
-// const app = getApp();
-// const config = require("../../utils/config");
-
 Page({
-
 	/**
    * 页面的初始数据
    */
@@ -22,7 +16,9 @@ Page({
 		// 缓存的地址信息
 		position: "",
 		// 商店信息
-		todayNum: 7,
+		todayList: [], //今日推荐
+		goodsDetail: {}, // 点击的商品
+		goodsList: [], // 全部商品分类
 	},
 	// 点击搜索
 	onSearch(e) {
@@ -44,7 +40,6 @@ Page({
 	},
 	// 选取位置确定
 	onConfirmPosition(event) {
-		console.log(event.detail.value, "position sure");
 		// 位置信息保存
 		wx.setStorageSync("campus", event.detail.value[2]);
 		// 关闭弹框
@@ -73,9 +68,9 @@ Page({
 	// 商品点击
 	onSearchGoodsDetail(e) {
 		console.log(e.currentTarget.dataset);
-		let data = e.currentTarget.dataset;
+		let data = e.currentTarget.dataset.data;
 		wx.navigateTo({
-			url: `/pages/goodsDetail/goodsDetail?id=${data.index}`
+			url: `/pages/goodsDetail/goodsDetail?id=${data.id}`
 		});
 	},
 
@@ -133,6 +128,33 @@ Page({
 		}).then(res => {
 			this.setData({
 				swiperUrls: res.data || []
+			});
+		});
+		// 获取今日推荐数据
+		request.get({
+			url: "/today/getAll"
+		}).then(res => {
+			console.log(res);
+			this.setData({
+				todayList: res.data || []
+			});
+		});
+		// 获取全部商品数据
+		request.get({
+			url: "/goods/getByCampus"
+		}).then(res => {
+			console.log(res);
+			let data = res.data || [];
+			let sortGoodsList = [];
+			data.map(item => {
+				sortGoodsList.push(item);
+			});
+			sortGoodsList.sort((a, b) => {
+				return b.sales - a.sales;
+			});
+			this.setData({
+				goodsList: data,
+				sortGoodsList: sortGoodsList
 			});
 		});
 	},

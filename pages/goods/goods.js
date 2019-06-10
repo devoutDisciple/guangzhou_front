@@ -8,15 +8,31 @@ Page({
 	data: {
 		todayNum: 50, //商品总数
 		type: [], // 商品分类数据
+		data: [], // 全部商品数据
+		showData: [], //要展示的商品数据
 	},
 
 	//  当商品列表点击的时候
 	onGoodsItemClick(e) {
-		console.log(e);
 		let data = e.currentTarget.dataset.data;
-		console.log(e.currentTarget.dataset);
+		console.log(data);
 		wx.navigateTo({
-			url: `/pages/goodsDetail/goodsDetail?id=${data}`
+			url: `/pages/goodsDetail/goodsDetail?id=${data.id}`
+		});
+	},
+	// 当点击tab的时候
+	onClickTab(e) {
+		let type = e.detail.title, data = this.data.data, showData = [];
+		if(type == "全部") {
+			return this.setData({
+				showData: data
+			});
+		}
+		data.map(item => {
+			if(item.type == type) showData.push(item);
+		});
+		this.setData({
+			showData
 		});
 	},
 
@@ -25,11 +41,10 @@ Page({
    */
 	onLoad: function (options) {
 		console.log(options);
-		this.getTypes();
 	},
 
-	// 获取商品分类数据
-	getTypes() {
+	// 获取商品数据
+	getData() {
 		// 获取商品类型分类
 		request.get({
 			url: "/type/all"
@@ -46,19 +61,25 @@ Page({
 				});
 			}
 		});
-	},
-
-	/**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-	onReady: function () {
-
+		// 获取全部数据
+		request.get({
+			url: "/goods/getByCampus"
+		}).then(res => {
+			console.log(res.data);
+			let data = res.data;
+			this.setData({
+				data: data,
+				showData: data
+			});
+		});
 	},
 
 	/**
    * 生命周期函数--监听页面显示
    */
 	onShow: function () {
+		// 获取商品数据
+		this.getData();
 		// 设置标题
 		wx.setNavigationBarTitle({
 			title: "商品列表"

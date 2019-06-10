@@ -3,13 +3,13 @@
     	scroll-y class="goodsDetail_content">
 		<van-row custom-class="goodsDetail_content_goods">
 			<van-row custom-class="goodsDetail_content_goods_img">
-				<image src="/asserts/imgs/goods2.jpeg" />
+				<image src="{{data.url}}" />
 			</van-row>
 			<van-row custom-class="goodsDetail_content_goods_name">
-				发了圣诞节福利的时间粉丝的放得开了时间发了多少见风使舵放得开了时间发牢骚
+				{{data.name}}
 			</van-row>
 			<van-row custom-class="goodsDetail_content_goods_price">
-				￥93
+				￥{{data.price}}
 			</van-row>
 		</van-row>
 		<van-row custom-class="goodsDetail_content_evaluate">
@@ -63,19 +63,15 @@
 			</van-row>
 		</van-row>
 		<van-row custom-class="goodsDetail_content_detail">
-			<image src="/asserts/imgs/goods3.jpeg" alt="暂无数据" />
-			<image src="/asserts/imgs/goods3.jpeg" alt="暂无数据" />
-			<image src="/asserts/imgs/goods3.jpeg" alt="暂无数据" />
-			<image src="/asserts/imgs/goods3.jpeg" alt="暂无数据" />
-			<image src="/asserts/imgs/goods3.jpeg" alt="暂无数据" />
+			<image wx:for="{{data.desc}}" src="{{item}}" wx:key="{{index}}" alt="暂无数据" />
 		</van-row>
 	</scroll-view>
 
 	<van-row custom-class="goodsDetail_footer">
 		<van-goods-action>
-			<van-goods-action-icon icon="chat-o" text="客服" open-type="contact"/>
-			<van-goods-action-icon icon="cart-o" text="购物车" info="5" bind:click="onClickGoCarIcon"/>
-			<!-- <van-goods-action-icon icon="shop-o" text="店铺" /> -->
+			<van-goods-action-icon icon="chat-o" text="更多" open-type="contact"/>
+			<!-- <van-goods-action-icon icon="cart-o" text="购物车" info="5" bind:click="onClickGoCarIcon"/> -->
+			<van-goods-action-icon icon="shop-o" text="收藏" />
 			<van-goods-action-button text="加入购物车" type="warning" bind:click="onClickAddCarIcon"/>
 			<van-goods-action-button text="立即购买" bind:click="onClickBuyIcon"/>
 		</van-goods-action>

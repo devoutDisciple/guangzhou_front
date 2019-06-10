@@ -51,12 +51,12 @@
       <van-col custom-class="home_content_today_line"></van-col>
     </van-row>
     <van-row custom-class="goods_today">
-      <van-col custom-class="goods_item" wx:for="{{todayNum}}" wx:key="{{index}}" data-index="{{index}}" bindtap="onSearchGoodsDetail">
+      <van-col custom-class="goods_item" wx:for="{{todayList}}" wx:key="{{index}}" data-data="{{item}}" data-type="today" bindtap="onSearchGoodsDetail">
           <van-row custom-class="goods_item_img">
-            <image src="/asserts/imgs/goods1.jpeg" />
+            <image src="{{item.goodsDetail.url}}" />
           </van-row>
-          <van-row custom-class="goods_item_name">艾尔割裂克山杨茹甘洛（8-9个月） 180g Manchego 9 months</van-row>
-          <van-row custom-class="goods_item_price">￥93</van-row>
+          <van-row custom-class="goods_item_name">{{item.goodsDetail.name}}</van-row>
+          <van-row custom-class="goods_item_price">￥{{item.goodsDetail.price}}</van-row>
       </van-col>
     </van-row>
 
@@ -65,23 +65,23 @@
       <van-tabs active="{{ 0 }}" bind:change="onHomeTabsChange">
           <van-tab title="综合排序">
             <van-row custom-class="goods_today">
-              <van-col custom-class="goods_item" wx:for="{{todayNum}}" wx:key="{{index}}">
+              <van-col custom-class="goods_item" wx:for="{{goodsList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
                   <van-row custom-class="goods_item_img">
-                    <image src="/asserts/imgs/goods1.jpeg" />
+                    <image src="{{item.url}}" />
                   </van-row>
-                  <van-row custom-class="goods_item_name">艾尔割裂克山杨茹甘洛（8-9个月） 180g Manchego 9 months</van-row>
-                  <van-row custom-class="goods_item_price">￥93</van-row>
+                  <van-row custom-class="goods_item_name">{{item.name}}</van-row>
+                  <van-row custom-class="goods_item_price">￥{{item.price}}</van-row>
               </van-col>
             </van-row>
           </van-tab>
           <van-tab title="销量最高">
-            <van-row custom-class="goods_today">
-              <van-col custom-class="goods_item" wx:for="{{todayNum}}" wx:key="{{index}}">
+			<van-row custom-class="goods_today">
+              <van-col custom-class="goods_item" wx:for="{{sortGoodsList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
                   <van-row custom-class="goods_item_img">
-                    <image src="/asserts/imgs/goods1.jpeg" />
+                    <image src="{{item.url}}" />
                   </van-row>
-                  <van-row custom-class="goods_item_name">艾尔割裂克山杨茹甘洛（8-9个月） 180g Manchego 9 months</van-row>
-                  <van-row custom-class="goods_item_price">￥93</van-row>
+                  <van-row custom-class="goods_item_name">{{item.name}}</van-row>
+                  <van-row custom-class="goods_item_price">￥{{item.price}}</van-row>
               </van-col>
             </van-row>
           </van-tab>

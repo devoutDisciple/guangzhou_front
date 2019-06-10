@@ -4,6 +4,7 @@ let baseUrl = config.baseUrl;
 module.exports = {
 	get: (params = {}) => {
 		let position = wx.getStorageSync("campus");
+		console.log(position, 111);
 		return new Promise((resolve, reject) => {
 			wx.request({
 				method: "GET",

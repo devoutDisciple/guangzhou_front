@@ -1,11 +1,12 @@
-// pages/goodsDetail/goodsDetail.js
+const request = require("../../utils/request");
 Page({
 
 	/**
    * 页面的初始数据
    */
 	data: {
-		evaluateList: [{
+		data: {}, // 商品详情数据
+		evaluateList: [{ // 商品评价列表
 			shop_grade: 5,
 			create_time: "2018-9-12 10:32",
 			desc: "hello test",
@@ -21,15 +22,28 @@ Page({
 	},
 	// 点击购物车按钮
 	onClickGoCarIcon() {
-		console.log(123);
+		// 支付订单跳转到订单页面
+		wx.switchTab({
+			url: "/pages/car/car"
+		});
 	},
 	// 点击加入购物车
 	onClickAddCarIcon() {
 		console.log(3);
+		wx.showToast({
+			title: "加入成功",
+			icon: "success",
+			duration: 1000
+		});
+
 	},
 	// 点击立即购买
 	onClickBuyIcon() {
-		console.log(24234);
+		wx.showToast({
+			title: "暂不支持购买",
+			icon: "fail",
+			duration: 1000
+		});
 	},
 
 	/**
@@ -37,64 +51,30 @@ Page({
    */
 	onLoad: function (options) {
 		console.log(options);
-		let id = options.id;
+		let id = options.id || 1;
 		// 设置标题
-		wx.setNavigationBarTitle({
-			title: `点击商品id为${id}`
+		// 获取轮播图数据
+		request.get({
+			url: "/goods/getById",
+			data: {
+				id: id
+			}
+		}).then(res => {
+			console.log(res.data);
+			let data = res.data;
+			data.desc = data.desc ? JSON.parse(data.desc) : [];
+			this.setData({
+				data: data || {}
+			});
+			wx.setNavigationBarTitle({
+				title: data.name.length > 10 ? (data.name.slice(0, 10) + "...") : data.name
+			});
 		});
+
 		// 设置导航栏颜色
 		wx.setNavigationBarColor({
 			frontColor: "#000000",//前景颜色值
 			backgroundColor: "#ffffff"//背景颜色值
 		});
-	},
-
-	/**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-	onReady: function () {
-
-	},
-
-	/**
-   * 生命周期函数--监听页面显示
-   */
-	onShow: function () {
-
-	},
-
-	/**
-   * 生命周期函数--监听页面隐藏
-   */
-	onHide: function () {
-
-	},
-
-	/**
-   * 生命周期函数--监听页面卸载
-   */
-	onUnload: function () {
-
-	},
-
-	/**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-	onPullDownRefresh: function () {
-
-	},
-
-	/**
-   * 页面上拉触底事件的处理函数
-   */
-	onReachBottom: function () {
-
-	},
-
-	/**
-   * 用户点击右上角分享
-   */
-	onShareAppMessage: function () {
-
 	}
 });
