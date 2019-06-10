@@ -70,8 +70,7 @@
 	<van-row custom-class="goodsDetail_footer">
 		<van-goods-action>
 			<van-goods-action-icon icon="chat-o" text="更多" open-type="contact"/>
-			<!-- <van-goods-action-icon icon="cart-o" text="购物车" info="5" bind:click="onClickGoCarIcon"/> -->
-			<van-goods-action-icon icon="shop-o" text="收藏" />
+			<van-goods-action-icon icon="like-o" text="收藏" color="red"/>
 			<van-goods-action-button text="加入购物车" type="warning" bind:click="onClickAddCarIcon"/>
 			<van-goods-action-button text="立即购买" bind:click="onClickBuyIcon"/>
 		</van-goods-action>

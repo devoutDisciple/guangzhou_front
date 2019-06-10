@@ -29,6 +29,17 @@
             <van-col span="2">
                 <van-icon name="arrow" />
             </van-col>
+		</van-row>
+		<van-row custom-class="my_list_item">
+            <van-col custom-class="my_list_item_icon" span="2">
+                <van-icon name="location-o" />
+            </van-col>
+            <van-col bind:tap="onClickMyCollect" span="20">
+                <text>我的收藏</text>
+            </van-col>
+            <van-col span="2">
+                <van-icon name="arrow" />
+            </van-col>
         </van-row>
         <van-row custom-class="my_list_item" bindtap="onClickMyService">
             <van-col custom-class="my_list_item_icon" span="2">

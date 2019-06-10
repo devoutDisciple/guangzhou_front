@@ -75,6 +75,10 @@ Page({
 			url: "/pages/order/order"
 		});
 	},
+	// 点击我的收藏
+	onClickMyCollect() {
+
+	},
 	// 登录按钮点击的时候
 	getUserInfo: function(e) {
 		app.globalData.userInfo = e.detail.userInfo;
