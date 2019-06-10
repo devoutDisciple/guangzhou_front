@@ -4,7 +4,7 @@
 			<van-col custom-class="car_content_list_radio">
 				<radio bindtap="radioChange" data-data="{{item.id}}" checked="{{item.select ? true : false}}" color="#f72728"/>
 			</van-col>
-			<van-col custom-class="car_content_list_img">
+			<van-col custom-class="car_content_list_img" bindtap="onSearchGoodsDetail" data-data="{{item}}">
 				<image src="{{item.goodsDetail.url}}" />
 			</van-col>
 			<van-col custom-class="car_content_list_intro">

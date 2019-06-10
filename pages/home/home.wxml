@@ -52,11 +52,14 @@
     </van-row>
     <van-row custom-class="goods_today">
       <van-col custom-class="goods_item" wx:for="{{todayList}}" wx:key="{{index}}" data-data="{{item}}" data-type="today" bindtap="onSearchGoodsDetail">
-          <van-row custom-class="goods_item_img">
-            <image src="{{item.goodsDetail.url}}" />
-          </van-row>
-          <van-row custom-class="goods_item_name">{{item.goodsDetail.name}}</van-row>
-          <van-row custom-class="goods_item_price">￥{{item.goodsDetail.price}}</van-row>
+          	<van-row custom-class="goods_item_img">
+            	<image src="{{item.goodsDetail.url}}" />
+          	</van-row>
+			<van-row custom-class="goods_item_name">{{item.goodsDetail.name}}</van-row>
+			<van-row custom-class="goods_item_price">
+				<van-col custom-class="goods_item_price_left">￥{{item.goodsDetail.price}}</van-col>
+				<van-col custom-class="goods_item_price_right">月售: {{item.goodsDetail.sales}}</van-col>
+			</van-row>
       </van-col>
     </van-row>
 
@@ -70,18 +73,24 @@
                     <image src="{{item.url}}" />
                   </van-row>
                   <van-row custom-class="goods_item_name">{{item.name}}</van-row>
-                  <van-row custom-class="goods_item_price">￥{{item.price}}</van-row>
+                  <van-row custom-class="goods_item_price">
+					<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
+					<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
+				  </van-row>
               </van-col>
             </van-row>
           </van-tab>
           <van-tab title="销量最高">
 			<van-row custom-class="goods_today">
               <van-col custom-class="goods_item" wx:for="{{sortGoodsList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
-                  <van-row custom-class="goods_item_img">
-                    <image src="{{item.url}}" />
-                  </van-row>
-                  <van-row custom-class="goods_item_name">{{item.name}}</van-row>
-                  <van-row custom-class="goods_item_price">￥{{item.price}}</van-row>
+                  	<van-row custom-class="goods_item_img">
+                    	<image src="{{item.url}}" />
+                  	</van-row>
+                  	<van-row custom-class="goods_item_name">{{item.name}}</van-row>
+                  	<van-row custom-class="goods_item_price">
+						<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
+						<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
+					</van-row>
               </van-col>
             </van-row>
           </van-tab>

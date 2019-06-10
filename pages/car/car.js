@@ -25,6 +25,15 @@ Page({
 		});
 	},
 
+	// 点击商品图片
+	onSearchGoodsDetail(e) {
+		let data = e.currentTarget.dataset.data;
+		console.log(data, 111);
+		wx.navigateTo({
+			url: `/pages/goodsDetail/goodsDetail?id=${data.goodsDetail.id}`
+		});
+	},
+
 	// radio选择的时候
 	radioChange(e) {
 		console.log(e);
@@ -79,6 +88,13 @@ Page({
 		this.setData({data}, () => {
 			this.countPrice();
 		});
+		return request.post({
+			url: "/car/modifyNum",
+			data: {
+				id: goods.id,
+				num: 1
+			}
+		});
 	},
 
 	// 减少商品数量
@@ -86,7 +102,16 @@ Page({
 		let goods = e.currentTarget.dataset.data;
 		let data = this.data.data;
 		data.map(item => {
-			if(item.id == goods.id && item.num > 1) item.num--;
+			if(item.id == goods.id && item.num > 1) {
+				item.num--;
+				request.post({
+					url: "/car/modifyNum",
+					data: {
+						id: goods.id,
+						num: -1
+					}
+				});
+			}
 		});
 		this.setData({data}, () => {
 			this.countPrice();
