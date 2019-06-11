@@ -77,7 +77,8 @@
     /* border-left: none; */
 }
 .goods_item_img image{
-    width: 100%;
+	width: 50vw;
+	height: 50vw;
 }
 .goods_item_name{
     line-height: 20px;
@@ -90,6 +91,8 @@
 .goods_item_price{
 	margin-left: 10px;
 	position: relative;
+	height: 30px;
+	line-height: 30px;
 }
 .goods_item_price_left{
     color: red;

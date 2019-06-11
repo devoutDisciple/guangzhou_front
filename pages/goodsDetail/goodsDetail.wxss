@@ -18,6 +18,7 @@
 }
 .goodsDetail_content_goods_img image{
 	width: 100vw;
+	height: 100vw;
 }
 .goodsDetail_content_goods_name{
 	width: calc(100vw - 20px);
@@ -134,5 +135,9 @@
 }
 .goodsDetail_content_detail image{
 	width: calc(100vw - 20px);
+	height: calc(100vw - 20px);
 	overflow: hidden;
+}
+.collection_red{
+	color: red;
 }
