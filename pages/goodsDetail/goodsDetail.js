@@ -7,6 +7,8 @@ Page({
 	data: {
 		data: {}, // 商品详情数据
 		goods_id: 1, // 商品id
+		shopid: "1", //商店id
+		type: "detail", // 正常是商品详情页面，但是从商店点击进来为shop，不显示更多按钮
 		isCollection: false, // 是否已经收藏  默认没有收藏
 		evaluateList: [{ // 商品评价列表
 			shop_grade: 5,
@@ -80,8 +82,12 @@ Page({
 		});
 	},
 	// 点击更多 前往商店
-	goShop(e) {
-
+	goShop() {
+		let shopid = this.data.shopid;
+		console.log(shopid);
+		wx.navigateTo({
+			url: `/pages/shop/shop?id=${shopid}`
+		});
 	},
 	// 点击立即购买
 	onClickBuyIcon() {
@@ -97,7 +103,6 @@ Page({
 			url: "/collection/getByOpenid"
 		}).then((res) => {
 			let data = res.data;
-			console.log(data);
 			data.map(item => {
 				if(item.goods_id == this.data.goods_id) {
 					this.setData({
@@ -112,6 +117,7 @@ Page({
    */
 	onLoad: function (options) {
 		let id = options.id || 1;
+		let type = options.type;
 		// 获取商品数据
 		request.get({
 			url: "/goods/getById",
@@ -120,10 +126,13 @@ Page({
 			}
 		}).then(res => {
 			let data = res.data;
+			console.log(data, "goods");
 			data.desc = data.desc ? JSON.parse(data.desc) : [];
 			this.setData({
 				data: data || {},
-				goods_id: id
+				goods_id: id,
+				shopid: data.shopid,
+				type: type || "detail"
 			}, () => {
 				// 查看收藏
 				this.getCollectionGoods();

@@ -28,7 +28,6 @@ Page({
 	// 点击商品图片
 	onSearchGoodsDetail(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data, 111);
 		wx.navigateTo({
 			url: `/pages/goodsDetail/goodsDetail?id=${data.goodsDetail.id}`
 		});
@@ -36,9 +35,7 @@ Page({
 
 	// radio选择的时候
 	radioChange(e) {
-		console.log(e);
 		let radioId = e.currentTarget.dataset.data, data = this.data.data;
-		console.log(data);
 		data.map(item => {
 			if (item.id == radioId) {
 				item.select = !item.select;
@@ -59,7 +56,6 @@ Page({
 
 	//  全选点击的时候
 	allSelectChange() {
-		console.log(123);
 		let data = this.data.data, allSelect = this.data.allSelect;
 		if(allSelect) { // 取消全选
 			data.map(item => {

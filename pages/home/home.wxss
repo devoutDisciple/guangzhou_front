@@ -113,3 +113,18 @@
     line-height: 40px;
     font-size: 14px;
 }
+
+.fixed_car{
+	width: 80rpx;
+	height: 80rpx;
+	position: fixed;
+	bottom: 20px;
+	right: 10px;
+	border-radius: 100%;
+	background: #333333;
+}
+.fixed_car image{
+	width: 50rpx;
+	height: 50rpx;
+	margin: 15rpx;
+}

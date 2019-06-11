@@ -69,7 +69,7 @@
 
 	<van-row custom-class="goodsDetail_footer">
 		<van-goods-action>
-			<van-goods-action-icon icon="ellipsis" text="更多"  bindtap="goShop"/>
+			<van-goods-action-icon wx:if="{{type == 'detail'}}" icon="ellipsis" text="更多"  bindtap="goShop"/>
 			<van-goods-action-icon icon-class="collection_red" wx:if="{{isCollection}}" icon="like" text="已收藏" bindtap="removeCollection"/>
 			<van-goods-action-icon wx:if="{{!isCollection}}" icon="like-o" text="收藏" bindtap="addCollection" color="#9b9b9b"/>
 			<van-goods-action-button text="加入购物车" type="warning" bind:click="onClickAddCarIcon"/>

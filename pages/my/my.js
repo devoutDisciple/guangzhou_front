@@ -70,14 +70,15 @@ Page({
 	},
 	// 点击我的订单
 	onClickMyOrder() {
-		console.log(123);
 		wx.navigateTo({
 			url: "/pages/order/order"
 		});
 	},
 	// 点击我的收藏
 	onClickMyCollect() {
-
+		wx.navigateTo({
+			url: "/pages/collection/collection"
+		});
 	},
 	// 登录按钮点击的时候
 	getUserInfo: function(e) {

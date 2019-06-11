@@ -19,6 +19,14 @@ Page({
 		todayList: [], //今日推荐
 		goodsDetail: {}, // 点击的商品
 		goodsList: [], // 全部商品分类
+		sortGoodsList: [], // 按销量排序
+		type: 1, // 1 综合排序 2 销量排序
+	},
+	// 点击购物车
+	goCar() {
+		wx.navigateTo({
+			url: "/pages/car/car"
+		});
 	},
 	// 点击搜索
 	onSearch(e) {
@@ -62,8 +70,11 @@ Page({
 		});
 	},
 	// tab切换
-	onHomeTabsChange(e) {
-		console.log(e);
+	changeSortType() {
+		let type = this.data.type;
+		this.setData({
+			type: type == 1 ? 2 : 1
+		});
 	},
 	// 商品点击
 	onSearchGoodsDetail(e) {
@@ -112,7 +123,7 @@ Page({
 		});
 		// 设置标题
 		wx.setNavigationBarTitle({
-			title: "广州西西里"
+			title: "贝沃思美食"
 		});
 		// 设置导航栏颜色
 		wx.setNavigationBarColor({

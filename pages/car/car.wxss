@@ -86,7 +86,7 @@
 
 .car_footer{
 	height: 50px;
-	border-top: 1px solid #ebebeb;
+	border-top: 2px solid #ebebeb;
 }
 .car_footer_radio{
 	margin-left: 10px;
