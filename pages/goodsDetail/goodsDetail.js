@@ -96,6 +96,39 @@ Page({
 			icon: "fail",
 			duration: 1000
 		});
+		let goods = this.data.data;
+		// https://api.mch.weixin.qq.com/pay/unifiedorder
+		request.get({
+			url: "/pay/order",
+			data: {
+				total_fee: goods.price,
+			}
+		}).then((res) => {
+			console.log(res);
+			let data = res.data;
+			console.log(data);
+			wx.requestPayment({
+				timeStamp: data.timeStamp,
+				nonceStr: data.nonceStr,
+				package: data.package,
+				signType: "MD5",
+				paySign: data.paySign,
+				success (res) {
+					console.log(res, "success");
+				},
+				fail (res) {
+					console.log(res, "error");
+				}
+			});
+		});		// wx.requestPayment({
+		// 	timeStamp: "",
+		// 	nonceStr: "",
+		// 	package: "",
+		// 	signType: "MD5",
+		// 	paySign: "",
+		// 	success (res) { },
+		// 	fail (res) { }
+		// });
 	},
 	// 查看收藏的商品
 	getCollectionGoods() {
@@ -128,6 +161,7 @@ Page({
 			let data = res.data;
 			console.log(data, "goods");
 			data.desc = data.desc ? JSON.parse(data.desc) : [];
+
 			this.setData({
 				data: data || {},
 				goods_id: id,

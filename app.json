@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/goodsDetail/goodsDetail",
     "pages/home/home",
     "pages/car/car",
     "pages/shop/shop",
-    "pages/goodsDetail/goodsDetail",
     "pages/collection/collection",
     "pages/goods/goods",
     "pages/accounts/accounts",
@@ -14,7 +14,6 @@
     "pages/address/address",
     "pages/my/my",
     "pages/custom/custom",
-    "pages/type/type",
     "pages/option/option"
   ],
   "window": {
