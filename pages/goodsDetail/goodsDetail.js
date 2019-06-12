@@ -108,7 +108,8 @@ Page({
 			let data = res.data;
 			console.log(data);
 			wx.requestPayment({
-				timeStamp: data.timeStamp,
+				appid: "wx2769b76cc1aa3502",
+				timeStamp: String(data.timeStamp),
 				nonceStr: data.nonceStr,
 				package: data.package,
 				signType: "MD5",
@@ -120,15 +121,7 @@ Page({
 					console.log(res, "error");
 				}
 			});
-		});		// wx.requestPayment({
-		// 	timeStamp: "",
-		// 	nonceStr: "",
-		// 	package: "",
-		// 	signType: "MD5",
-		// 	paySign: "",
-		// 	success (res) { },
-		// 	fail (res) { }
-		// });
+		});
 	},
 	// 查看收藏的商品
 	getCollectionGoods() {
