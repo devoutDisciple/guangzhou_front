@@ -1,17 +1,17 @@
 {
   "pages": [
-    "pages/goodsDetail/goodsDetail",
     "pages/home/home",
+    "pages/accounts/accounts",
+    "pages/myAddress/myAddress",
+    "pages/address/address",
+    "pages/goodsDetail/goodsDetail",
     "pages/car/car",
     "pages/shop/shop",
     "pages/collection/collection",
     "pages/goods/goods",
-    "pages/accounts/accounts",
     "pages/order/order",
     "pages/orderEvaluate/orderEvaluate",
     "pages/orderDetail/orderDetail",
-    "pages/myAddress/myAddress",
-    "pages/address/address",
     "pages/my/my",
     "pages/custom/custom",
     "pages/option/option"

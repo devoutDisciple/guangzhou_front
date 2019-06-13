@@ -8,8 +8,10 @@ Page({
 		data: {}, // 商品详情数据
 		goods_id: 1, // 商品id
 		shopid: "1", //商店id
+		shopDetail: {},// 商店详情
 		type: "detail", // 正常是商品详情页面，但是从商店点击进来为shop，不显示更多按钮
 		isCollection: false, // 是否已经收藏  默认没有收藏
+		orderList: [], // 订单页面所需要的数据
 		evaluateList: [{ // 商品评价列表
 			shop_grade: 5,
 			create_time: "2018-9-12 10:32",
@@ -91,37 +93,56 @@ Page({
 	},
 	// 点击立即购买
 	onClickBuyIcon() {
-		wx.showToast({
-			title: "暂不支持购买",
-			icon: "fail",
-			duration: 1000
-		});
 		let goods = this.data.data;
-		// https://api.mch.weixin.qq.com/pay/unifiedorder
-		request.get({
-			url: "/pay/order",
-			data: {
-				total_fee: goods.price,
-			}
-		}).then((res) => {
-			console.log(res);
-			let data = res.data;
-			console.log(data);
-			wx.requestPayment({
-				appid: "wx2769b76cc1aa3502",
-				timeStamp: String(data.timeStamp),
-				nonceStr: data.nonceStr,
-				package: data.package,
-				signType: "MD5",
-				paySign: data.paySign,
-				success (res) {
-					console.log(res, "success");
-				},
-				fail (res) {
-					console.log(res, "error");
-				}
-			});
+		console.log(goods, 888);
+		// 跳转到编辑地址表单页面
+		wx.navigateTo({
+			url: "/pages/accounts/accounts?type=detail"
 		});
+		// https://api.mch.weixin.qq.com/pay/unifiedorder
+		// request.get({
+		// 	url: "/pay/order",
+		// 	data: {
+		// 		total_fee: goods.price,
+		// 	}
+		// }).then((res) => {
+		// 	console.log(res);
+		// 	let data = res.data;
+		// 	console.log(data);
+		// 	wx.requestPayment({
+		// 		timeStamp: String(data.timeStamp),
+		// 		nonceStr: data.nonceStr,
+		// 		package: data.package,
+		// 		signType: "MD5",
+		// 		paySign: data.paySign,
+		// 		success (res) {
+		// 			console.log(res, "success");
+		// 			if(res.errMsg == "requestPayment:ok"){
+		// 				console.log("支付成功");
+		// 			} else {
+		// 				wx.showModal({
+		// 					title: "支付失败",
+		// 					content: "支付失败, 请重新支付",
+		// 					confirmText: "重新支付",
+		// 					success: () => {
+		// 						this.onClickBuyIcon();
+		// 					}
+		// 				});
+		// 			}
+		// 		},
+		// 		fail (res) {
+		// 			console.log(res, "error");
+		// 			wx.showModal({
+		// 				title: "支付失败",
+		// 				content: "支付失败, 请重新支付",
+		// 				confirmText: "重新支付",
+		// 				success: () => {
+		// 					this.onClickBuyIcon();
+		// 				}
+		// 			});
+		// 		}
+		// 	});
+		// });
 	},
 	// 查看收藏的商品
 	getCollectionGoods() {
@@ -135,6 +156,19 @@ Page({
 						isCollection: true
 					});
 				}
+			});
+		});
+	},
+	// 获取商店数据
+	getShopDetail(id) {
+		request.get({
+			url: "/shop/getById",
+			data: {
+				id: id
+			}
+		}).then(res => {
+			this.setData({
+				shopDetail: res.data
 			});
 		});
 	},
@@ -154,13 +188,16 @@ Page({
 			let data = res.data;
 			console.log(data, "goods");
 			data.desc = data.desc ? JSON.parse(data.desc) : [];
-
+			data.num = 1;
 			this.setData({
 				data: data || {},
+				orderList: [data],
 				goods_id: id,
 				shopid: data.shopid,
 				type: type || "detail"
 			}, () => {
+				// 获取商店数据
+				this.getShopDetail(data.shopid);
 				// 查看收藏
 				this.getCollectionGoods();
 			});

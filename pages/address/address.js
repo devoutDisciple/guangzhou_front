@@ -4,46 +4,19 @@ Page({
    * 页面的初始数据
    */
 	data: {
-		sexRedio: "1", // 默认选中男同学
-		campusRadio: "1", // 默认是校内
+		type: "create", //默认是新增
 		positionDialogVisible: false, // 学校位置弹框
+		floorDialogVisible: false, // 取餐点的弹框
 		username: "",
 		phone: "",
-		otherPhone: "",
 		campus: "",
 		floor: "",
-		home: "",
-		family: "",
-		table: "",
+		position: [], // 全部位置
 		// 位置按钮种类
 		positionColumns: [
 		],
-		type: "create", //默认是新增
-
-		floorDialogVisible: false, // 宿舍楼号
 		floorColumns: [
-			{
-				values: ["宿舍楼"],
-				className: "column1"
-			},
-			{
-				values: [ "1号楼", "2号楼", "3号楼", "4号楼", "5号楼", "6号楼", "7号楼", "8号楼" ],
-				className: "column2"
-			},
 		],
-	},
-
-	// 改变男女同学按钮
-	onChangeSexRadio(e) {
-		this.setData({
-			sexRedio: e.detail
-		});
-	},
-	// 改变校内还是校外
-	onChangeCampusRadio(e) {
-		this.setData({
-			campusRadio: e.detail
-		});
 	},
 	// 位置相关---------------------
 	// 位置弹框的开关
@@ -52,17 +25,35 @@ Page({
 			positionDialogVisible: !this.data.positionDialogVisible
 		});
 	},
-	// 改变位置的时候
-	onChangePosition(event) {
-		console.log(event.detail, "change position");
-	},
 	// 选取位置确定
 	onConfirmPosition(event) {
 		console.log(event.detail.value, "position sure");
 		// 关闭弹框
 		this.onShowPositionDialog();
+		// 设置学校取餐点
+		let value = event.detail.value, campus = value[1], position = this.data.position, floorColumns = [];
+		console.log(position);
+		position.map(item => {
+			if(item.name == campus) {
+				try {
+					floorColumns.push({
+						values: JSON.parse(item.address) || [],
+						className: "column1"
+					});
+				} catch (error) {
+					console.log(error);
+					floorColumns.push({
+						values: ["暂无取餐点"],
+						className: "column1"
+					});
+				}
+
+			}
+		});
 		this.setData({
-			campus: event.detail.value.join(" ")
+			campus: event.detail.value.join(" "),
+			floorColumns,
+			floor: ""
 		});
 	},
 
@@ -81,10 +72,6 @@ Page({
 			floorDialogVisible: !floorDialogVisible
 		});
 	},
-	// 改变位置的时候
-	onChangeFloor(event) {
-		console.log(event.detail, "change Floor");
-	},
 	// 选取位置确定
 	onConfirmFloor(event) {
 		console.log(event.detail.value, "Floor sure");
@@ -102,40 +89,21 @@ Page({
 		// 选择校内
 		if(!value.username) return this.formMessage("请输入联系人姓名");
 		if(!value.phone) return this.formMessage("请输入手机号");
-		let params = {
-			username: value.username,
-			sex: this.data.sexRedio,
-			phone: value.phone,
-			otherPhone: value.otherPhone,
-		};
-		if(this.data.campusRadio == 1) {
-			if(!value.campus) return this.formMessage("请选择校区");
-			if(!value.floor) return this.formMessage("请选择楼号");
-			if(!value.home) return this.formMessage("请输入宿舍号");
-			let address = JSON.stringify(Object.assign({
-				isSchool: true,
-				campus: value.campus,
-				floor: value.floor,
-				home: value.home
-			}, params));
-			params.address = address;
-		} else {
-			if(!value.family) return this.formMessage("请输入收货地址");
-			if(!value.table) return this.formMessage("请输入门牌号");
-			let address = JSON.stringify(Object.assign({
-				isSchool: false,
-				family: value.family,
-				table: value.table
-			}, params));
-			params.address = address;
-		}
+		if(!value.campus) return this.formMessage("请选择学校");
+		if(!value.floor) return this.formMessage("请选择取餐点");
 		let type = this.data.type;
 		if(type == "create") {
+			let params = {
+				username: value.username,
+				phone: value.phone,
+				campus: value.campus,
+				address: JSON.stringify(value),
+			};
 			return request.post({
 				url: "/user/addAddress",
 				data: params
 			}).then(() => {
-				// 跳转到详情页
+				// 跳转到我的地址页面
 				wx.navigateTo({
 					url: "/pages/myAddress/myAddress"
 				});
@@ -146,16 +114,13 @@ Page({
 			let prevPage = pages[pages.length - 2];  //上一个页面
 			let data = prevPage.data;
 			let newAddress = [];
-
 			data.addressList.map((item, index) => {
 				if(index == data.editIndex) {
-					let itemAddress = JSON.parse(params.address);
+					let itemAddress = JSON.parse(JSON.stringify(value));
 					if(item.default) itemAddress.default = true;
-					newAddress.push(itemAddress);
-					return;
+					return newAddress.push(itemAddress);
 				}
-				newAddress.push(item);
-				return;
+				return newAddress.push(item);
 			});
 			request.post({
 				url: "/user/updateAddress",
@@ -191,6 +156,10 @@ Page({
 			this.setData({
 				type: "create"
 			});
+			// 设置标题
+			wx.setNavigationBarTitle({
+				title: "新增收货地址"
+			});
 		}
 		// 如果是编辑
 		if(type == "edit") {
@@ -201,15 +170,13 @@ Page({
 			this.setData({
 				type: "edit",
 				username: editData.username,
-				sexRedio: editData.sex,
 				phone: editData.phone,
-				otherPhone: editData.otherPhone,
-				campusRadio: editData.isSchool ? "1" : "2", // 校内或者校外
 				campus: editData.campus || "",
 				floor: editData.floor || "",
-				home: editData.home || "",
-				family: editData.family || "",
-				table: editData.table || ""
+			});
+			// 设置标题
+			wx.setNavigationBarTitle({
+				title: "编辑收货地址"
 			});
 		}
 		// 获取位置信息
@@ -217,27 +184,20 @@ Page({
 			url: "/position/all"
 		}).then(res => {
 			this.setData({
+				position: res.data,
 				positionColumns: [
 					{
-						values: ["上海"],
+						values: ["广州市"],
 						className: "column1"
-					},
-					{
-						values: ["上海"],
-						className: "column2"
 					},
 					{
 						values: res.data.map(item => {
 							return item.name;
 						}),
-						className: "column3"
+						className: "column2"
 					},
 				]
 			});
-		});
-		// 设置标题
-		wx.setNavigationBarTitle({
-			title: "新增收货地址"
 		});
 		// 设置导航栏颜色
 		wx.setNavigationBarColor({
