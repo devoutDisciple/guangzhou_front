@@ -71,22 +71,32 @@
 }
 .goods_item{
     width: 50vw;
-    min-height: 100px;
+    min-height: 50vw;
     border: 1px solid #eeeeee;
-    /* border-top: none; */
-    /* border-left: none; */
 }
 .goods_item_img image{
 	width: 50vw;
 	height: 50vw;
+	display: block;
 }
 .goods_item_name{
     line-height: 20px;
-    height: 60px;
-    margin: 10px;
-    margin-top: 0;
-    margin-bottom: 0;
-    overflow: hidden;
+	height: 20px;
+	margin-top: 5px;
+    margin-left: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.goods_item_title{
+	line-height: 20px;
+	height: 20px;
+	font-size: 12px;
+	color: #9c9c9c;
+	margin-left: 10px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .goods_item_price{
 	margin-left: 10px;

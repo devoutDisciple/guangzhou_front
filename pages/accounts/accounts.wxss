@@ -144,9 +144,8 @@
 }
 .accounts_content_other{
 	background: #fff;
-	margin-top: 10px;
 	min-height: 100px;
-	padding: 10px;
+	padding: 0 10px;
 }
 .accounts_content_other_row{
 	height: 20px;

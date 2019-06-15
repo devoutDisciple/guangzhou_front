@@ -9,7 +9,6 @@ Page({
 	data: {
 		orderList: [], // 订单数据
 		totalPrice: 0.00, // 总价
-		discountPrice: 0, // 满减优惠
 		type: "car", // 默认是从shop点击进来的
 		personDetail: {}, // 个人信息
 		address: {}, // 默认收货地址
@@ -67,21 +66,8 @@ Page({
 	// 支付订单
 	submitOrder() {
 		let self = this;
-		let shopDetail = {
-			id: self.data.shopDetail.id,
-			name: self.data.shopDetail.name,
-			address: self.data.shopDetail.address,
-			url: self.data.shopDetail.url,
-			package_cost: self.data.shopDetail.package_cost,
-			send_price: self.data.shopDetail.send_price
-		};
-		let goodIds = [];
-		self.data.orderList.map(item => {
-			goodIds.push({
-				id: item.id,
-				num: item.num
-			});
-		});
+		let orderList = this.data.orderList;
+		console.log(orderList, 11);
 		request.get({
 			url: "/pay/order",
 			data: {
@@ -102,14 +88,7 @@ Page({
 						request.post({
 							url: "/order/add",
 							data: {
-								id: self.data.shopDetail.id,
-								goodIds: goodIds,
-								shop_detail: JSON.stringify(shopDetail),
-								order_list: JSON.stringify(self.data.orderList),
-								total_price: self.data.totalPrice, // 总价
-								discount_price: self.data.discountPrice, // 优惠价格
-								order_time: (new Date()).getTime(),
-								desc: self.data.comment, // 备注信息
+								orderList: JSON.stringify(orderList),
 							}
 						}).then(() => {
 							// 支付订单跳转到订单页面
@@ -159,6 +138,11 @@ Page({
 		let prevPage = pages[pages.length - 2]; //上一个页面
 		let data = prevPage.data;
 		if (type == "detail") { // 从商品详情点击过来
+			let orderList = data.orderList;
+			orderList.map(item => {
+				item.comment = "";
+				item.showComment = "口味,偏好等要求";
+			});
 			this.setData({
 				type: "shop",
 				orderList: data.orderList,
@@ -184,6 +168,7 @@ Page({
 					totalPrice = totalPrice + Number(item.shopDetail.send_price) + Number(item.shopDetail.package_cost);
 					globalPrice = Number(globalPrice + totalPrice);
 					item.goods = goods;
+					item.comment = "";
 					item.showComment =  "口味,偏好等要求";
 					item.totalPrice = totalPrice;
 					newOderList.push(item);
@@ -194,7 +179,6 @@ Page({
 				type: "car",
 				orderList: newOderList,
 				totalPrice: globalPrice,
-				discountPrice: 0
 			});
 		}
 

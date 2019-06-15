@@ -61,6 +61,14 @@
 	font-size: 12px;
 	position: relative;
 }
+.order_content_item_desc_type{
+	max-width: calc(100vw - 150px);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	height: 20px;
+	line-height: 20px;
+}
 .order_content_item_desc_price{
 	position: absolute;
 	right: 0;

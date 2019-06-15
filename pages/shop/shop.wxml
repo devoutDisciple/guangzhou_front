@@ -6,6 +6,7 @@
 					<image src="{{item.url}}" />
 				</van-row>
 				<van-row custom-class="goods_item_name">{{item.name}}</van-row>
+				<van-row custom-class="goods_item_title">{{item.title}}</van-row>
 				<van-row custom-class="goods_item_price">
 					<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
 					<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>

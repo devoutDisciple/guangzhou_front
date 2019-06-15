@@ -22,12 +22,22 @@
 }
 .goodsDetail_content_goods_name{
 	width: calc(100vw - 20px);
-	height: 60px;
-	line-height: 30px;
-	font-size: 16px;
+	height: 20px;
+	line-height: 20px;
 	color: #333;
 	margin-left: 10px;
 	overflow: hidden;
+}
+.goodsDetail_content_goods_title{
+	width: calc(100vw - 20px);
+	height: 20px;
+	line-height: 20px;
+	font-size: 12px;
+	color: #9c9c9c;
+	margin-left: 10px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 .goodsDetail_content_goods_price{
 	width: calc(100vw - 20px);

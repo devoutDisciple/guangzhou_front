@@ -47,6 +47,7 @@ Page({
 			let value = e.detail.value.textarea,
 				{peopleGrade, shopGrade} = this.data;
 			console.log(peopleGrade, shopGrade, value);
+			console.log(this.data.orderitem);
 			request.post({
 				url: "/evaluate/addEvaluate",
 				data: {
@@ -63,7 +64,7 @@ Page({
 				console.log(res);
 				// 跳转订单页面;
 				wx.switchTab({
-					url: "/pages/order/order",
+					url: "/pages/my/omrder",
 					success: () => {
 						wx.showToast({
 							title: "评价成功",

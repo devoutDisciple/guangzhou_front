@@ -8,6 +8,9 @@
 			<van-row custom-class="goodsDetail_content_goods_name">
 				{{data.name}}
 			</van-row>
+			<van-row custom-class="goodsDetail_content_goods_title">
+				{{data.title}}
+			</van-row>
 			<van-row custom-class="goodsDetail_content_goods_price">
 				￥{{data.price}}
 			</van-row>

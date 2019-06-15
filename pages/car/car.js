@@ -79,9 +79,11 @@ Page({
 	// 增加商品数量
 	addGoodsNum(e) {
 		let goods = e.currentTarget.dataset.data;
+		console.log(goods);
 		let data = this.data.data;
+		console.log(data);
 		data.map(item => {
-			item.num++;
+			if(goods.id == item.id) item.num++;
 		});
 		this.setData({data}, () => {
 			this.countPrice();

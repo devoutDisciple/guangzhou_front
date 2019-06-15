@@ -52,10 +52,6 @@
 							配送费<van-col custom-class="accounts_content_shop_message_row_right">￥{{item.shopDetail.send_price}}</van-col>
 						</van-row>
 					</van-row>
-					<van-row custom-class="accounts_content_shop_total">
-						<text class="accounts_content_shop_total_total">合计</text>
-						<text class="accounts_content_shop_total_money">￥{{item.totalPrice}}</text>
-					</van-row>
 					<van-row custom-class="accounts_content_other">
 						<van-row custom-class="accounts_content_other_row" bindtap="addComment" data-data="{{item}}">
 							<text custom-class="accounts_content_other_row_left">备注</text>
@@ -66,6 +62,10 @@
 						<van-row custom-class="accounts_content_other_row">
 							支付方式<text class="accounts_content_other_row_right">在线支付</text>
 						</van-row>
+					</van-row>
+					<van-row custom-class="accounts_content_shop_total">
+						<text class="accounts_content_shop_total_total">合计</text>
+						<text class="accounts_content_shop_total_money">￥{{item.totalPrice}}</text>
 					</van-row>
 				</van-row>
 			</van-row>
