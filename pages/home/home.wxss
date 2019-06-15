@@ -138,3 +138,10 @@
 	height: 50rpx;
 	margin: 15rpx;
 }
+.empty{
+	height: 200px;
+	width: 100vw;
+	text-align: center;
+	line-height: 200px;
+	color: #9c9c9c;
+}

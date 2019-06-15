@@ -1,4 +1,5 @@
 const request = require("../../utils/request");
+const moment = require("../../utils/moment");
 Page({
 
 	/**
@@ -12,19 +13,10 @@ Page({
 		type: "detail", // 正常是商品详情页面，但是从商店点击进来为shop，不显示更多按钮
 		isCollection: false, // 是否已经收藏  默认没有收藏
 		orderList: [], // 订单页面所需要的数据
-		evaluateList: [{ // 商品评价列表
-			shop_grade: 5,
-			create_time: "2018-9-12 10:32",
-			desc: "hello test",
-			username: "「？....！』",
-			avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJibwnzh0pHtTsXFNbFcdnaWW2MztibPkwQ6ZSYpxuPjV30rfXGbxrkiaMxGPAQWyycO9vV2A4lD52Qg/132"
-		}, {
-			shop_grade: 3,
-			create_time: "2018-9-12 10:39",
-			desc: "hello111",
-			username: "「？....！』",
-			avatarUrl: "https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJibwnzh0pHtTsXFNbFcdnaWW2MztibPkwQ6ZSYpxuPjV30rfXGbxrkiaMxGPAQWyycO9vV2A4lD52Qg/132"
-		}]
+		evaluateList: [],// 商品评价列表
+		evaluateListAll: [], // 全部评价
+		evaluateNum: 0, // 全部评价数量
+		avgEvaluate: 0, // 评价平局值
 	},
 	// 点击加入购物车
 	onClickAddCarIcon() {
@@ -184,6 +176,34 @@ Page({
 			});
 		});
 	},
+	// 获取评价列表
+	getEvaluate(goods_id) {
+		request.get({
+			url: "/evaluate/getEvaluateByGoodsId",
+			data: {
+				goods_id: goods_id
+			}
+		}).then(res => {
+			console.log(res.data);
+			let data = res.data.result, sumEvaluate = res.data.sumEvaluate, evaluateList = [];
+			data.map((item, index) => {
+				index < 2 ? evaluateList.push(item) : null;
+				item.create_time = moment.format(Number(item.create_time));
+			});
+			this.setData({
+				evaluateListAll: data,
+				evaluateList: evaluateList,
+				evaluateNum: data.length,
+				avgEvaluate: Math.round(sumEvaluate / data.length)
+			});
+		});
+	},
+	// 查看更多
+	onSearchMore() {
+		wx.navigateTo({
+			url: "/pages/evaluateList/evaluateList"
+		});
+	},
 	/**
    * 生命周期函数--监听页面加载
    */
@@ -212,6 +232,8 @@ Page({
 				this.getShopDetail(data.shopid);
 				// 查看收藏
 				this.getCollectionGoods();
+				// 获取评价
+				this.getEvaluate(id);
 			});
 			// 设置微信头部
 			wx.setNavigationBarTitle({

@@ -9,7 +9,8 @@ Page({
 		peopleGrade: 0,
 		shopGrade: 0,
 		success: false,
-		shopDetail: {}
+		shopDetail: {},
+		orderitem: {}
 	},
 
 	// 对骑手评价改变
@@ -45,15 +46,17 @@ Page({
 		// 跳转订单页面
 		if(this.data.success) {
 			let value = e.detail.value.textarea,
-				{peopleGrade, shopGrade} = this.data;
+				{peopleGrade, shopGrade, orderitem} = this.data;
 			console.log(peopleGrade, shopGrade, value);
 			console.log(this.data.orderitem);
+			let goods_id = orderitem.order_list[0].id;
 			request.post({
 				url: "/evaluate/addEvaluate",
 				data: {
 					orderid: this.data.orderitem.id,
 					shopid: this.data.shopDetail.id,
 					desc: value,
+					goods_id: goods_id,
 					shop_grade: shopGrade,
 					sender_grade: peopleGrade,
 					create_time: (new Date()).getTime(),
@@ -64,7 +67,7 @@ Page({
 				console.log(res);
 				// 跳转订单页面;
 				wx.switchTab({
-					url: "/pages/my/omrder",
+					url: "/pages/my/my",
 					success: () => {
 						wx.showToast({
 							title: "评价成功",

@@ -17,17 +17,17 @@
 		</van-row>
 		<van-row custom-class="goodsDetail_content_evaluate">
 			<van-row custom-class="goodsDetail_content_evaluate_title">
-				<van-row custom-class="goodsDetail_content_evaluate_title_num">评论(235)</van-row>
+				<van-row custom-class="goodsDetail_content_evaluate_title_num">评论({{evaluateNum}})</van-row>
 				<van-row custom-class="goodsDetail_content_evaluate_title_icon">
 					<van-rate
-						value="{{ 4 }}"
+						value="{{ avgEvaluate }}"
 						size="{{ 20 }}"
 						color="#f44"
 						readonly/>
 				</van-row>
 			</van-row>
-			<van-row custom-class="goodsDetail_content_evaluate_content">
-				<van-row custom-class="goodsDetail_content_evaluate_item" wx:for="{{evaluateList}}" wx:key="{{index}}">
+			<van-row custom-class="goodsDetail_content_evaluate_content"  wx:if="{{evaluateList.length != 0}}">
+				<van-row custom-class="goodsDetail_content_evaluate_item" wx:for="{{evaluateList}}" wx:key="{{index}}" >
 					<van-row custom-class="goodsDetail_content_evaluate_item_title">
 						<van-col custom-class="goodsDetail_content_evaluate_item_title_img">
 							<image src="{{item.avatarUrl}}"/>
@@ -56,7 +56,8 @@
 					</van-row>
 				</van-row>
 			</van-row>
-			<van-row custom-class="goodsDetail_content_evaluate_more">
+			<van-row custom-class="goodsDetail_content_evaluate_empty">暂无评价</van-row>
+			<van-row custom-class="goodsDetail_content_evaluate_more" bindtap="onSearchMore" wx:if="{{evaluateList.length > 1}}">
 				<van-col custom-class="goodsDetail_content_evaluate_more_text">
 					查看更多
 				</van-col>

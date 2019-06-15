@@ -72,6 +72,7 @@
 	height: 20px;
 	line-height: 20px;
 }
+
 .goodsDetail_content_evaluate_item{
 	min-height: 70px;
 	padding-top: 10px;
@@ -94,7 +95,7 @@
 	width: 30px;
 }
 .goodsDetail_content_evaluate_item_title_right_name{
-	width: calc(100vw - 180px);
+	width: calc(100vw - 190px);
 	height: 30px;
 	margin-left: 10px;
 	font-size: 12px;
@@ -110,7 +111,7 @@
 }
 .goodsDetail_content_evaluate_item_title_right_time{
 	color: #9c9c9c;
-	width: 120px;
+	width: 130px;
 	height: 30px;
 	font-size: 12px;
 	text-align: right;
@@ -150,4 +151,9 @@
 }
 .collection_red{
 	color: red;
+}
+.goodsDetail_content_evaluate_empty{
+	height: 50px;
+	line-height: 50px;
+	color: #9c9c9c;
 }

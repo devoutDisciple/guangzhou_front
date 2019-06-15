@@ -31,7 +31,7 @@
     scroll-y
     class="home_content">
     <!-- 轮播图 -->
-    <van-row custom-class="home_content_swiper">
+    <van-row custom-class="home_content_swiper" wx:if="{{swiperUrls.length != 0}}">
       <swiper
         indicator-dots="{{true}}"
 		    autoplay="{{true}}"
@@ -43,14 +43,17 @@
           </swiper-item>
         </block>
       </swiper>
-    </van-row>
+	</van-row>
+	<van-row wx:else  custom-class="empty">
+		暂无数据
+	</van-row>
     <!-- 今日推荐 -->
     <van-row custom-class="home_content_today">
       <van-col custom-class="home_content_today_line home_content_today_line_first"></van-col>
       <van-col custom-class="home_content_today_text">今日推荐</van-col>
       <van-col custom-class="home_content_today_line"></van-col>
     </van-row>
-    <van-row custom-class="goods_today">
+    <van-row custom-class="goods_today" wx:if="{{todayList.length != 0}}">
       <van-col custom-class="goods_item" wx:for="{{todayList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
           	<van-row custom-class="goods_item_img">
             	<image src="{{item.goodsDetail.url}}" />
@@ -62,7 +65,10 @@
 				<van-col custom-class="goods_item_price_right">月售: {{item.goodsDetail.sales}}</van-col>
 			</van-row>
       </van-col>
-    </van-row>
+	</van-row>
+	<van-row wx:else  custom-class="empty">
+			暂无数据
+	</van-row>
 
     <!-- 全部商品 -->
     <van-row custom-class="home_content_shop">
@@ -71,7 +77,7 @@
 			<van-col custom-class="home_content_today_text">{{type == 1 ? "综合排序" : "销量最高"}}</van-col>
 			<van-col custom-class="home_content_today_line"></van-col>
 		</van-row>
-		<van-row custom-class="goods_today">
+		<van-row custom-class="goods_today" wx:if="{{type == 1 ? goodsList.length != 0 : sortGoodsList.length != 0 }}">
 			<van-col custom-class="goods_item" wx:for="{{type == 1 ? goodsList : sortGoodsList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
 				<van-row custom-class="goods_item_img">
 					<image src="{{item.url}}" />
@@ -84,21 +90,9 @@
 				</van-row>
 			</van-col>
 		</van-row>
-
-          <!-- <van-tab title="销量最高">
-			<van-row custom-class="goods_today">
-              <van-col custom-class="goods_item" wx:for="{{sortGoodsList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
-                  	<van-row custom-class="goods_item_img">
-                    	<image src="{{item.url}}" />
-                  	</van-row>
-                  	<van-row custom-class="goods_item_name">{{item.name}}</van-row>
-                  	<van-row custom-class="goods_item_price">
-						<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
-						<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
-					</van-row>
-              </van-col>
-            </van-row>
-          </van-tab> -->
+		<van-row wx:else  custom-class="empty">
+			暂无数据
+		</van-row>
     </van-row>
   </scroll-view>
 

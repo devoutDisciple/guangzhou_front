@@ -1,0 +1,56 @@
+.evaluate_content{
+	width: calc(100vw - 20px);
+	height: 100vh;
+	margin-left: 10px;
+}
+.evaluate_item{
+	min-height: 70px;
+	padding-top: 10px;
+	width: 100%;
+	border-bottom: 1px solid #ebebeb;
+}
+.evaluate_item:last-child{
+	border: none;
+}
+
+.evaluate_item_title{
+	height: 30px;
+}
+.evaluate_item_title_img{
+	height: 30px;
+	width: 30px;
+}
+.evaluate_item_title_img image{
+	height: 30px;
+	width: 30px;
+}
+.evaluate_item_title_right_name{
+	width: calc(100vw - 190px);
+	height: 30px;
+	margin-left: 10px;
+	font-size: 12px;
+}
+.evaluate_item_title_right_name_user{
+	color: #9c9c9c;
+	height: 15px;
+	width: 100%;
+}
+.evaluate_item_title_right_name_grade{
+	height: 15px;
+	width: 100%;
+}
+.evaluate_item_title_right_time{
+	color: #9c9c9c;
+	width: 130px;
+	height: 30px;
+	font-size: 12px;
+	text-align: right;
+	line-height: 30px;
+}
+.evaluate_item_content{
+	min-height: 20px;
+	padding-bottom: 10px;
+	font-size: 12px;
+
+	color: #8e8e8e;
+}

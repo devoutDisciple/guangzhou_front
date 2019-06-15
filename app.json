@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/order/order",
     "pages/home/home",
+    "pages/order/order",
     "pages/car/car",
     "pages/accounts/accounts",
     "pages/myAddress/myAddress",
@@ -14,7 +14,8 @@
     "pages/orderDetail/orderDetail",
     "pages/my/my",
     "pages/custom/custom",
-    "pages/option/option"
+    "pages/option/option",
+    "pages/evaluateList/evaluateList"
   ],
   "window": {
     "backgroundTextStyle": "light",

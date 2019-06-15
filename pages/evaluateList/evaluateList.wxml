@@ -1,0 +1,30 @@
+<van-row custom-class="evaluate_content">
+	<van-row custom-class="evaluate_item" wx:for="{{evaluateListAll}}" wx:key="{{index}}">
+		<van-row custom-class="evaluate_item_title">
+			<van-col custom-class="evaluate_item_title_img">
+				<image src="{{item.avatarUrl}}"/>
+			</van-col>
+			<van-col custom-class="evaluate_item_title_right">
+				<van-col custom-class="evaluate_item_title_right_name">
+					<van-row custom-class="evaluate_item_title_right_name_user">
+						{{item.username}}
+					</van-row>
+					<van-row custom-class="evaluate_item_title_right_name_grade">
+						<van-rate color="#f44" value="{{item.shop_grade}}" size="{{12}}" readonly />
+					</van-row>
+				</van-col>
+				<van-col custom-class="evaluate_item_title_right_time">
+					{{item.create_time}}
+				</van-col>
+			</van-col>
+		</van-row>
+		<van-row custom-class="evaluate_item_content">
+			<text wx:if="{{item.desc}}">
+				{{item.desc}}
+			</text>
+			<text wx:if="{{!item.desc}}">
+				该用户暂无评价
+			</text>
+		</van-row>
+	</van-row>
+</van-row>
