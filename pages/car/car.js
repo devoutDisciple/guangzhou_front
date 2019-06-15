@@ -7,6 +7,7 @@ Page({
 		allSelect: false, //是否全选
 		data: [], // 购物车数据
 		totalPrice: 0.00, // 总金额
+		orderList: [], // 提交的订单
 	},
 
 	// 获取购物车信息
@@ -15,6 +16,7 @@ Page({
 			url: "/car/getByOpenid",
 		}).then(res => {
 			let data = res.data;
+			console.log(data);
 			data.map(item => {
 				item.select = false;
 			});
@@ -79,7 +81,7 @@ Page({
 		let goods = e.currentTarget.dataset.data;
 		let data = this.data.data;
 		data.map(item => {
-			if(item.id == goods.id) item.num++;
+			item.num++;
 		});
 		this.setData({data}, () => {
 			this.countPrice();
@@ -128,13 +130,29 @@ Page({
 
 	// 提交订单
 	onSubmitOrder() {
-		console.log(123);
+		let data = this.data.data;
+		let orderList = data.filter(item => {
+			item.goodsDetail.num = item.num;
+			if(item.select) return item;
+		});
+		console.log(JSON.stringify(orderList));
+		this.setData({orderList}, () => {
+			wx.navigateTo({
+				url: "/pages/accounts/accounts?type=car"
+			});
+		});
 	},
 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
+		// 清空数据
+		this.setData({
+			allSelect: false, //是否全选
+			totalPrice: 0.00, // 总金额
+			orderList: [], // 提交的订单
+		});
 		// 获取购物车
 		this.getCarDetail();
 		// 设置标题

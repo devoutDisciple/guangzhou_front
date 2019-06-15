@@ -7,7 +7,7 @@ Page({
 	data: {
 		data: {}, // 商品详情数据
 		goods_id: 1, // 商品id
-		shopid: "1", //商店id
+		shop_id: "1", //商店id
 		shopDetail: {},// 商店详情
 		type: "detail", // 正常是商品详情页面，但是从商店点击进来为shop，不显示更多按钮
 		isCollection: false, // 是否已经收藏  默认没有收藏
@@ -35,6 +35,7 @@ Page({
 			data: {
 				goods_id,
 				create_time,
+				shop_id: this.data.shop_id,
 				num: 1
 			}
 		}).then((res) => {
@@ -85,20 +86,31 @@ Page({
 	},
 	// 点击更多 前往商店
 	goShop() {
-		let shopid = this.data.shopid;
-		console.log(shopid);
+		let shop_id = this.data.shop_id;
+		console.log(shop_id);
 		wx.navigateTo({
-			url: `/pages/shop/shop?id=${shopid}`
+			url: `/pages/shop/shop?id=${shop_id}`
 		});
 	},
 	// 点击立即购买
 	onClickBuyIcon() {
-		let goods = this.data.data;
-		console.log(goods, 888);
-		// 跳转到编辑地址表单页面
-		wx.navigateTo({
-			url: "/pages/accounts/accounts?type=detail"
+		let goods = this.data.data, shopDetail = this.data.shopDetail;
+		goods.num = 1;
+		let totalPrice = Number(goods.price) + Number(shopDetail.send_price) + Number(shopDetail.package_cost);
+		let obj = {
+			shopDetail: shopDetail,
+			showComment: "口味,偏好等要求",
+			goods: [goods],
+			totalPrice: totalPrice
+		};
+		let orderList = [obj];
+		this.setData({orderList}, () => {
+			// 跳转到编辑地址表单页面
+			wx.navigateTo({
+				url: "/pages/accounts/accounts?type=detail"
+			});
 		});
+
 		// https://api.mch.weixin.qq.com/pay/unifiedorder
 		// request.get({
 		// 	url: "/pay/order",
@@ -193,7 +205,7 @@ Page({
 				data: data || {},
 				orderList: [data],
 				goods_id: id,
-				shopid: data.shopid,
+				shop_id: data.shopid,
 				type: type || "detail"
 			}, () => {
 				// 获取商店数据

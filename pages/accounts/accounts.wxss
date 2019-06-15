@@ -87,6 +87,9 @@
 	top: 0;
 	right: 0;
 }
+.accounts_content_shop_message_list{
+	background: #fff;
+}
 .accounts_content_shop_message{
 	padding: 10px;
 }
@@ -235,6 +238,6 @@
 	height: 50px;
 	width: 100px;
 	color: #fff;
-	background: #98f1d2;
+	background: red;
 	text-align: center;
 }
