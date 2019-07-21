@@ -4,13 +4,12 @@ let baseUrl = config.baseUrl;
 module.exports = {
 	get: (params = {}) => {
 		let position = wx.getStorageSync("campus");
-		console.log(position, 111);
 		return new Promise((resolve, reject) => {
 			wx.request({
 				method: "GET",
 				url: baseUrl + params.url,
 				data: Object.assign({
-					openid: app.globalData.openid || "oKw4p450ND5YU2HMpFZ0iPoVtd-I",
+					openid: app.globalData.openid,
 					position: position
 				}, params.data),
 				success: function(res) {
@@ -45,7 +44,7 @@ module.exports = {
 				method: "POST",
 				url: baseUrl + params.url,
 				data: Object.assign({
-					openid: app.globalData.openid || "oKw4p450ND5YU2HMpFZ0iPoVtd-I",
+					openid: app.globalData.openid,
 					position: position
 				}, params.data),
 				success: function(res) {

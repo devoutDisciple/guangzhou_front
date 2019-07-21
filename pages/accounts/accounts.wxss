@@ -60,7 +60,6 @@
 .accounts_content_shop_list_item_img{
 	height: 50px;
 	width: 50px;
-	background: red;
 }
 .accounts_content_shop_list_item_img image{
 	width: 100%;

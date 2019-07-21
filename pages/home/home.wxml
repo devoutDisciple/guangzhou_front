@@ -33,8 +33,10 @@
     <!-- 轮播图 -->
     <van-row custom-class="home_content_swiper" wx:if="{{swiperUrls.length != 0}}">
       <swiper
+	  	style="height: 200px;"
         indicator-dots="{{true}}"
-		    autoplay="{{true}}"
+		circular="{{true}}"
+		autoplay="{{true}}"
         interval="{{interval}}"
         duration="{{duration}}">
         <block wx:for="{{swiperUrls}}" wx:key="{{index}}">
@@ -56,13 +58,13 @@
     <van-row custom-class="goods_today" wx:if="{{todayList.length != 0}}">
       <van-col custom-class="goods_item" wx:for="{{todayList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
           	<van-row custom-class="goods_item_img">
-            	<image src="{{item.goodsDetail.url}}" />
+            	<image src="{{item.url}}" />
           	</van-row>
-			<van-row custom-class="goods_item_name">{{item.goodsDetail.name}}</van-row>
-			<van-row custom-class="goods_item_title">{{item.goodsDetail.title ? item.goodsDetail.title : ''}}</van-row>
+			<van-row custom-class="goods_item_name">{{item.name}}</van-row>
+			<van-row custom-class="goods_item_title">{{item.title ? item.title : ''}}</van-row>
 			<van-row custom-class="goods_item_price">
-				<van-col custom-class="goods_item_price_left">￥{{item.goodsDetail.price}}</van-col>
-				<van-col custom-class="goods_item_price_right">月售: {{item.goodsDetail.sales}}</van-col>
+				<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
+				<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
 			</van-row>
       </van-col>
 	</van-row>
@@ -111,6 +113,15 @@
       		bind:change="onChangePosition"
       		bind:cancel="onShowPositionDialog"
 	  		bind:confirm="onConfirmPosition" />
-  </van-action-sheet>
-  <!--  -->
+  	</van-action-sheet>
+	<!-- 登录弹出框 -->
+	<van-popup
+		show="{{ loginPopup }}"
+		position="right"
+		custom-class="login_popup"
+		overlay="{{ false }}"
+		close-on-click-overlay="{{false}}">
+		<button type="primary" class="login_popup_btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+	</van-popup>
+  	<!--  -->
 </view>

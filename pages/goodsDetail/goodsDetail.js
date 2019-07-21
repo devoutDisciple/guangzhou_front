@@ -88,7 +88,7 @@ Page({
 	onClickBuyIcon() {
 		let goods = this.data.data, shopDetail = this.data.shopDetail;
 		goods.num = 1;
-		let totalPrice = Number(goods.price) + Number(shopDetail.send_price) + Number(shopDetail.package_cost);
+		let totalPrice = Number(goods.price) + Number(shopDetail.send_price) + Number(goods.package_cost);
 		let obj = {
 			shopDetail: shopDetail,
 			showComment: "口味,偏好等要求",
@@ -102,51 +102,6 @@ Page({
 				url: "/pages/accounts/accounts?type=detail"
 			});
 		});
-
-		// https://api.mch.weixin.qq.com/pay/unifiedorder
-		// request.get({
-		// 	url: "/pay/order",
-		// 	data: {
-		// 		total_fee: goods.price,
-		// 	}
-		// }).then((res) => {
-		// 	console.log(res);
-		// 	let data = res.data;
-		// 	console.log(data);
-		// 	wx.requestPayment({
-		// 		timeStamp: String(data.timeStamp),
-		// 		nonceStr: data.nonceStr,
-		// 		package: data.package,
-		// 		signType: "MD5",
-		// 		paySign: data.paySign,
-		// 		success (res) {
-		// 			console.log(res, "success");
-		// 			if(res.errMsg == "requestPayment:ok"){
-		// 				console.log("支付成功");
-		// 			} else {
-		// 				wx.showModal({
-		// 					title: "支付失败",
-		// 					content: "支付失败, 请重新支付",
-		// 					confirmText: "重新支付",
-		// 					success: () => {
-		// 						this.onClickBuyIcon();
-		// 					}
-		// 				});
-		// 			}
-		// 		},
-		// 		fail (res) {
-		// 			console.log(res, "error");
-		// 			wx.showModal({
-		// 				title: "支付失败",
-		// 				content: "支付失败, 请重新支付",
-		// 				confirmText: "重新支付",
-		// 				success: () => {
-		// 					this.onClickBuyIcon();
-		// 				}
-		// 			});
-		// 		}
-		// 	});
-		// });
 	},
 	// 查看收藏的商品
 	getCollectionGoods() {

@@ -46,7 +46,7 @@
 				<van-row wx:if="{{idx == item.goods.length - 1}}" custom-class="accounts_content_shop_message_list">
 					<van-row custom-class="accounts_content_shop_message">
 						<van-row custom-class="accounts_content_shop_message_row">
-							餐盒费<van-col custom-class="accounts_content_shop_message_row_right">￥{{item.shopDetail.package_cost}}</van-col>
+							餐盒费<van-col custom-class="accounts_content_shop_message_row_right">￥{{item.package_cost}}</van-col>
 						</van-row>
 						<van-row custom-class="accounts_content_shop_message_row">
 							配送费<van-col custom-class="accounts_content_shop_message_row_right">￥{{item.shopDetail.send_price}}</van-col>

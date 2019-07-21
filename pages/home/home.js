@@ -1,4 +1,6 @@
 const request = require("../../utils/request");
+const config = require("../../utils/config");
+const app = getApp();
 Page({
 	/**
    * 页面的初始数据
@@ -7,6 +9,7 @@ Page({
 		positionDialogVisible: false, //位置弹框的开关
 		interval: 5000, // 轮播图间隔时间
 		duration: 1000, // 轮播图延迟时间
+		loginPopup: false, // 登录弹出框
 		// 轮播图url
 		swiperUrls: [
 		],
@@ -26,6 +29,49 @@ Page({
 	goCar() {
 		wx.navigateTo({
 			url: "/pages/car/car"
+		});
+	},
+	// 用户注册
+	getUserInfo(e) {
+		let userInfo = e.detail.userInfo;
+		app.globalData.userInfo = userInfo;
+		// 获取用户code
+		wx.login({
+			success: data => {
+				console.log(data, 222);
+				wx.request({
+					method: "POST",
+					url: config.baseUrl + "/user/register",
+					data: Object.assign({
+						code: data.code,
+						appid: config.appid,
+						AppSecret: config.AppSecret,
+						grant_type: config.grant_type,
+						avatarUrl: userInfo.avatarUrl,
+						name: userInfo.nickName
+					}),
+					success: res => {
+						console.log(res.data.data, 6789);
+						// 保存openid
+						app.globalData.openid = res.data.data;
+						// 关闭弹框
+						this.setData({
+							loginPopup: false
+						});
+					},
+					fail: err => {
+						console.log(err, 80);
+						wx.showModal({
+							title: "提示",
+							content: "网络异常",
+							showCancel: false
+						});
+					}
+				});
+			},
+			fail: res => {
+				console.log(res, "loginFail");
+			}
 		});
 	},
 	// 点击搜索
@@ -95,6 +141,7 @@ Page({
 		request.get({
 			url: "/position/all"
 		}).then(res => {
+			console.log(res, 999);
 			this.setData({
 				columns: [
 					{
@@ -133,6 +180,54 @@ Page({
 	},
 	// 获取首页信息
 	getHomeMessage: function() {
+		// 判断是否存在该用户
+		wx.login({
+			success: data => {
+				wx.request({
+					method: "POST",
+					url: config.baseUrl + "/user/getUser",
+					data: Object.assign({
+						code: data.code,
+						appid: config.appid,
+						AppSecret: config.AppSecret,
+						grant_type: config.grant_type,
+					}),
+					success: res => {
+						console.log(res.data.data, 6789);
+						// 该用户不存在
+						if(res.data.data == "nouser") {
+							return this.setData({
+								loginPopup: true
+							});
+						}
+						// 用户存在
+						let user = res.data.data;
+						app.globalData = {
+							openid: user.openid,
+							userInfo: {
+								avatarUrl: user.avatarUrl,
+								nickName: user.name
+							}
+						};
+					},
+					fail: err => {
+						console.log(err, 80);
+						wx.showModal({
+							title: "提示",
+							content: "网络异常",
+							showCancel: false
+						});
+					}
+				});
+			},
+			fail: res => {
+				console.log(res, "loginFail");
+				return this.setData({
+					loginPopup: true
+				});
+			}
+		});
+
 		// 获取轮播图数据
 		request.get({
 			url: "/swiper/all"
@@ -141,9 +236,9 @@ Page({
 				swiperUrls: res.data || []
 			});
 		});
-		// 获取今日推荐数据
+		// // 获取今日推荐数据
 		request.get({
-			url: "/today/getAll"
+			url: "/goods/getToday"
 		}).then(res => {
 			console.log(res);
 			this.setData({

@@ -62,7 +62,7 @@
     "van-radio-group": "dist/radio-group/index",
     "van-checkbox": "dist/checkbox/index",
     "van-rate": "dist/rate/index",
-    "van-dialog": "dist/dialog/index"
+	"van-dialog": "dist/dialog/index"
   },
   "sitemapLocation": "sitemap85.json"
 }

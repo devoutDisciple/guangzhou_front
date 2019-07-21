@@ -1,7 +1,6 @@
 //index.js
 //获取应用实例
 const app = getApp();
-const request = require("../../utils/request");
 const config = require("../../utils/config");
 Page({
 	data: {
@@ -82,30 +81,38 @@ Page({
 	},
 	// 登录按钮点击的时候
 	getUserInfo: function(e) {
-		app.globalData.userInfo = e.detail.userInfo;
-		this.setData({
-			userInfo: e.detail.userInfo,
-			hasUserInfo: true
-		});
-		// 登录
+		let userInfo = e.detail.userInfo;
+		app.globalData.userInfo = userInfo;
+		// 获取用户code
 		wx.login({
-			success: res => {
-				let code = res.code || "";
-				request.get({
-					url: "/user/register",
-					data: {
-						code: code,
-						name: e.detail.userInfo.nickName,
-						avatarUrl: e.detail.userInfo.avatarUrl,
+			success: data => {
+				wx.request({
+					method: "POST",
+					url: config.baseUrl + "/user/register",
+					data: Object.assign({
+						code: data.code,
 						appid: config.appid,
 						AppSecret: config.AppSecret,
 						grant_type: config.grant_type,
+						avatarUrl: userInfo.avatarUrl,
+						name: userInfo.nickName
+					}),
+					success: res => {
+						// 保存openid
+						app.globalData.openid = res.data.data;
+					},
+					fail: err => {
+						console.log(err);
+						wx.showModal({
+							title: "提示",
+							content: "网络异常",
+							showCancel: false
+						});
 					}
-				}).then(res => {
-					console.log(res, 11);
-					app.globalData.openid = res.data.data;
 				});
-				// 发送 res.code 到后台换取 openId, sessionKey, unionId
+			},
+			fail: res => {
+				console.log(res, "loginFail");
 			}
 		});
 	}
