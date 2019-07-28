@@ -16,6 +16,7 @@ Page({
 		commentId: "", // 备注信息id
 	},
 	// 点击新增收货地址
+
 	onClickAddAddress() {
 		wx.navigateTo({
 			url: "/pages/address/address?type=create"
