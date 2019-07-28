@@ -32,13 +32,22 @@ Page({
 		this.onShowPositionDialog();
 		// 设置学校取餐点
 		let value = event.detail.value, campus = value[1], position = this.data.position, floorColumns = [];
-		console.log(position);
+		console.log(this.data.positionColumns, 1222);
 		position.map(item => {
 			if(item.name == campus) {
 				try {
+					console.log(item.floor, 777);
+					let children = JSON.parse(item.floor);
+					console.log(children, 8888);
+					let temp = [];
+					if(children && children.length != 0) {
+						children.map(child => {
+							temp.push(child.name);
+						});
+					}
 					floorColumns.push({
-						values: JSON.parse(item.address) || [],
-						className: "column1"
+						values: temp,
+						className: "column2"
 					});
 				} catch (error) {
 					console.log(error);
