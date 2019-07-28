@@ -6,7 +6,9 @@ Page({
    */
 	data: {
 		shopDetail: {},
-		orderList: []
+		orderList: [],
+		orderDetail: {},
+		package_cost: 0
 	},
 
 	/**
@@ -31,12 +33,17 @@ Page({
 		let pages = getCurrentPages();
 		let prevPage = pages[pages.length - 2];  //上一个页面
 		let data = prevPage.data;
+		let package_cost = 0;
+		let orderList = data.orderitem.order_list;
+		orderList.map(item => {
+			package_cost += Number(item.package_cost);
+		});
 		console.log(data);
-		console.log(data.orderitem.order_list, 8);
+		console.log(orderList, 8);
 		this.setData({
-			shopDetail: data.orderitem.shop_detail,
-			orderList: data.orderitem.order_list,
-			orderDetail: data.orderitem
+			orderList,
+			orderDetail: data.orderitem,
+			package_cost
 		});
 	},
 

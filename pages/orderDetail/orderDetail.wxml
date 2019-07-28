@@ -5,44 +5,44 @@
 				订单已送达
 			</van-row>
 			<van-row custom-class="orderDetail_title_desc">
-				感谢您对雀送的信任，期待再次光临
+				感谢您对贝沃思的信任，期待再次光临
 			</van-row>
 		</van-row>
 		<van-row custom-class="orderDetail_order">
 			<van-row custom-class="orderDetail_order_item_title">
 				<van-col custom-class="orderDetail_order_item_title_img">
-					<image src="{{shopDetail.url}}" />
+					<image src="{{orderDetail.url}}" />
 				</van-col>
 				<van-col custom-class="orderDetail_order_item_title_name">
-					<van-row custom-class="orderDetail_order_item_title_name_shop">{{shopDetail.name}}</van-row>
+					<van-row custom-class="orderDetail_order_item_title_name_shop">{{orderDetail.shopName}}</van-row>
 					<van-row custom-class="orderDetail_order_item_title_name_time">{{orderDetail.order_time}}</van-row>
 				</van-col>
 			</van-row>
 			<view>
 				<van-row custom-class="orderDetail_order_item_list" wx:for="{{orderList}}" wx:key="{{item.id}}">
 					<van-col custom-class="orderDetail_order_item_list_img">
-						<image src="{{item.url}}" />
+						<image src="{{item.goodsUrl}}" />
 					</van-col>
 					<van-col custom-class="orderDetail_order_item_list_name">
-						{{item.name}}
+						{{item.goodsName}}
 					</van-col>
 					<van-col custom-class="orderDetail_order_item_list_num">
 						X {{item.num}}
 					</van-col>
 					<van-col custom-class="orderDetail_order_item_list_price">
-						￥ {{item.num * item.price}}
+						￥ {{item.totalPrice}}
 					</van-col>
 				</van-row>
 			</view>
 			<van-row custom-class="orderDetail_order_send">
 				<van-col custom-class="orderDetail_order_send_tag">送</van-col>
 				<van-col custom-class="orderDetail_order_send_type">配送费</van-col>
-				<van-col custom-class="orderDetail_order_send_price">￥{{shopDetail.send_price || 0}}</van-col>
+				<van-col custom-class="orderDetail_order_send_price">￥{{orderDetail.send_price || 0}}</van-col>
 			</van-row>
 			<van-row custom-class="orderDetail_order_send">
 				<van-col custom-class="orderDetail_order_send_tag">盒</van-col>
 				<van-col custom-class="orderDetail_order_send_type">餐盒费</van-col>
-				<van-col custom-class="orderDetail_order_send_price">￥{{shopDetail.package_cost || 0}}</van-col>
+				<van-col custom-class="orderDetail_order_send_price">￥{{package_cost || 0}}</van-col>
 			</van-row>
 			<van-row custom-class="orderDetail_order_total">
 				<van-col custom-class="orderDetail_order_total_tag">总价</van-col>

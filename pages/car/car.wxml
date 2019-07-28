@@ -5,11 +5,11 @@
 				<radio bindtap="radioChange" data-data="{{item.id}}" checked="{{item.select ? true : false}}" color="#f72728"/>
 			</van-col>
 			<van-col custom-class="car_content_list_img" bindtap="onSearchGoodsDetail" data-data="{{item}}">
-				<image src="{{item.goodsDetail.url}}" />
+				<image src="{{item.url}}" />
 			</van-col>
 			<van-col custom-class="car_content_list_intro">
-				<van-row custom-class="car_content_list_intro_title">{{item.goodsDetail.name}}</van-row>
-				<van-row custom-class="car_content_list_intro_price">￥{{item.goodsDetail.price}}</van-row>
+				<van-row custom-class="car_content_list_intro_title">{{item.goodsName}}</van-row>
+				<van-row custom-class="car_content_list_intro_price">￥{{item.price}}</van-row>
 				<van-row custom-class="car_content_list_intro_num">
 					<van-col
 						bindtap="subGoodsNum"

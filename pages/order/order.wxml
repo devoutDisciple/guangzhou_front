@@ -5,10 +5,10 @@
 			<van-row bind:tap="onSearchOrderDetail" data-orderItem="{{item}}">
 				<van-row custom-class="order_content_item_title">
 					<van-col custom-class="order_content_item_title_img">
-						<image src="{{item.shop_detail.url}}" />
+						<image src="{{item.url}}" />
 					</van-col>
 					<van-col custom-class="order_content_item_title_name">
-						<van-row custom-class="order_content_item_title_name_shop">{{item.shop_detail.name}}</van-row>
+						<van-row custom-class="order_content_item_title_name_shop">{{item.shopName}}</van-row>
 						<van-row custom-class="order_content_item_title_name_time">{{item.order_time}}</van-row>
 					</van-col>
 					<van-col custom-class="order_content_item_title_state">
@@ -16,16 +16,16 @@
 					</van-col>
 				</van-row>
 				<van-row custom-class="order_content_item_desc">
-					<van-col custom-class="order_content_item_desc_type">{{item.order_list[0].name}}...</van-col>
+					<van-col custom-class="order_content_item_desc_type">{{item.order_list[0].goodsName}}...</van-col>
 					<van-col custom-class="order_content_item_desc_price">￥{{item.total_price}}</van-col>
 				</van-row>
 			</van-row>
 
 			<van-row custom-class="order_content_item_footer">
 				<!-- <text>再来一单</text> -->
-				<text wx:if="{{item.status == 5}}">已完成</text>
-				<text wx:if="{{item.status == 5}}" bindtap="goGrade" data-orderItem="{{item}}">评价</text>
-				<text wx:if="{{item.status == 7}}">已评价</text>
+				<text wx:if="{{item.status == 4}}">已完成</text>
+				<text wx:if="{{item.status == 4}}" bindtap="goGrade" data-orderItem="{{item}}">评价</text>
+				<text wx:if="{{item.status == 6}}">已评价</text>
 			</van-row>
 		</van-row>
 		<van-row wx:if="{{list.length == 0}}" custom-class="otder_content_empty">暂无订单</van-row>

@@ -66,16 +66,7 @@ Page({
 	// 支付订单
 	submitOrder() {
 		let self = this;
-		let orderList = this.data.orderList;
-		let address = this.data.address;
-		if(!address.phone) {
-			wx.showModal({
-				title: "请填写收货地址",
-				confirmText: "确定"
-			});
-			return;
-		}
-		console.log(orderList, 11);
+		// 付钱
 		request.get({
 			url: "/pay/order",
 			data: {
@@ -93,17 +84,48 @@ Page({
 					if (res.errMsg == "requestPayment:ok") {
 						console.log("支付成功");
 						// 添加订单
-						request.post({
-							url: "/order/add",
-							data: {
-								orderList: JSON.stringify(orderList),
-							}
-						}).then(() => {
-							// 支付订单跳转到订单页面
-							wx.navigateTo({
-								url: "/pages/order/order"
+						let {type, address, orderList} = this.data;
+						if(!address.phone) {
+							wx.showModal({
+								title: "请填写收货地址",
+								confirmText: "确定"
 							});
-						});
+							return;
+						}
+						let reqParams = {};
+						if(type == "shop") {
+							let orderDetail = orderList[0];
+							let goodsDetail = orderDetail.goods[0];
+							reqParams = {
+								shopid: orderDetail.shopDetail.id,
+								totalPrice: orderDetail.totalPrice,
+								desc: orderDetail.comment,
+								discount: 0,
+								status: 1,
+								order_list: JSON.stringify([{
+									goodsid: goodsDetail.id,
+									goodsName: goodsDetail.name,
+									goodsUrl: goodsDetail.url,
+									num: 1,
+									price: goodsDetail.price,
+									send_price: orderDetail.shopDetail.send_price,
+									package_cost: goodsDetail.package_cost,
+									totalPrice: orderDetail.totalPrice,
+								}]),
+							};
+							request.post({
+								url: "/order/add",
+								data: reqParams
+							}).then(() => {
+								// 支付订单跳转到订单页面
+								wx.navigateTo({
+									url: "/pages/order/order"
+								});
+							});
+						}
+						if(type == "car") {
+							console.log(123);
+						}
 					} else {
 						wx.showModal({
 							title: "支付失败",
@@ -145,8 +167,6 @@ Page({
 		let pages = getCurrentPages();
 		let prevPage = pages[pages.length - 2]; //上一个页面
 		let data = prevPage.data;
-		console.log(type, 11);
-		console.log(data.orderList, "orderlist0000");
 		if (type == "detail") { // 从商品详情点击过来
 			let orderList = data.orderList;
 			orderList.map(item => {
@@ -154,6 +174,7 @@ Page({
 				item.package_cost = item.goods[0].package_cost;
 				item.showComment = "口味,偏好等要求";
 			});
+			console.log(orderList, 99999);
 			this.setData({
 				type: "shop",
 				orderList: data.orderList,
@@ -162,7 +183,6 @@ Page({
 		}
 		if(type == "car") {
 			let orderList = data.orderList;
-			console.log(orderList, "orderList");
 			let newOderList = [];
 			let shop_ids = [];
 			let globalPrice = 0;
@@ -170,15 +190,12 @@ Page({
 				let goods = [];
 				let totalPrice = 0;
 				orderList.map(item2 => {
-					console.log(111);
 					if(item.shop_id == item2.shop_id) {
 						goods.push(item2.goodsDetail);
 						totalPrice = totalPrice + Number(item2.goodsDetail.price * item2.goodsDetail.num);
 					}
 				});
-				console.log(totalPrice, 90);
 				if(!shop_ids.includes(item.shop_id)) {
-					console.log(222);
 					totalPrice = totalPrice + Number(item.shopDetail.send_price) + Number(item.goodsDetail.package_cost);
 					globalPrice = Number(globalPrice + totalPrice);
 					item.goods = goods;
@@ -190,7 +207,6 @@ Page({
 					shop_ids.push(item.shop_id);
 				}
 			});
-			console.log(newOderList, "newOderListlllll");
 			this.setData({
 				type: "car",
 				orderList: newOderList,

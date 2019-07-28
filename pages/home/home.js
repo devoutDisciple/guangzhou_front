@@ -38,7 +38,6 @@ Page({
 		// 获取用户code
 		wx.login({
 			success: data => {
-				console.log(data, 222);
 				wx.request({
 					method: "POST",
 					url: config.baseUrl + "/user/register",
@@ -51,7 +50,6 @@ Page({
 						name: userInfo.nickName
 					}),
 					success: res => {
-						console.log(res.data.data, 6789);
 						// 保存openid
 						app.globalData.openid = res.data.data;
 						// 关闭弹框
@@ -60,7 +58,7 @@ Page({
 						});
 					},
 					fail: err => {
-						console.log(err, 80);
+						console.log(err);
 						wx.showModal({
 							title: "提示",
 							content: "网络异常",

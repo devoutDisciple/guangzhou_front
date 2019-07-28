@@ -79,7 +79,6 @@ Page({
 	// 点击更多 前往商店
 	goShop() {
 		let shop_id = this.data.shop_id;
-		console.log(shop_id);
 		wx.navigateTo({
 			url: `/pages/shop/shop?id=${shop_id}`
 		});
@@ -96,6 +95,7 @@ Page({
 			totalPrice: totalPrice
 		};
 		let orderList = [obj];
+		console.log(JSON.stringify(orderList), 8888);
 		this.setData({orderList}, () => {
 			// 跳转到编辑地址表单页面
 			wx.navigateTo({
@@ -139,7 +139,6 @@ Page({
 				goods_id: goods_id
 			}
 		}).then(res => {
-			console.log(res.data);
 			let data = res.data.result, sumEvaluate = res.data.sumEvaluate, evaluateList = [];
 			data.map((item, index) => {
 				index < 2 ? evaluateList.push(item) : null;
@@ -173,7 +172,6 @@ Page({
 			}
 		}).then(res => {
 			let data = res.data;
-			console.log(data, "goods");
 			data.desc = data.desc ? JSON.parse(data.desc) : [];
 			data.num = 1;
 			this.setData({

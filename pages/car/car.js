@@ -16,11 +16,10 @@ Page({
 			url: "/car/getByOpenid",
 		}).then(res => {
 			let data = res.data;
-			console.log(data);
 			data.map(item => {
 				item.select = false;
 			});
-			console.log(data);
+			console.log(data, 77777);
 			this.setData({
 				data: data
 			});
@@ -123,7 +122,7 @@ Page({
 		let data = this.data.data;
 		let totalPrice = 0;
 		data.map(item => {
-			if(item.select) totalPrice = totalPrice + item.num * item.goodsDetail.price;
+			if(item.select) totalPrice = totalPrice + item.num * item.price;
 		});
 		this.setData({
 			totalPrice: totalPrice * 100
@@ -133,11 +132,15 @@ Page({
 	// 提交订单
 	onSubmitOrder() {
 		let data = this.data.data;
+		console.log(data, "提交订单");
 		let orderList = data.filter(item => {
-			item.goodsDetail.num = item.num;
 			if(item.select) return item;
 		});
-		console.log(JSON.stringify(orderList));
+		if(orderList.length == 0) return wx.showModal({
+			content: "请选择购买的物品",
+			showCancel: false
+		});
+		console.log(orderList, 1111);
 		this.setData({orderList}, () => {
 			wx.navigateTo({
 				url: "/pages/accounts/accounts?type=car"
