@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/car/car",
     "pages/address/address",
     "pages/order/order",
-    "pages/car/car",
     "pages/accounts/accounts",
     "pages/myAddress/myAddress",
     "pages/goodsDetail/goodsDetail",

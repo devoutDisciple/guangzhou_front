@@ -19,7 +19,6 @@ Page({
 			data.map(item => {
 				item.select = false;
 			});
-			console.log(data, 77777);
 			this.setData({
 				data: data
 			});
@@ -78,9 +77,7 @@ Page({
 	// 增加商品数量
 	addGoodsNum(e) {
 		let goods = e.currentTarget.dataset.data;
-		console.log(goods);
 		let data = this.data.data;
-		console.log(data);
 		data.map(item => {
 			if(goods.id == item.id) item.num++;
 		});
@@ -132,7 +129,6 @@ Page({
 	// 提交订单
 	onSubmitOrder() {
 		let data = this.data.data;
-		console.log(data, "提交订单");
 		let orderList = data.filter(item => {
 			if(item.select) return item;
 		});
@@ -140,8 +136,16 @@ Page({
 			content: "请选择购买的物品",
 			showCancel: false
 		});
-		console.log(orderList, 1111);
-		this.setData({orderList}, () => {
+		let shopids = [], result = [];
+		data.map(item => {
+			shopids.includes(item.shopid) ? null : shopids.push(item.shopid);
+		});
+		shopids.map(item => {
+			result.push(data.filter(dataItem => {
+				return dataItem.shopid == item;
+			}));
+		});
+		this.setData({orderList: result}, () => {
 			wx.navigateTo({
 				url: "/pages/accounts/accounts?type=car"
 			});
