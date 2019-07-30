@@ -160,3 +160,6 @@
 	width: 50%;
 	margin-top: calc(50vh - 23px);
 }
+.adver_popup image{
+	width: 70vw;
+}

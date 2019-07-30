@@ -24,6 +24,7 @@ Page({
 		goodsList: [], // 全部商品分类
 		sortGoodsList: [], // 按销量排序
 		type: 1, // 1 综合排序 2 销量排序
+		adverDetail: {}, // 广告信息
 	},
 	// 点击购物车
 	goCar() {
@@ -120,12 +121,29 @@ Page({
 			type: type == 1 ? 2 : 1
 		});
 	},
+
 	// 商品点击
 	onSearchGoodsDetail(e) {
-		console.log(e.currentTarget.dataset);
 		let data = e.currentTarget.dataset.data;
 		wx.navigateTo({
 			url: `/pages/goodsDetail/goodsDetail?id=${data.id}`
+		});
+	},
+
+	// 广告点击
+	onSearchGoodsDetailByAdver(e) {
+		let data = e.currentTarget.dataset.data;
+		let adverDetail = this.data.adverDetail;
+		if(adverDetail && adverDetail.status == 1) {
+			adverDetail.status = 2;wx.navigateTo({
+				url: `/pages/goodsDetail/goodsDetail?id=${data.goods_id}`
+			});
+			return this.setData({
+				adverDetail: adverDetail
+			});
+		}
+		wx.navigateTo({
+			url: `/pages/goodsDetail/goodsDetail?id=${data.goods_id}`
 		});
 	},
 
@@ -139,7 +157,6 @@ Page({
 		request.get({
 			url: "/position/all"
 		}).then(res => {
-			console.log(res, 999);
 			this.setData({
 				columns: [
 					{
@@ -191,7 +208,6 @@ Page({
 						grant_type: config.grant_type,
 					}),
 					success: res => {
-						console.log(res.data.data, 6789);
 						// 该用户不存在
 						if(res.data.data == "nouser") {
 							return this.setData({
@@ -234,20 +250,20 @@ Page({
 				swiperUrls: res.data || []
 			});
 		});
-		// // 获取今日推荐数据
+
+		// 获取今日推荐数据
 		request.get({
 			url: "/goods/getToday"
 		}).then(res => {
-			console.log(res);
 			this.setData({
 				todayList: res.data || []
 			});
 		});
+
 		// 获取全部商品数据
 		request.get({
 			url: "/goods/getByCampus"
 		}).then(res => {
-			console.log(res);
 			let data = res.data || [];
 			let sortGoodsList = [];
 			data.map(item => {
@@ -259,6 +275,19 @@ Page({
 			this.setData({
 				goodsList: data,
 				sortGoodsList: sortGoodsList
+			});
+		});
+	},
+
+	onLoad: function() {
+		// 获取广告图
+		request.get({
+			url: "/adver/getAll"
+		}).then(res => {
+			let data = res.data || {};
+			console.log(data, 6777);
+			this.setData({
+				adverDetail: data
 			});
 		});
 	},
@@ -280,5 +309,15 @@ Page({
 				}
 			});
 		});
+	},
+	/**
+   * 用户点击右上角分享
+   */
+	onShareAppMessage: function () {
+		return {
+			title: "贝沃思美食",
+			path: "/pages/home/home",
+			imageUrl: "http://www.bws666.com/goods/K9B47WOAZCA1-1564311179900.jpg"
+		};
 	}
 });
