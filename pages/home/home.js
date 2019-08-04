@@ -26,6 +26,7 @@ Page({
 		type: 1, // 1 综合排序 2 销量排序
 		adverDetail: {}, // 广告信息
 		carNum: 0, // 购物车数量
+		toolTipShow: true, // 是否显示提示分享
 	},
 
 	// 点击购物车
@@ -33,6 +34,18 @@ Page({
 		wx.navigateTo({
 			url: "/pages/car/car"
 		});
+	},
+
+	// 三秒过后关闭提示分享
+	closeToolTip() {
+		setTimeout(() => {
+			this.setData({toolTipShow: false});
+		}, 3000);
+	},
+
+	// 立刻关闭
+	closeToolTipNow() {
+		this.setData({toolTipShow: false});
 	},
 
 	// 用户注册
@@ -196,7 +209,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
 	onShow: function () {
-		// this.getLoactionByUser();
+		// 三秒过后关闭分享
+		this.closeToolTip();
 		// 获取所属校园
 		let value = wx.getStorageSync("campus");
 		// 获取位置信息

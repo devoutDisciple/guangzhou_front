@@ -8,8 +8,8 @@
 			<van-row custom-class="goods_item_name">{{item.name}}</van-row>
 			<van-row custom-class="goods_item_title">{{item.title}}</van-row>
 			<van-row custom-class="goods_item_price">
-				<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
-				<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
+				<van-col custom-class="goods_item_price_left">月售: {{item.sales}}</van-col>
+				<van-col custom-class="goods_item_price_right">￥{{item.price}}</van-col>
 			</van-row>
 			<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
 				<image src="/asserts/imgs/plus.png" />

@@ -63,8 +63,8 @@
 			<van-row custom-class="goods_item_name">{{item.name}}</van-row>
 			<van-row custom-class="goods_item_title">{{item.title ? item.title : ''}}</van-row>
 			<van-row custom-class="goods_item_price">
-				<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
-				<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
+				<van-col custom-class="goods_item_price_left">月售: {{item.sales}}</van-col>
+				<van-col custom-class="goods_item_price_right">￥{{item.price}}</van-col>
 			</van-row>
 			<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
 				<image src="/asserts/imgs/plus.png" />
@@ -92,8 +92,8 @@
 					{{item.title ? item.title : ''}}
 				</van-row>
 				<van-row custom-class="goods_item_price">
-					<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
-					<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
+					<van-col custom-class="goods_item_price_left">月售: {{item.sales}}</van-col>
+					<van-col custom-class="goods_item_price_right">￥{{item.price}}</van-col>
 				</van-row>
 				<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
 					<image src="/asserts/imgs/plus.png" />
@@ -142,4 +142,8 @@
 		close-on-click-overlay="{{true}}">
 		<image src="{{adverDetail.url}}" bindtap="onSearchGoodsDetailByAdver" data-data="{{adverDetail}}" mode="widthFix" alt="暂无数据" />
 	</van-popup>
+	<view class="home_fenxiang_tip" wx:if="{{toolTipShow}}" bindtap="closeToolTipNow">
+		添加小程序, 发现美好生活
+		<view class="home_fenxiang_tip_jiao"></view>
+	</view>
 </view>
