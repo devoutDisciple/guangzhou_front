@@ -15,13 +15,14 @@ Page({
 		show: false, // 备注信息弹框是否开启
 		commentId: "", // 备注信息id
 	},
-	// 点击新增收货地址
 
+	// 点击新增收货地址
 	onClickAddAddress() {
 		wx.navigateTo({
 			url: "/pages/address/address?type=create"
 		});
 	},
+
 	// 点击新增备注
 	addComment(e) {
 		let data = e.currentTarget.dataset.data;
@@ -31,12 +32,14 @@ Page({
 			commentId: data.shop_id
 		});
 	},
+
 	// 备注信息点击确定的时候
 	confirmComment() {
 		this.setData({
 			show: !this.data.show
 		});
 	},
+
 	// 备注信息点击取消的时候
 	cancelComment() {
 		let orderList = this.data.orderList, commentId = this.data.commentId;
@@ -50,6 +53,7 @@ Page({
 			orderList
 		});
 	},
+
 	// 键盘输入的时候
 	textareaInput(e) {
 		let value = e.detail.value;
@@ -64,6 +68,7 @@ Page({
 			orderList
 		});
 	},
+
 	// 支付订单
 	submitOrder() {
 		let self = this;
@@ -80,8 +85,8 @@ Page({
 		request.get({
 			url: "/pay/order",
 			data: {
-				// total_fee: self.data.totalPrice,
-				total_fee: 0.01,
+				total_fee: self.data.totalPrice,
+				// total_fee: 0.01,
 			}
 		}).then((res) => {
 			let data = res.data;
@@ -156,6 +161,7 @@ Page({
 			});
 		});
 	},
+
 	// 点击编辑收货地址
 	goEditPage() {
 		// 跳转到编辑地址表单页面

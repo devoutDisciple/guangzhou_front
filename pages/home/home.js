@@ -25,6 +25,7 @@ Page({
 		sortGoodsList: [], // 按销量排序
 		type: 1, // 1 综合排序 2 销量排序
 		adverDetail: {}, // 广告信息
+		carNum: 0, // 购物车数量
 	},
 
 	// 点击购物车
@@ -79,7 +80,6 @@ Page({
 	// 加入购物车
 	goodsGoCar(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data, 99);
 		let goods_id = data.id;
 		let create_time = (new Date()).getTime();
 		request.post({
@@ -90,19 +90,13 @@ Page({
 				shop_id: data.shopid,
 				num: 1
 			}
-		}).then((res) => {
-			if(res.data == "have one") {
-				return wx.showToast({
-					title: "已添加过该商品",
-					icon: "warn",
-					duration: 1000
-				});
-			}
+		}).then(() => {
 			wx.showToast({
 				title: "加入成功",
 				icon: "success",
 				duration: 1000
 			});
+			this.countCarNum();
 		});
 	},
 
@@ -160,6 +154,19 @@ Page({
 		});
 	},
 
+	// 计算购物车数量
+	countCarNum() {
+		// getCarNumByOpenid
+		request.get({
+			url: "/car/getCarNumByOpenid"
+		}).then(res => {
+			console.log(res, 444);
+			this.setData({
+				carNum: res.data || 0
+			});
+		});
+	},
+
 	// 商品点击
 	onSearchGoodsDetail(e) {
 		let data = e.currentTarget.dataset.data;
@@ -189,7 +196,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
 	onShow: function () {
-		this.getLoactionByUser();
+		// this.getLoactionByUser();
 		// 获取所属校园
 		let value = wx.getStorageSync("campus");
 		// 获取位置信息
@@ -263,6 +270,7 @@ Page({
 								nickName: user.name
 							}
 						};
+						this.countCarNum();
 					},
 					fail: err => {
 						console.log(err, 80);
