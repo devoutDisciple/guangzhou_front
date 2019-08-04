@@ -26,12 +26,14 @@ Page({
 		type: 1, // 1 综合排序 2 销量排序
 		adverDetail: {}, // 广告信息
 	},
+
 	// 点击购物车
 	goCar() {
 		wx.navigateTo({
 			url: "/pages/car/car"
 		});
 	},
+
 	// 用户注册
 	getUserInfo(e) {
 		let userInfo = e.detail.userInfo;
@@ -73,6 +75,37 @@ Page({
 			}
 		});
 	},
+
+	// 加入购物车
+	goodsGoCar(e) {
+		let data = e.currentTarget.dataset.data;
+		console.log(data, 99);
+		let goods_id = data.id;
+		let create_time = (new Date()).getTime();
+		request.post({
+			url: "/car/addCarGoods",
+			data: {
+				goods_id,
+				create_time,
+				shop_id: data.shopid,
+				num: 1
+			}
+		}).then((res) => {
+			if(res.data == "have one") {
+				return wx.showToast({
+					title: "已添加过该商品",
+					icon: "warn",
+					duration: 1000
+				});
+			}
+			wx.showToast({
+				title: "加入成功",
+				icon: "success",
+				duration: 1000
+			});
+		});
+	},
+
 	// 点击搜索
 	onSearch(e) {
 		let value = e.detail;
@@ -81,16 +114,19 @@ Page({
 			url: `/pages/type/type?value=${value}&type=search`
 		});
 	},
+
 	// 位置弹框的开关
 	onShowPositionDialog() {
 		this.setData({
 			positionDialogVisible: !this.data.positionDialogVisible
 		});
 	},
+
 	// 改变位置的时候
 	onChangePosition(event) {
 		console.log(event);
 	},
+
 	// 选取位置确定
 	onConfirmPosition(event) {
 		// 位置信息保存
@@ -106,6 +142,7 @@ Page({
 		}, 0);
 
 	},
+
 	// 点击轮播图
 	swiperClick(e) {
 		let shopid = e.currentTarget.dataset.shopid;
@@ -114,6 +151,7 @@ Page({
 			url: `/pages/shop/shop?id=${shopid}`
 		});
 	},
+
 	// tab切换
 	changeSortType() {
 		let type = this.data.type;

@@ -19,6 +19,36 @@ Page({
 		});
 	},
 
+	// 加入购物车
+	goodsGoCar(e) {
+		let data = e.currentTarget.dataset.data;
+		console.log(data, 99);
+		let goods_id = data.id;
+		let create_time = (new Date()).getTime();
+		request.post({
+			url: "/car/addCarGoods",
+			data: {
+				goods_id,
+				create_time,
+				shop_id: data.shopid,
+				num: 1
+			}
+		}).then((res) => {
+			if(res.data == "have one") {
+				return wx.showToast({
+					title: "已添加过该商品",
+					icon: "warn",
+					duration: 1000
+				});
+			}
+			wx.showToast({
+				title: "加入成功",
+				icon: "success",
+				duration: 1000
+			});
+		});
+	},
+
 	/**
    * 生命周期函数--监听页面加载
    */

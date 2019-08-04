@@ -152,6 +152,22 @@ Page({
 		});
 	},
 
+	// 提交删除
+	onDeleteCar: function(e) {
+		let data = e.currentTarget.dataset.item;
+		console.log(data, 333);
+		let id = data.id;
+		request.post({
+			url: "/car/delteItem",
+			data: {
+				id: id,
+			}
+		}).then(res => {
+			console.log(res);
+			if(res.data == "success") this.getCarDetail();
+		});
+	},
+
 	/**
 	 * 生命周期函数--监听页面显示
 	 */

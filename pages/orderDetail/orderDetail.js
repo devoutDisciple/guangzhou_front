@@ -40,6 +40,9 @@ Page({
 		});
 		console.log(data);
 		console.log(orderList, 8);
+		orderList.map((item) => {
+			item.totalPrice = Number(item.num) * Number(item.price);
+		});
 		this.setData({
 			orderList,
 			orderDetail: data.orderitem,

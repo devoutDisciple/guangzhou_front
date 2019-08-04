@@ -95,7 +95,6 @@ Page({
 			totalPrice: totalPrice
 		};
 		let orderList = [obj];
-		console.log(JSON.stringify(orderList), 8888);
 		this.setData({orderList}, () => {
 			// 跳转到编辑地址表单页面
 			wx.navigateTo({

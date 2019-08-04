@@ -56,8 +56,8 @@
       <van-col custom-class="home_content_today_line"></van-col>
     </van-row>
     <van-row custom-class="goods_today" wx:if="{{todayList.length != 0}}">
-      <van-col custom-class="goods_item" wx:for="{{todayList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
-          	<van-row custom-class="{{index % 2 == 0 ? 'goods_item_img' : 'goods_item_img goods_item_img_right'}}">
+      	<van-col custom-class="goods_item" wx:for="{{todayList}}" wx:key="{{index}}">
+          	<van-row bindtap="onSearchGoodsDetail" data-data="{{item}}" custom-class="{{index % 2 == 0 ? 'goods_item_img' : 'goods_item_img goods_item_img_right'}}">
             	<image src="{{item.url}}" />
           	</van-row>
 			<van-row custom-class="goods_item_name">{{item.name}}</van-row>
@@ -66,7 +66,10 @@
 				<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
 				<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
 			</van-row>
-      </van-col>
+			<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
+				<image src="/asserts/imgs/plus.png" />
+			</view>
+	  	</van-col>
 	</van-row>
 	<van-row wx:else  custom-class="empty">
 			暂无数据
@@ -80,16 +83,21 @@
 			<van-col custom-class="home_content_today_line"></van-col>
 		</van-row>
 		<van-row custom-class="goods_today" wx:if="{{type == 1 ? goodsList.length != 0 : sortGoodsList.length != 0 }}">
-			<van-col custom-class="goods_item" wx:for="{{type == 1 ? goodsList : sortGoodsList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
-				<van-row custom-class="goods_item_img">
+			<van-col custom-class="goods_item" wx:for="{{type == 1 ? goodsList : sortGoodsList}}" wx:key="{{index}}">
+				<van-row  bindtap="onSearchGoodsDetail" data-data="{{item}}" custom-class="{{index % 2 == 0 ? 'goods_item_img' : 'goods_item_img goods_item_img_right'}}">
 					<image src="{{item.url}}" />
 				</van-row>
 				<van-row custom-class="goods_item_name">{{item.name}}</van-row>
-				<van-row custom-class="goods_item_title">{{item.title ? item.title : ''}}</van-row>
+				<van-row custom-class="goods_item_title">
+					{{item.title ? item.title : ''}}
+				</van-row>
 				<van-row custom-class="goods_item_price">
 					<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
 					<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
 				</van-row>
+				<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
+					<image src="/asserts/imgs/plus.png" />
+				</view>
 			</van-col>
 		</van-row>
 		<van-row wx:else  custom-class="empty">

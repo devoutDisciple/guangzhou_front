@@ -17,8 +17,16 @@
     border: 1px solid #eeeeee;
 }
 .goods_item_img image{
-	width: 50vw;
-	height: 50vw;
+	width: calc(50vw - 4px);
+	height: calc(50vw - 5px);
+	display: block;
+	margin-left: 0;
+}
+.goods_item_img_right image{
+	width: calc(50vw - 3px);
+	height: calc(50vw - 5px);
+	display: block;
+	padding-left: 2px;
 }
 .goods_item_name{
     line-height: 20px;

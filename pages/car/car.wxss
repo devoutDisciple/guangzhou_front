@@ -78,16 +78,29 @@
 	border-left: 0;
 }
 
-
-
-
-
-
-
 .car_footer{
 	height: 50px;
 	border-top: 2px solid #ebebeb;
 }
 .car_footer_radio{
 	margin-left: 10px;
+}
+
+.van-swipe-cell__left, .van-swipe-cell__right {
+  display: inline-block;
+  width: 65px;
+  height: 120px;
+  font-size: 15px;
+  line-height: 120px;
+  color: #fff;
+  text-align: center;
+  background-color: #f44;
+}
+.car_empty{
+	height: 100vh;
+	width: 100vw;
+	line-height: 100vh;
+	text-align: center;
+	font-size: 24px;
+	color: #eee;
 }

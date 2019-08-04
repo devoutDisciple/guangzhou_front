@@ -1,39 +1,48 @@
 <view class="car">
-	<scroll-view scroll-y class='car_content'>
-		<van-row custom-class="car_content_list" wx:for="{{data}}" wx:key="{{index}}">
-			<van-col custom-class="car_content_list_radio">
-				<radio bindtap="radioChange" data-data="{{item.id}}" checked="{{item.select ? true : false}}" color="#f72728"/>
-			</van-col>
-			<van-col custom-class="car_content_list_img" bindtap="onSearchGoodsDetail" data-data="{{item}}">
-				<image src="{{item.url}}" />
-			</van-col>
-			<van-col custom-class="car_content_list_intro">
-				<van-row custom-class="car_content_list_intro_title">{{item.goodsName}}</van-row>
-				<van-row custom-class="car_content_list_intro_price">￥{{item.price}}</van-row>
-				<van-row custom-class="car_content_list_intro_num">
-					<van-col
-						bindtap="subGoodsNum"
-						data-data="{{item}}"
-						custom-class="car_content_list_intro_num_btn car_content_list_intro_num_btn_first">
-						-
+	<scroll-view scroll-y class='car_content' wx:if="{{data.length != 0}}">
+		<van-swipe-cell right-width="{{ 65 }}" wx:for="{{data}}" wx:key="{{index}}">
+			<van-cell-group>
+				<van-row custom-class="car_content_list">
+					<van-col custom-class="car_content_list_radio">
+						<radio bindtap="radioChange" data-data="{{item.id}}" checked="{{item.select ? true : false}}" color="#f72728"/>
 					</van-col>
-					<van-col custom-class="car_content_list_intro_num_center">{{item.num}}</van-col>
-					<van-col
-						bindtap="addGoodsNum"
-						data-data="{{item}}"
-						custom-class="car_content_list_intro_num_btn car_content_list_intro_num_btn_second">
-						+
+					<van-col custom-class="car_content_list_img" bindtap="onSearchGoodsDetail" data-data="{{item}}">
+						<image src="{{item.url}}" />
+					</van-col>
+					<van-col custom-class="car_content_list_intro">
+						<van-row custom-class="car_content_list_intro_title">{{item.goodsName}}</van-row>
+						<van-row custom-class="car_content_list_intro_price">￥{{item.price}}</van-row>
+						<van-row custom-class="car_content_list_intro_num">
+							<van-col
+								bindtap="subGoodsNum"
+								data-data="{{item}}"
+								custom-class="car_content_list_intro_num_btn car_content_list_intro_num_btn_first">
+								-
+							</van-col>
+							<van-col custom-class="car_content_list_intro_num_center">{{item.num}}</van-col>
+							<van-col
+								bindtap="addGoodsNum"
+								data-data="{{item}}"
+								custom-class="car_content_list_intro_num_btn car_content_list_intro_num_btn_second">
+								+
+							</van-col>
+						</van-row>
 					</van-col>
 				</van-row>
-			</van-col>
-		</van-row>
+			</van-cell-group>
+			<view slot="right" bindtap="onDeleteCar" data-item="{{item}}" class="van-swipe-cell__right">删除</view>
+		</van-swipe-cell>
+
 	</scroll-view>
-	<view class="car_footer">
+	<view class="car_footer" wx:if="{{data.length != 0}}">
 		<van-submit-bar
 			price="{{ totalPrice }}"
 			button-text="结算"
 			bind:submit="onSubmitOrder">
 			<radio class="car_footer_radio" bindtap="allSelectChange" checked="{{allSelect ? true : false}}" color="#f72728"/>全选
 			</van-submit-bar>
+	</view>
+	<view class="car_empty" wx:if="{{data.length == 0}}">
+		暂无商品
 	</view>
 </view>

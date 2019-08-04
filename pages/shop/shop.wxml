@@ -1,16 +1,19 @@
 <view class="shop">
 	<scroll-view
 		scroll-y class="shop_content">
-		<van-col custom-class="goods_item" wx:for="{{data}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
-				<van-row custom-class="goods_item_img">
-					<image src="{{item.url}}" />
-				</van-row>
-				<van-row custom-class="goods_item_name">{{item.name}}</van-row>
-				<van-row custom-class="goods_item_title">{{item.title}}</van-row>
-				<van-row custom-class="goods_item_price">
-					<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
-					<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
-				</van-row>
+		<van-col custom-class="goods_item" wx:for="{{data}}" wx:key="{{index}}">
+			<van-row  data-data="{{item}}" bindtap="onSearchGoodsDetail" custom-class="{{index % 2 == 0 ? 'goods_item_img' : 'goods_item_img goods_item_img_right'}}">
+				<image src="{{item.url}}" />
+			</van-row>
+			<van-row custom-class="goods_item_name">{{item.name}}</van-row>
+			<van-row custom-class="goods_item_title">{{item.title}}</van-row>
+			<van-row custom-class="goods_item_price">
+				<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
+				<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
+			</van-row>
+			<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
+				<image src="/asserts/imgs/plus.png" />
+			</view>
 		</van-col>
 	</scroll-view>
 </view>

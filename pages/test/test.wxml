@@ -1,0 +1,11 @@
+<!--pages/test/test.wxml-->
+<view class="hello">
+	<van-swipe-cell custom-class="fuck" right-width="{{ 65 }}" left-width="{{ 65 }}">
+		<view slot="left" class="van-swipe-cell__left">aaa</view>
+		<van-cell-group>
+		<view class="fuck">hellodskljflsdjl</view>
+		</van-cell-group>
+		<view slot="right" class="van-swipe-cell__right">bbb</view>
+	</van-swipe-cell>
+</view>
+
