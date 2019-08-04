@@ -151,6 +151,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
 	onShow: function () {
+		this.getLoactionByUser();
 		// 获取所属校园
 		let value = wx.getStorageSync("campus");
 		// 获取位置信息
@@ -193,6 +194,7 @@ Page({
 			backgroundColor: "#ffffff"//背景颜色值
 		});
 	},
+
 	// 获取首页信息
 	getHomeMessage: function() {
 		// 判断是否存在该用户
@@ -276,6 +278,24 @@ Page({
 				goodsList: data,
 				sortGoodsList: sortGoodsList
 			});
+		});
+	},
+
+	// 获取位置信息
+	getLoactionByUser: function() {
+		wx.getLocation({
+			type: "wgs84",
+			altitude: false,
+			success: function(res) {
+				const latitude = res.latitude;
+				const longitude = res.longitude;
+				console.log(latitude, longitude, 888);
+				request.get({
+					url: "/position/all"
+				}).then(res => {
+					console.log(res, 111);
+				});
+			}
 		});
 	},
 

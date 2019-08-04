@@ -57,7 +57,7 @@
     </van-row>
     <van-row custom-class="goods_today" wx:if="{{todayList.length != 0}}">
       <van-col custom-class="goods_item" wx:for="{{todayList}}" wx:key="{{index}}" data-data="{{item}}" bindtap="onSearchGoodsDetail">
-          	<van-row custom-class="goods_item_img">
+          	<van-row custom-class="{{index % 2 == 0 ? 'goods_item_img' : 'goods_item_img goods_item_img_right'}}">
             	<image src="{{item.url}}" />
           	</van-row>
 			<van-row custom-class="goods_item_name">{{item.name}}</van-row>

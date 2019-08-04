@@ -67,6 +67,7 @@ Page({
 	// 支付订单
 	submitOrder() {
 		let self = this;
+		console.log(this.address, 689);
 		let {address, orderList} = this.data;
 		if(!address.phone) {
 			wx.showModal({
@@ -75,81 +76,115 @@ Page({
 			});
 			return;
 		}
-		// 付钱
-		request.get({
-			url: "/pay/order",
-			data: {
-				total_fee: self.data.totalPrice,
-			}
-		}).then((res) => {
-			let data = res.data;
-			wx.requestPayment({
-				timeStamp: String(data.timeStamp),
-				nonceStr: data.nonceStr,
-				package: data.package,
-				signType: "MD5",
-				paySign: data.paySign,
-				success(res) {
-					if (res.errMsg == "requestPayment:ok") {
-						console.log("支付成功");
-						let reqParams = [];
-						orderList.map(item => {
-							let order_list = [];
-							item.goods.map(good => {
-								order_list.push({
-									goodsid: good.id,
-									goodsName: good.name,
-									goodsUrl: good.url,
-									num: 1,
-									price: good.price,
-								});
-							});
-							reqParams.push({
-								shopid: item.shopDetail.id,
-								total_price: item.totalPrice,
-								desc: item.comment,
-								discount_price: 0,
-								status: 1,
-								send_price: String(item.shopDetail.send_price),
-								package_cost: String(item.package_cost),
-								order_list: JSON.stringify(order_list)
-							});
-						});
-						request.post({
-							url: "/order/add",
-							data: {
-								data: reqParams
-							}
-						}).then(() => {
-							// 支付订单跳转到订单页面
-							wx.navigateTo({
-								url: "/pages/order/order"
-							});
-						});
-					} else {
-						wx.showModal({
-							title: "支付失败",
-							content: "支付失败, 请重新支付",
-							confirmText: "重新支付",
-							success: (result) => {
-								if (result.confirm) self.submitOrder();
-							}
-						});
-					}
-				},
-				fail(res) {
-					console.log(res, "error");
-					wx.showModal({
-						title: "支付失败",
-						content: "支付失败, 请重新支付",
-						confirmText: "重新支付",
-						success: (result) => {
-							if (result.confirm) self.submitOrder();
-						}
-					});
-				}
+		let reqParams = [];
+		orderList.map(item => {
+			let order_list = [];
+			item.goods.map(good => {
+				order_list.push({
+					goodsid: good.id,
+					goodsName: good.name,
+					goodsUrl: good.url,
+					num: 1,
+					price: good.price,
+				});
+			});
+			reqParams.push({
+				shopid: item.shopDetail.id,
+				total_price: item.totalPrice,
+				desc: item.comment,
+				discount_price: 0,
+				status: 1,
+				send_price: String(item.shopDetail.send_price),
+				package_cost: String(item.package_cost),
+				order_list: JSON.stringify(order_list)
 			});
 		});
+		request.post({
+			url: "/order/add",
+			data: {
+				data: reqParams
+			}
+		}).then(() => {
+			// 支付订单跳转到订单页面
+			wx.navigateTo({
+				url: "/pages/order/order"
+			});
+		});
+		// 付钱
+		// request.get({
+		// 	url: "/pay/order",
+		// 	data: {
+		// 		total_fee: self.data.totalPrice,
+		// 	}
+		// }).then((res) => {
+		// 	let data = res.data;
+		// 	wx.requestPayment({
+		// 		timeStamp: String(data.timeStamp),
+		// 		nonceStr: data.nonceStr,
+		// 		package: data.package,
+		// 		signType: "MD5",
+		// 		paySign: data.paySign,
+		// 		success(res) {
+		// 			if (res.errMsg == "requestPayment:ok") {
+		// 				console.log("支付成功");
+		// 				let reqParams = [];
+		// 				orderList.map(item => {
+		// 					let order_list = [];
+		// 					item.goods.map(good => {
+		// 						order_list.push({
+		// 							goodsid: good.id,
+		// 							goodsName: good.name,
+		// 							goodsUrl: good.url,
+		// 							num: 1,
+		// 							price: good.price,
+		// 						});
+		// 					});
+		// 					reqParams.push({
+		// 						shopid: item.shopDetail.id,
+		// 						total_price: item.totalPrice,
+		// 						desc: item.comment,
+		// 						discount_price: 0,
+		// 						status: 1,
+		// 						send_price: String(item.shopDetail.send_price),
+		// 						package_cost: String(item.package_cost),
+		// 						order_list: JSON.stringify(order_list)
+		// 					});
+		// 				});
+		// 				request.post({
+		// 					url: "/order/add",
+		// 					data: {
+		// 						data: reqParams
+		// 					}
+		// 				}).then(() => {
+		// 					// 支付订单跳转到订单页面
+		// 					wx.navigateTo({
+		// 						url: "/pages/order/order"
+		// 					});
+		// 				});
+		// 			} else {
+		// 				wx.showModal({
+		// 					title: "支付失败",
+		// 					content: "支付失败, 请重新支付",
+		// 					confirmText: "重新支付",
+		// 					success: (result) => {
+		// 						if (result.confirm) self.submitOrder();
+		// 					}
+		// 				});
+		// 			}
+		// 		},
+		// 		fail(res) {
+		// 			console.log(res, "error");
+		// 			wx.showModal({
+		// 				title: "支付失败",
+		// 				content: "支付失败, 请重新支付",
+		// 				confirmText: "重新支付",
+		// 				success: (result) => {
+		// 					if (result.confirm) self.submitOrder();
+		// 				}
+		// 			});
+		// 		}
+		// 	});
+		// });
 	},
 	// 点击编辑收货地址
 	goEditPage() {

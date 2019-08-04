@@ -64,5 +64,13 @@
     "van-rate": "dist/rate/index",
     "van-dialog": "dist/dialog/index"
   },
-  "sitemapLocation": "sitemap85.json"
+  "sitemapLocation": "sitemap85.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+	},
+	"cope.userInfo": {
+		"desc": "你的个人信息将用于小程序位置接口的效果展示"
+	}
+  }
 }
