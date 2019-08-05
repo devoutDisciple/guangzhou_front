@@ -1,6 +1,7 @@
 // pages/shop/shop.js
 // const app = getApp();
 const request = require("../../utils/request");
+const moment = require("../../utils/moment.min");
 Page({
 
 	/**
@@ -73,9 +74,22 @@ Page({
 		request.get({
 			url: `/goods/getByShopId?id=${id}`
 		}).then(res => {
-			let data = res.data;
+			let data = res.data || [];
+			data.map(item => {
+				let start_time = item.shopDetail.start_time;
+				let end_time = item.shopDetail.end_time;
+				start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
+				end_time = moment(moment().format("YYYY-MM-DD ") + end_time).valueOf();
+				if(start_time >= end_time) {
+					end_time = moment(moment(end_time).add(1, "days")).valueOf();
+				}
+				let now = moment(new Date().getTime());
+				if((now >= start_time && now <= end_time) && item.shopDetail.status == 1) {
+					item.open = true;
+				}
+			});
+			console.log(data, 8999);
 			this.setData({data});
-			console.log(data);
 		});
 	},
 });

@@ -173,7 +173,7 @@ Page({
 		// getCarNumByOpenid
 		request.get({
 			url: "/car/getCarNumByOpenid"
-		}, {openid}).then(res => {
+		}, {openid: openid}).then(res => {
 			this.setData({
 				carNum: res.data || 0
 			});

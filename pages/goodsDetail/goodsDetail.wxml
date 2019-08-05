@@ -72,18 +72,19 @@
 	</scroll-view>
 
 	<van-row custom-class="goodsDetail_footer">
-		<van-goods-action wx:if="{{shopDetail.status == 1 && shopDetail.open}}">
+		<van-goods-action wx:if="{{data.leave == 1 && shopDetail.open}}">
 			<van-goods-action-icon wx:if="{{type == 'detail'}}" icon="ellipsis" text="更多"  bindtap="goShop"/>
 			<van-goods-action-icon icon-class="collection_red" wx:if="{{isCollection}}" icon="like" text="已收藏" bindtap="removeCollection"/>
 			<van-goods-action-icon wx:if="{{!isCollection}}" icon="like-o" text="收藏" bindtap="addCollection" color="#9b9b9b"/>
 			<van-goods-action-button text="加入购物车" type="warning" bind:click="onClickAddCarIcon"/>
 			<van-goods-action-button text="立即购买" bind:click="onClickBuyIcon"/>
 		</van-goods-action>
-		<van-goods-action wx:if="{{shopDetail.status == 1 && !shopDetail.open}}">
+		<van-goods-action wx:if="{{!shopDetail.open}}">
 			<van-goods-action-button text="已关闭"/>
 		</van-goods-action>
-		<van-goods-action wx:if="{{shopDetail.status == 2}}">
-			<van-goods-action-button text="已关闭"/>
+		<van-goods-action wx:if="{{data.leave == 2 && shopDetail.open}}">
+			<van-goods-action-icon wx:if="{{type == 'detail'}}" icon="ellipsis" text="更多"  bindtap="goShop"/>
+			<van-goods-action-button text="已售罄"/>
 		</van-goods-action>
 	</van-row>
 </view>

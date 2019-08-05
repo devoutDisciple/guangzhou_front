@@ -133,6 +133,7 @@ Page({
 			}
 		}).then(res => {
 			let data = res.data;
+			console.log(data, 888);
 			let start_time = data.start_time;
 			let end_time = data.end_time;
 			start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
@@ -141,9 +142,10 @@ Page({
 				end_time = moment(moment(end_time).add(1, "days")).valueOf();
 			}
 			let now = moment(new Date().getTime());
-			if(now >= start_time && now <= end_time) {
+			if((now >= start_time && now <= end_time) && data.status == 1) {
 				data.open = true;
 			}
+
 			this.setData({
 				shopDetail: data
 			});
@@ -195,6 +197,7 @@ Page({
 			let data = res.data;
 			data.desc = data.desc ? JSON.parse(data.desc) : [];
 			data.num = 1;
+			console.log(data.leave, data, 90);
 			this.setData({
 				data: data || {},
 				orderList: [data],

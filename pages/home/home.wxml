@@ -113,7 +113,7 @@
 	<!-- 购物车 -->
 	<view class='fixed_car' bindtap="goCar">
 		<image src="/asserts/imgs/car.png" />
-		<view class="fixed_car_num">{{carNum}}</view>
+		<view wx:if="{{carNum != 0}}" class="fixed_car_num">{{carNum}}</view>
 	</view>
 	<!-- 学校位置弹框 -->
   	<van-action-sheet
