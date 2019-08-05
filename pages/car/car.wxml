@@ -4,10 +4,12 @@
 			<van-cell-group>
 				<van-row custom-class="car_content_list">
 					<van-col custom-class="car_content_list_radio">
-						<radio bindtap="radioChange" data-data="{{item.id}}" checked="{{item.select ? true : false}}" color="#f72728"/>
+						<radio disabled="{{!item.open || item.status == 2}}" bindtap="radioChange" data-data="{{item.id}}" checked="{{item.select ? true : false}}" color="#f72728"/>
 					</van-col>
 					<van-col custom-class="car_content_list_img" bindtap="onSearchGoodsDetail" data-data="{{item}}">
 						<image src="{{item.url}}" />
+						<van-col custom-class="car_content_list_img_empty" wx:if="{{!item.open}}">已关闭</van-col>
+						<van-col custom-class="car_content_list_img_empty" wx:if="{{item.status == 2}}">已售罄</van-col>
 					</van-col>
 					<van-col custom-class="car_content_list_intro">
 						<van-row custom-class="car_content_list_intro_title">{{item.goodsName}}</van-row>

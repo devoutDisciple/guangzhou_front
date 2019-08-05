@@ -24,6 +24,18 @@
 .car_content_list_img{
 	width: 100px;
 	height: 100%;
+	position: relative;
+}
+.car_content_list_img_empty{
+	position: absolute;
+	left: 10px;
+	top: 31px;
+	width: 80px;
+	height: 37px;
+	border: 1px solid #fff;
+	color: #fff;
+	line-height: 37px;
+	text-align: center;
 }
 .car_content_list_img image{
 	width: 100px;
