@@ -168,12 +168,11 @@ Page({
 	},
 
 	// 计算购物车数量
-	countCarNum() {
+	countCarNum(openid) {
 		// getCarNumByOpenid
 		request.get({
 			url: "/car/getCarNumByOpenid"
-		}).then(res => {
-			console.log(res, 444);
+		}, {openid}).then(res => {
 			this.setData({
 				carNum: res.data || 0
 			});
@@ -284,7 +283,7 @@ Page({
 								nickName: user.name
 							}
 						};
-						this.countCarNum();
+						this.countCarNum(user.openid);
 					},
 					fail: err => {
 						console.log(err, 80);
@@ -328,6 +327,7 @@ Page({
 		}).then(res => {
 			let data = res.data || [];
 			let sortGoodsList = [];
+			console.log(data, 7878);
 			data.map(item => {
 				sortGoodsList.push(item);
 			});
@@ -365,7 +365,6 @@ Page({
 			url: "/adver/getAll"
 		}).then(res => {
 			let data = res.data || {};
-			console.log(data, 6777);
 			this.setData({
 				adverDetail: data
 			});

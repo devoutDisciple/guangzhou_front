@@ -1,5 +1,5 @@
 const request = require("../../utils/request");
-const moment = require("../../utils/moment");
+const moment = require("../../utils/moment.min");
 Page({
 
 	/**
@@ -18,6 +18,7 @@ Page({
 		evaluateNum: 0, // 全部评价数量
 		avgEvaluate: 0, // 评价平局值
 	},
+
 	// 点击加入购物车
 	onClickAddCarIcon() {
 		let goods_id = this.data.goods_id;
@@ -45,6 +46,7 @@ Page({
 			});
 		});
 	},
+
 	// 点击收藏 addCollection
 	addCollection() {
 		let goods_id = this.data.goods_id;
@@ -62,6 +64,7 @@ Page({
 			});
 		});
 	},
+
 	// 移除收藏
 	removeCollection() {
 		let goods_id = this.data.goods_id;
@@ -76,6 +79,7 @@ Page({
 			});
 		});
 	},
+
 	// 点击更多 前往商店
 	goShop() {
 		let shop_id = this.data.shop_id;
@@ -83,6 +87,7 @@ Page({
 			url: `/pages/shop/shop?id=${shop_id}`
 		});
 	},
+
 	// 点击立即购买
 	onClickBuyIcon() {
 		let goods = this.data.data, shopDetail = this.data.shopDetail;
@@ -102,6 +107,7 @@ Page({
 			});
 		});
 	},
+
 	// 查看收藏的商品
 	getCollectionGoods() {
 		request.get({
@@ -117,6 +123,7 @@ Page({
 			});
 		});
 	},
+
 	// 获取商店数据
 	getShopDetail(id) {
 		request.get({
@@ -125,11 +132,27 @@ Page({
 				id: id
 			}
 		}).then(res => {
+			let data = res.data;
+			console.log(data, 999);
+			let start_time = data.start_time;
+			let end_time = data.end_time;
+			start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
+			end_time = moment(moment().format("YYYY-MM-DD ") + end_time).valueOf();
+			console.log(start_time, end_time, "======");
+			if(start_time >= end_time) {
+				end_time = moment(moment(end_time).add(1, "days")).valueOf();
+			}
+			console.log(start_time, end_time, "+++++++++");
+			let now = moment(new Date().getTime());
+			if(now >= start_time && now <= end_time) {
+				data.open = true;
+			}
 			this.setData({
-				shopDetail: res.data
+				shopDetail: data
 			});
 		});
 	},
+
 	// 获取评价列表
 	getEvaluate(goods_id) {
 		request.get({
@@ -141,7 +164,7 @@ Page({
 			let data = res.data.result, sumEvaluate = res.data.sumEvaluate, evaluateList = [];
 			data.map((item, index) => {
 				index < 2 ? evaluateList.push(item) : null;
-				item.create_time = moment.format(Number(item.create_time));
+				item.create_time = moment(Number(item.create_time)).format("YYYY-MM-DD HH:mm:ss");
 			});
 			this.setData({
 				evaluateListAll: data,
@@ -151,12 +174,14 @@ Page({
 			});
 		});
 	},
+
 	// 查看更多
 	onSearchMore() {
 		wx.navigateTo({
 			url: "/pages/evaluateList/evaluateList"
 		});
 	},
+
 	/**
    * 生命周期函数--监听页面加载
    */

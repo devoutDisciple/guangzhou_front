@@ -14,6 +14,9 @@
 			<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
 				<image src="/asserts/imgs/plus.png" />
 			</view>
+			<view wx:if="{{item.leave == 2}}" class="leave_no">
+				<view class="leave_no_text">已售罄</view>
+			</view>
 		</van-col>
 	</scroll-view>
 </view>
