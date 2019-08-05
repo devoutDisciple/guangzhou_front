@@ -1,5 +1,6 @@
 const request = require("../../utils/request");
 const config = require("../../utils/config");
+const moment = require("../../utils/moment.min");
 const app = getApp();
 Page({
 	/**
@@ -316,8 +317,22 @@ Page({
 		request.get({
 			url: "/goods/getToday"
 		}).then(res => {
+			let data = res.data || [];
+			data.map(item => {
+				let start_time = item.start_time;
+				let end_time = item.end_time;
+				start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
+				end_time = moment(moment().format("YYYY-MM-DD ") + end_time).valueOf();
+				if(start_time >= end_time) {
+					end_time = moment(moment(end_time).add(1, "days")).valueOf();
+				}
+				let now = moment(new Date().getTime());
+				if((now >= start_time && now <= end_time) && item.shopStatus == 1) {
+					item.open = true;
+				}
+			});
 			this.setData({
-				todayList: res.data || []
+				todayList: data
 			});
 		});
 
@@ -326,8 +341,20 @@ Page({
 			url: "/goods/getByCampus"
 		}).then(res => {
 			let data = res.data || [];
+			data.map(item => {
+				let start_time = item.start_time;
+				let end_time = item.end_time;
+				start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
+				end_time = moment(moment().format("YYYY-MM-DD ") + end_time).valueOf();
+				if(start_time >= end_time) {
+					end_time = moment(moment(end_time).add(1, "days")).valueOf();
+				}
+				let now = moment(new Date().getTime());
+				if((now >= start_time && now <= end_time) && item.shopStatus == 1) {
+					item.open = true;
+				}
+			});
 			let sortGoodsList = [];
-			console.log(data, 7878);
 			data.map(item => {
 				sortGoodsList.push(item);
 			});
@@ -389,6 +416,7 @@ Page({
 			});
 		});
 	},
+
 	/**
    * 用户点击右上角分享
    */

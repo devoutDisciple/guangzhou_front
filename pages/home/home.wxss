@@ -109,17 +109,12 @@
     border: 1px solid #eeeeee;
     position: relative;
 }
-.leave_no{
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: calc(70px + 50vw);
-	width: 50vw;
-	text-align: center;
-}
+
 .leave_no_text{
-	margin-top: calc(25vw - 15px);
+	position: absolute;
+	top: calc(25vw - 15px);
 	border: 2px solid #fff;
+	left: calc(25vw - 50px);
 	width: 100px;
 	height: 38px;
 	line-height: 38px;

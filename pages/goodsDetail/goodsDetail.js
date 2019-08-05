@@ -133,16 +133,13 @@ Page({
 			}
 		}).then(res => {
 			let data = res.data;
-			console.log(data, 999);
 			let start_time = data.start_time;
 			let end_time = data.end_time;
 			start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
 			end_time = moment(moment().format("YYYY-MM-DD ") + end_time).valueOf();
-			console.log(start_time, end_time, "======");
 			if(start_time >= end_time) {
 				end_time = moment(moment(end_time).add(1, "days")).valueOf();
 			}
-			console.log(start_time, end_time, "+++++++++");
 			let now = moment(new Date().getTime());
 			if(now >= start_time && now <= end_time) {
 				data.open = true;
