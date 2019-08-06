@@ -4,12 +4,13 @@
 			<van-cell-group>
 				<van-row custom-class="car_content_list">
 					<van-col custom-class="car_content_list_radio">
-						<radio disabled="{{!item.open || item.status == 2}}" bindtap="radioChange" data-data="{{item.id}}" checked="{{item.select ? true : false}}" color="#f72728"/>
+						<radio disabled="{{!item.open || item.leave == 2}}" bindtap="radioChange" data-data="{{item.id}}" checked="{{item.select ? true : false}}" color="#f72728"/>
 					</van-col>
 					<van-col custom-class="car_content_list_img" bindtap="onSearchGoodsDetail" data-data="{{item}}">
 						<image src="{{item.url}}" />
-						<van-col custom-class="car_content_list_img_empty" wx:if="{{!item.open}}">已关闭</van-col>
-						<van-col custom-class="car_content_list_img_empty" wx:if="{{item.status == 2}}">已售罄</van-col>
+						<view wx:if="{{item.leave == 2 || !item.open}}" class="car_content_list_img_no"></view>
+						<van-col custom-class="car_content_list_img_empty" wx:if="{{!item.open && item.leave != 2}}">已关闭</van-col>
+						<van-col custom-class="car_content_list_img_empty" wx:if="{{item.leave == 2}}">已售罄</van-col>
 					</van-col>
 					<van-col custom-class="car_content_list_intro">
 						<van-row custom-class="car_content_list_intro_title">{{item.goodsName}}</van-row>
@@ -37,6 +38,7 @@
 
 	</scroll-view>
 	<view class="car_footer" wx:if="{{data.length != 0}}">
+	<!-- disabled="{{orderList && orderList.length == 0 ? true : false}}" -->
 		<van-submit-bar
 			price="{{ totalPrice }}"
 			button-text="结算"

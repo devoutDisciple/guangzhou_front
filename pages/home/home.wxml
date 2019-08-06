@@ -69,8 +69,9 @@
 			<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
 				<image src="/asserts/imgs/plus.png" />
 			</view>
-			<view  wx:if="{{item.leave == 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已售罄</view>
-			<view  wx:if="{{!item.open && item.leave != 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已关闭</view>
+			<view wx:if="{{item.leave == 2 || !item.open}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no"></view>
+			<view wx:if="{{item.leave == 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已售罄</view>
+			<view wx:if="{{!item.open && item.leave != 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已关闭</view>
 	  	</van-col>
 	</van-row>
 	<van-row wx:else  custom-class="empty">
@@ -100,8 +101,9 @@
 				<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
 					<image src="/asserts/imgs/plus.png" />
 				</view>
-				<view  wx:if="{{item.leave == 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已售罄</view>
-				<view  wx:if="{{!item.open && item.leave != 2}}"  bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已关闭</view>
+				<view wx:if="{{item.leave == 2 || !item.open}}"  bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no"></view>
+				<view wx:if="{{item.leave == 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已售罄</view>
+				<view wx:if="{{!item.open && item.leave != 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已关闭</view>
 			</van-col>
 		</van-row>
 		<van-row wx:else  custom-class="empty">
@@ -144,7 +146,9 @@
 		custom-class="adver_popup"
 		overlay="{{ true }}"
 		close-on-click-overlay="{{true}}">
-		<image src="{{adverDetail.url}}" bindtap="onSearchGoodsDetailByAdver" data-data="{{adverDetail}}" mode="widthFix" alt="暂无数据" />
+		<view class="adver_popup_container">
+			<image src="{{adverDetail.url}}" bindtap="onSearchGoodsDetailByAdver" data-data="{{adverDetail}}" mode="widthFix" alt="暂无数据" />
+		</view>
 	</van-popup>
 	<view class="home_fenxiang_tip" wx:if="{{toolTipShow}}" bindtap="closeToolTipNow">
 		添加小程序, 发现美好生活

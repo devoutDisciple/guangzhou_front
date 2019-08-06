@@ -18,12 +18,25 @@
 	border: 1px solid #eeeeee;
 	position: relative;
 }
+.leave_no{
+	position: absolute;
+	width: calc(50vw - 4px);
+	height: calc(50vw - 5px);
+	top: 0;
+	left: 0;
+	background: gray;
+	opacity: 0.5;
+	z-index: 5;
+}
+
 .leave_no_text{
 	position: absolute;
-	top: calc(25vw - 15px);
-	border: 2px solid #fff;
-	left: calc(25vw - 50px);
-	width: 100px;
+	z-index: 9999;
+	top: calc(25vw - 20px);
+	font-size: 16px;
+	border: 3px solid #fff;
+	left: calc(25vw - 40px);
+	width: 80px;
 	height: 38px;
 	line-height: 38px;
 	text-align: center;

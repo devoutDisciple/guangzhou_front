@@ -58,7 +58,7 @@ Page({
 		// 判断是否已经全选
 		let flag = true; // 默认全选
 		data.map(item => {
-			if(!item.select) flag = false;
+			if(!item.select && item.open && item.leave == 1) flag = false;
 		});
 		this.setData({
 			data,
@@ -77,7 +77,7 @@ Page({
 			});
 		} else {
 			data.map(item => {
-				if(item.open && item.status == 1) item.select = true;
+				if(item.open && item.leave == 1) item.select = true;
 			});
 		}
 		this.setData({
