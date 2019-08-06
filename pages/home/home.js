@@ -327,6 +327,7 @@ Page({
 					end_time = moment(moment(end_time).add(1, "days")).valueOf();
 				}
 				let now = moment(new Date().getTime());
+				console.log(now, start_time, end_time, item.shopStatus);
 				if((now >= start_time && now <= end_time) && item.shopStatus == 1) {
 					item.open = true;
 				}

@@ -18,6 +18,7 @@ Page({
 			url: "/car/getByOpenid",
 		}).then(res => {
 			let data = res.data || [];
+			console.log(data);
 			data.map(item => {
 				let start_time = item.start_time;
 				let end_time = item.end_time;
@@ -32,7 +33,6 @@ Page({
 				}
 				item.select = false;
 			});
-			console.log(data, 999);
 			this.setData({
 				data: data
 			});

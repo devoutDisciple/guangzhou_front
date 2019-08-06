@@ -75,16 +75,17 @@ Page({
 			url: `/goods/getByShopId?id=${id}`
 		}).then(res => {
 			let data = res.data || [];
+			console.log(data, 999);
 			data.map(item => {
-				let start_time = item.shopDetail.start_time;
-				let end_time = item.shopDetail.end_time;
+				let start_time = item.start_time;
+				let end_time = item.end_time;
 				start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
 				end_time = moment(moment().format("YYYY-MM-DD ") + end_time).valueOf();
 				if(start_time >= end_time) {
 					end_time = moment(moment(end_time).add(1, "days")).valueOf();
 				}
 				let now = moment(new Date().getTime());
-				if((now >= start_time && now <= end_time) && item.shopDetail.status == 1) {
+				if((now >= start_time && now <= end_time) && item.shopStatus == 1) {
 					item.open = true;
 				}
 			});

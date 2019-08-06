@@ -133,7 +133,6 @@ Page({
 			}
 		}).then(res => {
 			let data = res.data;
-			console.log(data, 888);
 			let start_time = data.start_time;
 			let end_time = data.end_time;
 			start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
