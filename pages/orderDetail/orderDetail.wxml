@@ -42,7 +42,7 @@
 			<van-row custom-class="orderDetail_order_send">
 				<van-col custom-class="orderDetail_order_send_tag">盒</van-col>
 				<van-col custom-class="orderDetail_order_send_type">餐盒费</van-col>
-				<van-col custom-class="orderDetail_order_send_price">￥{{package_cost || 0}}</van-col>
+				<van-col custom-class="orderDetail_order_send_price">￥{{orderDetail.package_cost || 0}}</van-col>
 			</van-row>
 			<van-row custom-class="orderDetail_order_total">
 				<van-col custom-class="orderDetail_order_total_tag">总价</van-col>

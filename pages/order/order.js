@@ -13,7 +13,6 @@ Page({
 	// 点击查看订单详情
 	onSearchOrderDetail(e) {
 		let orderitem = e.currentTarget.dataset.orderitem;
-		console.log(orderitem, 245);
 		this.setData({
 			orderitem: orderitem
 		}, () => {

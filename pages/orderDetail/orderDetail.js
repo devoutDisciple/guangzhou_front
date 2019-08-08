@@ -8,7 +8,6 @@ Page({
 		shopDetail: {},
 		orderList: [],
 		orderDetail: {},
-		package_cost: 0
 	},
 
 	/**
@@ -33,20 +32,14 @@ Page({
 		let pages = getCurrentPages();
 		let prevPage = pages[pages.length - 2];  //上一个页面
 		let data = prevPage.data;
-		let package_cost = 0;
 		let orderList = data.orderitem.order_list;
-		orderList.map(item => {
-			package_cost += Number(item.package_cost);
-		});
-		console.log(data);
-		console.log(orderList, 8);
+		console.log(data.orderitem, 99);
 		orderList.map((item) => {
 			item.totalPrice = Number(item.num) * Number(item.price);
 		});
 		this.setData({
 			orderList,
 			orderDetail: data.orderitem,
-			package_cost
 		});
 	},
 

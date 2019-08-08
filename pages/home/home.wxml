@@ -142,11 +142,12 @@
 	<!-- 广告弹框 -->
 	<!-- 登录弹出框 -->
 	<view wx:if="{{ adverDetail.status == 1 }}" class="adver_popup">
+		<view class="adver_popup_close">
+			<image src="/asserts/imgs/chahao.png" bindtap="onCloseGoodsDetailByAdver" mode="widthFix" alt="暂无数据"/>
+		</view>
 		<van-popup
 			show="{{true}}">
-			<view class="adver_popup_close">
-				<image src="/asserts/imgs/chahao.png" bindtap="onCloseGoodsDetailByAdver" mode="widthFix" alt="暂无数据"/>
-			</view>
+
 			<image src="{{adverDetail.url}}" bindtap="onSearchGoodsDetailByAdver" data-data="{{adverDetail}}" mode="widthFix" alt="暂无数据" />
 		</van-popup>
 	</view>
