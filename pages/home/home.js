@@ -192,16 +192,28 @@ Page({
 	onSearchGoodsDetailByAdver(e) {
 		let data = e.currentTarget.dataset.data;
 		let adverDetail = this.data.adverDetail;
-		if(adverDetail && adverDetail.status == 1) {
-			adverDetail.status = 2;wx.navigateTo({
+		let show = adverDetail.show;
+		adverDetail.status = 2;
+		if(show == 1) { //关联商店
+			wx.navigateTo({
 				url: `/pages/goodsDetail/goodsDetail?id=${data.goods_id}`
 			});
-			return this.setData({
-				adverDetail: adverDetail
+		} else if(show == 2) { // 关联食品
+			wx.navigateTo({
+				url: `/pages/shop/shop?id=${data.shop_id}`
 			});
 		}
-		wx.navigateTo({
-			url: `/pages/goodsDetail/goodsDetail?id=${data.goods_id}`
+		return this.setData({
+			adverDetail: adverDetail
+		});
+	},
+
+	// 关闭广告
+	onCloseGoodsDetailByAdver() {
+		let adverDetail = this.data.adverDetail;
+		adverDetail.status = 2;
+		this.setData({
+			adverDetail: adverDetail
 		});
 	},
 
@@ -328,7 +340,6 @@ Page({
 					end_time = moment(moment(end_time).add(1, "days")).valueOf();
 				}
 				let now = moment(new Date().getTime());
-				console.log(now, start_time, end_time, item.shopStatus);
 				if((now >= start_time && now <= end_time) && item.shopStatus == 1) {
 					item.open = true;
 				}
@@ -413,6 +424,15 @@ Page({
 			url: "/adver/getAll"
 		}).then(res => {
 			let data = res.data || {};
+			if(data.time && data.time > 0 && data.status == 1) {
+				this.timer = setTimeout(() => {
+					data.status = 2;
+					this.setData({
+						adverDetail: data
+					});
+					clearTimeout(this.timer);
+				}, data.time * 1000);
+			}
 			this.setData({
 				adverDetail: data
 			});
