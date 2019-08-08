@@ -236,11 +236,12 @@ Page({
 				],
 				position: value ? value : res.data[0].name
 			});
+			// 如果位置信息存在
 			if(value) {
 				this.getHomeMessage();
 			}else{
-				wx.setStorageSync("campus", res.data[0].name);
-				this.getHomeMessage();
+				// wx.setStorageSync("campus", res.data[0].name);
+				this.getLoactionByUser();
 			}
 		});
 		// 设置标题
@@ -371,17 +372,36 @@ Page({
 
 	// 获取位置信息
 	getLoactionByUser: function() {
+		let self = this;
 		wx.getLocation({
 			type: "wgs84",
 			altitude: false,
 			success: function(res) {
-				const latitude = res.latitude;
-				const longitude = res.longitude;
-				console.log(latitude, longitude, 888);
+				const latitude = res.latitude; // 纬度
+				const longitude = res.longitude; // 经度
 				request.get({
 					url: "/position/all"
 				}).then(res => {
-					console.log(res, 111);
+					let position =res.data || [];
+					let result = [];
+					position.map(item => {
+						let distince = Math.pow((Number(item.siteY) * 100 - Number(latitude) * 100), 2) + Math.pow(Number(item.siteX) * 100 - Number(longitude) * 100, 2);
+						result.push({
+							id: item.id,
+							name: item.name,
+							distince
+						});
+					});
+					let minDistince = result[0].distince, minIndex = 0;
+					result.map((item, index) => {
+						if(minDistince > item.distince) {
+							minDistince = item.distince;
+							minIndex = index;
+						}
+					});
+					let minName = result[minIndex].name;
+					wx.setStorageSync("campus", minName);
+					self.getHomeMessage();
 				});
 			}
 		});
@@ -397,6 +417,7 @@ Page({
 				adverDetail: data
 			});
 		});
+		this.getLoactionByUser();
 	},
 
 	/**
