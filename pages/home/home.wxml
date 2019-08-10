@@ -40,7 +40,7 @@
         interval="{{interval}}"
         duration="{{duration}}">
         <block wx:for="{{swiperUrls}}" wx:key="{{index}}">
-          <swiper-item catchtap="swiperClick" data-shopid="{{item.shopid}}">
+          <swiper-item catchtap="swiperClick" data-data="{{item}}">
             <image src="{{item.url}}" class="slide-image"/>
           </swiper-item>
         </block>

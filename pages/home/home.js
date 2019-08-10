@@ -153,10 +153,14 @@ Page({
 
 	// 点击轮播图
 	swiperClick(e) {
-		let shopid = e.currentTarget.dataset.shopid;
-		// 跳转到详情页
-		wx.navigateTo({
-			url: `/pages/shop/shop?id=${shopid}`
+		let data = e.currentTarget.dataset.data;
+		// 商店
+		if(data.type == 1) return wx.navigateTo({
+			url: `/pages/shop/shop?id=${data.shopid}`
+		});
+		// 食品
+		if(data.type == 2) return wx.navigateTo({
+			url: `/pages/goodsDetail/goodsDetail?id=${data.goodsid}`
 		});
 	},
 
