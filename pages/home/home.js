@@ -154,6 +154,7 @@ Page({
 	// 点击轮播图
 	swiperClick(e) {
 		let data = e.currentTarget.dataset.data;
+		console.log(data, 999);
 		// 商店
 		if(data.type == 1) return wx.navigateTo({
 			url: `/pages/shop/shop?id=${data.shopid}`

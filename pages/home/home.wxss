@@ -264,8 +264,8 @@
 	position: absolute;
 	width: 30px;
 	height: 30px;
-	right: calc(20vw - 50px);
-	top: calc((100vh - 75vw) / 2 - 50px);
+	right: calc(20vw - 35px);
+	top: calc((100vh - 75vw) / 2 - 30px);
 	z-index: 1000;
 }
 .adver_popup .adver_popup_close image{
