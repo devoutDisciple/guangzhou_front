@@ -138,11 +138,11 @@ Page({
 	// 选取位置确定
 	onConfirmPosition(event) {
 		// 位置信息保存
-		wx.setStorageSync("campus", event.detail.value[2]);
+		wx.setStorageSync("campus", event.detail.value[0] || "");
 		// 关闭弹框
 		this.onShowPositionDialog();
 		this.setData({
-			position: event.detail.value[2]
+			position: event.detail.value[0]
 		});
 		setTimeout(() => {
 			// 重新查询页面
@@ -237,14 +237,6 @@ Page({
 			this.setData({
 				columns: [
 					{
-						values: ["广州"],
-						className: "column1"
-					},
-					{
-						values: ["广州"],
-						className: "column2"
-					},
-					{
 						values: res.data.map(item => {
 							return item.name;
 						}),
@@ -257,8 +249,9 @@ Page({
 			if(value) {
 				this.getHomeMessage();
 			}else{
-				// wx.setStorageSync("campus", res.data[0].name);
-				this.getLoactionByUser();
+				wx.setStorageSync("campus", res.data[0].name);
+				this.getHomeMessage();
+				// this.getLoactionByUser();
 			}
 		});
 		// 设置标题
@@ -442,7 +435,6 @@ Page({
 				adverDetail: data
 			});
 		});
-		this.getLoactionByUser();
 	},
 
 	/**

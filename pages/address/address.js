@@ -18,6 +18,7 @@ Page({
 		floorColumns: [
 		],
 	},
+
 	// 位置相关---------------------
 	// 位置弹框的开关
 	onShowPositionDialog() {
@@ -25,34 +26,47 @@ Page({
 			positionDialogVisible: !this.data.positionDialogVisible
 		});
 	},
+
 	// 选取位置确定
 	onConfirmPosition(event) {
-		console.log(event.detail.value, "position sure");
 		// 关闭弹框
 		this.onShowPositionDialog();
 		// 设置学校取餐点
-		let value = event.detail.value, campus = value[1], position = this.data.position, floorColumns = [];
-		console.log(this.data.positionColumns, 1222);
+		let value = event.detail.value, campus = value[0], position = this.data.position, floorColumns = [], floorData = {};
 		position.map(item => {
 			if(item.name == campus) {
 				try {
-					console.log(item.floor, 777);
-					let children = JSON.parse(item.floor);
-					console.log(children, 8888);
-					let temp = [];
-					if(children && children.length != 0) {
-						children.map(child => {
-							temp.push(child.name);
+					let campus = JSON.parse(item.floor);
+					let obj = {};
+					let defaultName = "";
+					if(campus && campus.length != 0) {
+						campus.map((floor, index) => {
+							if(index == 0) defaultName = floor.name;
+							obj[floor.name] = [];
+							let children = floor.children;
+							if(children && children.length != 0) {
+								children.map(item => {
+									obj[floor.name].push(item.name);
+								});
+							}
 						});
 					}
-					floorColumns.push({
-						values: temp,
-						className: "column2"
-					});
+					floorData = obj;
+					floorColumns =  [
+						{
+							values: Object.keys(obj),
+							className: "column1"
+						},
+						{
+							values: obj[defaultName],
+							className: "column2",
+							defaultIndex: 0
+						}
+					];
 				} catch (error) {
 					console.log(error);
 					floorColumns.push({
-						values: ["暂无取餐点"],
+						values: ["无"],
 						className: "column1"
 					});
 				}
@@ -62,6 +76,7 @@ Page({
 		this.setData({
 			campus: event.detail.value.join(" "),
 			floorColumns,
+			floorData,
 			floor: ""
 		});
 	},
@@ -81,9 +96,16 @@ Page({
 			floorDialogVisible: !floorDialogVisible
 		});
 	},
+
+	// 楼号改变的时候
+	floorChange(event) {
+		let floorData = this.data.floorData;
+		const { picker, value } = event.detail;
+		picker.setColumnValues(1, floorData[value[0]]);
+	},
+
 	// 选取位置确定
 	onConfirmFloor(event) {
-		console.log(event.detail.value, "Floor sure");
 		// 关闭弹框
 		this.onShowFloorDialog();
 		this.setData({
@@ -94,7 +116,6 @@ Page({
 	// 表单提交
 	formSubmit(e) {
 		let value = e.detail.value;
-		console.log(value, "formsubmit------");
 		// 选择校内
 		if(!value.username) return this.formMessage("请输入联系人姓名");
 		if(!value.phone) return this.formMessage("请输入手机号");
@@ -175,7 +196,6 @@ Page({
 			let pages = getCurrentPages();
 			let prevPage = pages[pages.length - 2];  //上一个页面
 			let data = prevPage.data, editData = data.editData;
-			console.log(editData, "编辑地址");
 			this.setData({
 				type: "edit",
 				username: editData.username,
@@ -195,10 +215,6 @@ Page({
 			this.setData({
 				position: res.data,
 				positionColumns: [
-					{
-						values: ["广州市"],
-						className: "column1"
-					},
 					{
 						values: res.data.map(item => {
 							return item.name;

@@ -48,6 +48,7 @@
     	<van-picker
       		show-toolbar="{{true}}"
       		columns="{{ floorColumns }}"
+			bind:change="floorChange"
       		title=""
       		bind:cancel="onShowFloorDialog"
 	  		bind:confirm="onConfirmFloor" />
