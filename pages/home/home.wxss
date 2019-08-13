@@ -83,7 +83,7 @@
     margin-top: 20px;
     height: 0px;
     width: 50px;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
 }
 
 .home_content_today_line_first {

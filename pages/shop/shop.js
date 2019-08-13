@@ -54,7 +54,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
 	onLoad: function (options) {
-		let id = options.id || 1;
+		let id = "";
+		options.id ? id = options.id : null;
+		if (options.scene) {
+			let params = decodeURIComponent(options.scene);
+			id = params.id;
+		}
 		// 获取商店列表
 		request.get({
 			url: `/shop/getById?id=${id}`
