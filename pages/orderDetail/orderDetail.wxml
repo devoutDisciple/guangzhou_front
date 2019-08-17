@@ -24,7 +24,12 @@
 						<image src="{{item.goodsUrl}}" />
 					</van-col>
 					<van-col custom-class="orderDetail_order_item_list_name">
-						{{item.goodsName}}
+						<van-col custom-class="orderDetail_order_item_list_name_text">
+							{{item.goodsName}}
+						</van-col>
+						<van-col custom-class="orderDetail_order_item_list_name_desc">
+							{{item.specification}}
+						</van-col>
 					</van-col>
 					<van-col custom-class="orderDetail_order_item_list_num">
 						X {{item.num}}

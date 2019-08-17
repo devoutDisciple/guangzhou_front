@@ -14,7 +14,10 @@
 					</van-col>
 					<van-col custom-class="car_content_list_intro">
 						<van-row custom-class="car_content_list_intro_title">{{item.goodsName}}</van-row>
-						<van-row custom-class="car_content_list_intro_price">￥{{item.price}}</van-row>
+						<van-row custom-class="car_content_list_intro_price">
+							<van-col custom-class="car_content_list_intro_price_num">￥{{item.specification.price}}</van-col>
+							<van-col custom-class="car_content_list_intro_price_desc">{{item.specification.name ? item.specification.name : ""}}</van-col>
+						</van-row>
 						<van-row custom-class="car_content_list_intro_num">
 							<van-col
 								bindtap="subGoodsNum"

@@ -1,5 +1,6 @@
 const request = require("../../utils/request");
 const moment = require("../../utils/moment.min");
+import Toast from "../../dist/toast/toast";
 Page({
 
 	/**
@@ -17,10 +18,38 @@ Page({
 		evaluateListAll: [], // 全部评价
 		evaluateNum: 0, // 全部评价数量
 		avgEvaluate: 0, // 评价平局值
+		payType: 1, // 1-购物车 2-立即购买
+
+		specificationDialog: false, // 规格弹出框
+		addCarNum: 1, // 将要添加到购物车的数量
+		specification: [], // 规格信息
+		specificationActiveIndex: -1, // 默认选择的那个规格小标
+		specificationActiveData: {}, // 选择的规格信息
+		goodsidForSpecification: "", // 选择规格的菜品信息
+		shopidForSpecification: "", // 选择规格的菜品信息
 	},
 
 	// 点击加入购物车
 	onClickAddCarIcon() {
+		this.setData({payType: 1});
+		let goods_id = this.data.goods_id;
+		let goodsData = this.data.data;
+		console.log(goodsData, 899);
+		let specification = JSON.parse(goodsData.specification) || [];
+		if(specification && specification.length != 0) {
+			console.log(specification, 32);
+			return this.setData({
+				specification: specification,
+				specificationDialog: true,
+				goodsidForSpecification: goods_id,
+				shopidForSpecification: goodsData.shopid
+			});
+		}
+		this.addCar(1, this.data.price, {});
+	},
+
+	// 加入购物车
+	addCar(num, price, specification) {
 		let goods_id = this.data.goods_id;
 		let create_time = (new Date()).getTime();
 		request.post({
@@ -29,7 +58,9 @@ Page({
 				goods_id,
 				create_time,
 				shop_id: this.data.shop_id,
-				num: 1
+				num: num,
+				price: price,
+				specification: JSON.stringify(specification)
 			}
 		}).then((res) => {
 			if(res.data == "have one") {
@@ -46,6 +77,59 @@ Page({
 			});
 		});
 	},
+
+	// 改变要加入购物车的商品数量
+	addGoodsForCarNum(e) {
+		let data = e.currentTarget.dataset.data;
+		let num = this.data.addCarNum;
+		if(data == 1 && num == 1) return;
+		this.setData({
+			addCarNum: data == 1 ? this.data.addCarNum - 1 : this.data.addCarNum + 1
+		});
+	},
+
+	// 选择规格
+	selectSpecification(e) {
+		let {data, index} = e.currentTarget.dataset;
+		this.setData({
+			specificationActiveIndex: index,
+			specificationActiveData: data
+		});
+	},
+
+	// 关闭规格弹框
+	onCloseSpecificationDialog() {
+		this.setData({
+			specificationDialog: false, // 规格弹出框
+			addCarNum: 1, // 将要添加到购物车的数量
+			specification: [], // 规格信息
+			specificationActiveIndex: -1, // 默认选择的那个规格小标
+			specificationActiveData: {}, // 选择的规格信息
+			goodsidForSpecification: "", // 选择规格的菜品信息
+			shopidForSpecification: "", // 选择规格的菜品信息
+		});
+	},
+
+	// 选择规格确认
+	sureSpecificationDialog() {
+		let {addCarNum, specificationActiveData, payType} = this.data;
+		if(!specificationActiveData.name) return Toast.fail("请选择规格");
+		if(payType == 1) { // 加入购物车
+			this.setData({
+				specificationDialog: false, // 规格弹出框
+			}, () => {
+				this.setData({
+					addCarNum: 1, // 将要添加到购物车的数量
+					specification: [], // 规格信息
+					specificationActiveIndex: -1, // 默认选择的那个规格小标
+					specificationActiveData: {}, // 选择的规格信息
+				});
+			});
+			return this.addCar(addCarNum, specificationActiveData.price, specificationActiveData);
+		}
+		this.buy(addCarNum, specificationActiveData.price, specificationActiveData.name);
+	},
+
 
 	// 点击收藏 addCollection
 	addCollection() {
@@ -90,8 +174,29 @@ Page({
 
 	// 点击立即购买
 	onClickBuyIcon() {
+		this.setData({payType: 2});
+		let goodsData = this.data.data;
+		let goods_id = this.data.goods_id;
+		let specification = JSON.parse(goodsData.specification) || [];
+		if(specification && specification.length != 0) {
+			console.log(specification, 32);
+			return this.setData({
+				specification: specification,
+				specificationDialog: true,
+				goodsidForSpecification: goods_id,
+				shopidForSpecification: goodsData.shopid
+			});
+		}
+		let goods = this.data.data;
+		this.buy(1, goods.price, "");
+	},
+
+	// 购买
+	buy(num, price, specification) {
 		let goods = this.data.data, shopDetail = this.data.shopDetail;
-		goods.num = 1;
+		goods.num = num;
+		goods.price = Number(price) * Number(num);
+		goods.specification = specification;
 		let totalPrice = Number(goods.price) + Number(shopDetail.send_price) + Number(goods.package_cost);
 		let obj = {
 			shopDetail: shopDetail,

@@ -33,7 +33,6 @@ Page({
 		let prevPage = pages[pages.length - 2];  //上一个页面
 		let data = prevPage.data;
 		let orderList = data.orderitem.order_list;
-		console.log(data.orderitem, 99);
 		orderList.map((item) => {
 			item.totalPrice = Number(item.num) * Number(item.price);
 		});

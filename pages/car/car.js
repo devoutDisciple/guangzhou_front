@@ -24,6 +24,9 @@ Page({
 				let end_time = item.end_time;
 				start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
 				end_time = moment(moment().format("YYYY-MM-DD ") + end_time).valueOf();
+				console.log(item.specification, 11);
+				item.specification = JSON.parse(item.specification);
+				console.log(item.specification, 22);
 				if(start_time >= end_time) {
 					end_time = moment(moment(end_time).add(1, "days")).valueOf();
 				}
@@ -131,6 +134,7 @@ Page({
 	// 计算价格
 	countPrice() {
 		let data = this.data.data;
+		console.log(data, 999);
 		let totalPrice = 0;
 		data.map(item => {
 			if(item.select) totalPrice = totalPrice + item.num * item.price;
@@ -144,6 +148,7 @@ Page({
 	onSubmitOrder() {
 		let data = this.data.data;
 		let orderList = data.filter(item => {
+			item.specification = item.specification.name;
 			if(item.select) return item;
 		});
 		if(orderList.length == 0) return wx.showModal({

@@ -67,7 +67,17 @@
 .car_content_list_intro_price{
 	height: 20px;
 	width: 100%;
+}
+.car_content_list_intro_price_desc{
+	color: #b5b0b0;
+	font-size: 12px;
+	line-height: 16px;
+	margin-left: 10px;
+}
+.car_content_list_intro_price_num{
+	font-size: 16px;
 	color: red;
+	line-height: 16px;
 }
 .car_content_list_intro_num{
 	height: 30px;

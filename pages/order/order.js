@@ -1,5 +1,6 @@
 const request = require("../../utils/request");
 const orderUtil = require("../../utils/orderUtil");
+const moment = require("../../utils/moment.min");
 Page({
 
 	/**
@@ -27,6 +28,7 @@ Page({
 	goGrade(e) {
 		console.log(e);
 		let orderitem = e.currentTarget.dataset.orderitem;
+
 		this.setData({
 			orderitem: orderitem
 		}, () => {
@@ -64,11 +66,13 @@ Page({
    */
 	onShow: function () {
 		request.get({url: "/order/getListByOpenid"}).then(res => {
-			console.log(res.data, 6789);
 			let data = res.data || [];
 			this.setData({
 				list: data.map(item => {
+					console.log(item.order_time, 9999);
 					item.status_cn = orderUtil.filterStatus(item.status);
+					item.order_time = moment(item.order_time).format("YYYY-MM-DD HH:mm:ss");
+					console.log(item.order_time, 678);
 					return item;
 				})
 			});

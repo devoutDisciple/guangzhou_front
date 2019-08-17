@@ -239,3 +239,7 @@
 	background: red;
 	text-align: center;
 }
+.accounts_content_shop_list_item_intro_spe{
+	margin-left: 5px;
+	color: #9997a4;
+}

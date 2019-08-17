@@ -140,3 +140,8 @@
 	width: 50px;
 	text-align: center;
 }
+
+.orderDetail_order_item_list_name_desc{
+	margin-left: 10px;
+	color: #9e9e9e;
+}

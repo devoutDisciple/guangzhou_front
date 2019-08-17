@@ -286,3 +286,99 @@
     text-align: center;
     font-size: 12px;
 }
+
+
+
+.goods_dialog_specification{
+	min-height: 100px;
+	width: 90vw;
+}
+.goods_dialog_specification_header{
+	width: calc(90vw - 40px);
+	margin-left: 20px;
+	margin-top: 20px;
+
+}
+.goods_dialog_specification_header_label{
+	margin-right: 10px;
+	font-size: 18px;
+	float: left;
+	width: 50px;
+	height: 100%;
+	height: 30px;
+	line-height: 30px;
+	font-size: 18px;
+}
+.goods_dialog_specification_header_content{
+	float: left;
+	width: calc(90vw - 90px);
+	height: 100%;
+	margin-left: 50px;
+	margin-top: -40px;
+}
+.goods_dialog_specification_header_content_tag_no{
+	margin: 10px;
+	background: #f9f9f8;
+	color: #333;
+	border-radius: 20px;
+	padding: 4px 20px;
+	display: inline-block;
+	font-size: 16px;
+}
+.goods_dialog_specification_header_content_tag_select{
+	background: #fff;
+	border: 1px solid #d7d4cf;
+	color: #68523d;
+}
+.goods_dialog_specification_desc{
+	border-top: 1px solid orange;
+	height: 65px;
+}
+.goods_dialog_specification_desc_price{
+	margin-top: 5px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 20px;
+}
+.goods_dialog_specification_desc_price_left{
+	height: 30px;
+	margin-left: 20px;
+	float: left;
+}
+.goods_dialog_specification_desc_price_right{
+	height: 30px;
+	float: right!important;
+	margin-right: 20px;
+}
+.goods_dialog_specification_desc_price_right_num{
+	height: 30px;
+	line-height: 30px;
+	width: 30px;
+	text-align: center;
+}
+.goods_dialog_specification_desc_price_right_img image{
+	width: 30px;
+	height: 30px;
+}
+.goods_dialog_specification_desc_name{
+	height: 30px;
+	line-height: 30px;
+	font-size: 12px;
+	color: gray;
+	margin-left: 20px;
+}
+.goods_dialog_specification_desc_btn{
+	height: 60px;
+	text-align: center;
+}
+.goods_dialog_specification_desc_btn button{
+	width: 100px;
+	margin: 5px 10px;
+	height: 40px;
+	line-height: 40px;
+	width: calc(45vw - 80px);
+}
+.goods_dialog_specification_desc_btn2{
+	background: #8df1d9!important;
+	border: 1px solid #80efd4!important;
+}

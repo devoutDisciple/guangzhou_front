@@ -40,7 +40,10 @@
 							<van-col custom-class="accounts_content_shop_list_item_intro_desc_name">{{item2.name}}</van-col>
 							<van-col custom-class="accounts_content_shop_list_item_intro_desc_price">￥{{item2.price}}</van-col>
 						</van-row>
-						<van-row custom-class="accounts_content_shop_list_item_intro_num">x{{item2.num}}</van-row>
+						<van-row custom-class="accounts_content_shop_list_item_intro_num">
+							<van-col>x {{item2.num}} </van-col>
+							<van-col custom-class="accounts_content_shop_list_item_intro_spe"> {{item2.specification}}</van-col>
+						</van-row>
 					</van-col>
 				</van-row>
 				<van-row wx:if="{{idx == item.goods.length - 1}}" custom-class="accounts_content_shop_message_list">

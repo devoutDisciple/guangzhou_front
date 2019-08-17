@@ -64,7 +64,8 @@
     "van-checkbox": "dist/checkbox/index",
     "van-rate": "dist/rate/index",
     "van-dialog": "dist/dialog/index",
-    "van-swipe-cell": "dist/swipe-cell/index"
+    "van-swipe-cell": "dist/swipe-cell/index",
+    "van-toast": "dist/toast/index"
   },
   "sitemapLocation": "sitemap85.json",
   "permission": {
