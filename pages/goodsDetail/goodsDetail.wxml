@@ -116,7 +116,7 @@
 					</van-col>
 				</van-col>
 			</van-row>
-			<van-row custom-class="goods_dialog_specification_desc_name">卡布奇诺 无糖 ￥{{addCarNum * specificationActiveData.price  || 0}}</van-row>
+			<van-row custom-class="goods_dialog_specification_desc_name">{{data.name}} {{specificationActiveData.name}} ￥{{addCarNum * specificationActiveData.price  || 0}}</van-row>
 		</van-row>
 		<van-row custom-class="goods_dialog_specification_desc_btn">
 			<van-button custom-class="goods_dialog_specification_desc_btn1" type="default" bind:click="onCloseSpecificationDialog">取消</van-button>

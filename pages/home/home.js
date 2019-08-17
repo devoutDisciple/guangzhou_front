@@ -37,6 +37,7 @@ Page({
 		specificationActiveData: {}, // 选择的规格信息
 		goodsidForSpecification: "", // 选择规格的菜品信息
 		shopidForSpecification: "", // 选择规格的菜品信息
+		goodsName: "",
 	},
 
 	// 点击购物车
@@ -126,6 +127,7 @@ Page({
 		if(specification && specification.length != 0) {
 			console.log(specification, 32);
 			return this.setData({
+				goodsName: data.name,
 				specification: specification,
 				specificationDialog: true,
 				goodsidForSpecification: data.id,

@@ -314,6 +314,8 @@
 	width: calc(90vw - 90px);
 	height: 100%;
 	margin-left: 50px;
+}
+.goods_dialog_specification_header_content:nth-child(0){
 	margin-top: -40px;
 }
 .goods_dialog_specification_header_content_tag_no{
