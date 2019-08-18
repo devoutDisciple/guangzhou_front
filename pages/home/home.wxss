@@ -333,11 +333,11 @@
 	color: #68523d;
 }
 .goods_dialog_specification_desc{
-	border-top: 1px solid orange;
-	height: 65px;
+	border-top: 1px solid #e3e3e3;
+	height: 75px;
 }
 .goods_dialog_specification_desc_price{
-	margin-top: 5px;
+	margin-top: 15px;
 	height: 30px;
 	line-height: 30px;
 	font-size: 20px;

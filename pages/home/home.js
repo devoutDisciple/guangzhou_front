@@ -136,6 +136,7 @@ Page({
 		}
 		let goods_id = data.id;
 		let create_time = (new Date()).getTime();
+		console.log(data, 88888);
 		request.post({
 			url: "/car/addCarGoods",
 			data: {

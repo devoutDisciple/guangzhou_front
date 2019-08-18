@@ -7,7 +7,7 @@
 					＋ 新增收货地址
 				</view>
 			</van-row>
-			<van-row wx:else custom-class="accounts_content_address_item">
+			<van-row wx:else custom-class="accounts_content_address_item" bindtap="goEditPage">
 				<van-row>
 					<van-col custom-class="accounts_content_address_desc">
 						<van-row custom-class="accounts_content_address_desc_address">
@@ -19,7 +19,7 @@
 							<van-col custom-class="accounts_content_address_desc_phone">{{address.phone}}</van-col>
 						</van-row>
 					</van-col>
-					<van-col custom-class="accounts_content_address_edit" bindtap="goEditPage" data-item="{{item}}" data-index="{{index}}">
+					<van-col custom-class="accounts_content_address_edit">
 						<image src="/asserts/imgs/edit.png" />
 					</van-col>
 				</van-row>

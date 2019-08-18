@@ -46,11 +46,8 @@
         </block>
       </swiper>
 	</van-row>
-	<van-row wx:else  custom-class="empty">
-		暂无数据
-	</van-row>
     <!-- 今日推荐 -->
-    <van-row custom-class="home_content_today">
+    <van-row custom-class="home_content_today" wx:if="{{todayList.length != 0}}">
       <van-col custom-class="home_content_today_line home_content_today_line_first"></van-col>
       <van-col custom-class="home_content_today_text">今日推荐</van-col>
       <van-col custom-class="home_content_today_line"></van-col>
@@ -73,9 +70,6 @@
 			<view wx:if="{{item.leave == 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已售罄</view>
 			<view wx:if="{{!item.open && item.leave != 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已关闭</view>
 	  	</van-col>
-	</van-row>
-	<van-row wx:else  custom-class="empty">
-			暂无数据
 	</van-row>
 
     <!-- 全部商品 -->

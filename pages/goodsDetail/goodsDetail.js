@@ -198,6 +198,10 @@ Page({
 		goods.price = Number(price) * Number(num);
 		goods.specification = specification;
 		let totalPrice = Number(goods.price) + Number(shopDetail.send_price) + Number(goods.package_cost);
+		if(Number(goods.price) < shopDetail.start_price) {
+			Toast.fail(`满${shopDetail.start_price}元起送`);
+			return;
+		}
 		let obj = {
 			shopDetail: shopDetail,
 			showComment: "口味,偏好等要求",

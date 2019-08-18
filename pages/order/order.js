@@ -69,10 +69,8 @@ Page({
 			let data = res.data || [];
 			this.setData({
 				list: data.map(item => {
-					console.log(item.order_time, 9999);
 					item.status_cn = orderUtil.filterStatus(item.status);
 					item.order_time = moment(item.order_time).format("YYYY-MM-DD HH:mm:ss");
-					console.log(item.order_time, 678);
 					return item;
 				})
 			});
