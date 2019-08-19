@@ -83,50 +83,53 @@ Page({
 		}
 		console.log(self.data.totalPrice, 789);
 
-		// // start ---------------
-		let reqParams = [];
-		orderList.map(item => {
-			let order_list = [];
-			item.goods.map(good => {
-				order_list.push({
-					goodsid: good.id,
-					goodsName: good.name,
-					goodsUrl: good.url,
-					num: good.num,
-					specification: good.specification,
-					price: good.price,
-				});
-			});
-			reqParams.push({
-				shopid: item.shopDetail.id,
-				total_price: item.totalPrice,
-				desc: item.comment,
-				discount_price: 0,
-				status: 1,
-				people: address.username,
-				phone: address.phone,
-				address: `${address.campus ? address.campus : ""} ${address.floor ? address.floor : ""}`,
-				send_price: String(item.shopDetail.send_price),
-				package_cost: String(item.package_cost),
-				order_list: JSON.stringify(order_list)
-			});
-		});
-		request.post({
-			url: "/order/add",
-			data: {
-				data: reqParams
-			}
-		}).then(() => {
-			// 支付订单跳转到订单页面
-			wx.navigateTo({
-				url: "/pages/order/order"
-			});
-		});
-
-		// end ---------------
+		// -------------------------- start ---------------------
 
 
-		return;
+		// let reqParams = [];
+		// orderList.map(item => {
+		// 	let order_list = [];
+		// 	item.goods.map(good => {
+		// 		order_list.push({
+		// 			goodsid: good.id,
+		// 			goodsName: good.name,
+		// 			goodsUrl: good.url,
+		// 			num: good.num,
+		// 			specification: good.specification,
+		// 			price: good.price,
+		// 		});
+		// 	});
+		// 	reqParams.push({
+		// 		shopid: item.shopDetail.id,
+		// 		total_price: item.totalPrice,
+		// 		desc: item.comment,
+		// 		discount_price: 0,
+		// 		status: 1,
+		// 		people: address.username,
+		// 		phone: address.phone,
+		// 		address: `${address.campus ? address.campus : ""} ${address.floor ? address.floor : ""}`,
+		// 		send_price: String(item.shopDetail.send_price),
+		// 		package_cost: String(item.package_cost),
+		// 		order_list: JSON.stringify(order_list)
+		// 	});
+		// });
+		// request.post({
+		// 	url: "/order/add",
+		// 	data: {
+		// 		data: reqParams
+		// 	}
+		// }).then(() => {
+		// 	// 支付订单跳转到订单页面
+		// 	wx.navigateTo({
+		// 		url: "/pages/order/order"
+		// 	});
+		// });
+
+		// return;
+
+
+		// // ----------------------  end ---------------------
+
 		// 付钱
 		request.get({
 			url: "/pay/order",
@@ -136,48 +139,6 @@ Page({
 			}
 		}).then((res) => {
 			let data = res.data;
-
-			// // start ---------------
-			// let reqParams = [];
-			// orderList.map(item => {
-			// 	let order_list = [];
-			// 	item.goods.map(good => {
-			// 		order_list.push({
-			// 			goodsid: good.id,
-			// 			goodsName: good.name,
-			// 			goodsUrl: good.url,
-			// 			num: 1,
-			// 			price: good.price,
-			// 		});
-			// 	});
-			// 	reqParams.push({
-			// 		shopid: item.shopDetail.id,
-			// 		total_price: item.totalPrice,
-			// 		desc: item.comment,
-			// 		discount_price: 0,
-			// 		status: 1,
-			// 		people: address.username,
-			// 		phone: address.phone,
-			// 		address: `${address.campus ? address.campus : ""} ${address.floor ? address.floor : ""}`,
-			// 		send_price: String(item.shopDetail.send_price),
-			// 		package_cost: String(item.package_cost),
-			// 		order_list: JSON.stringify(order_list)
-			// 	});
-			// });
-			// request.post({
-			// 	url: "/order/add",
-			// 	data: {
-			// 		data: reqParams
-			// 	}
-			// }).then(() => {
-			// 	// 支付订单跳转到订单页面
-			// 	wx.navigateTo({
-			// 		url: "/pages/order/order"
-			// 	});
-			// });
-
-			// end ---------------
-
 			wx.requestPayment({
 				timeStamp: String(data.timeStamp),
 				nonceStr: data.nonceStr,

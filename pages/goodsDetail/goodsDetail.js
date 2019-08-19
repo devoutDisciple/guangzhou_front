@@ -27,6 +27,10 @@ Page({
 		specificationActiveData: {}, // 选择的规格信息
 		goodsidForSpecification: "", // 选择规格的菜品信息
 		shopidForSpecification: "", // 选择规格的菜品信息
+
+		numDialogVisible: false, // 选择数量的弹框
+		goodsNum: 1, // 食品数量
+		goodsNumPrice: 0, // 食品价格
 	},
 
 	// 点击加入购物车
@@ -34,10 +38,8 @@ Page({
 		this.setData({payType: 1});
 		let goods_id = this.data.goods_id;
 		let goodsData = this.data.data;
-		console.log(goodsData, 899);
 		let specification = JSON.parse(goodsData.specification) || [];
 		if(specification && specification.length != 0) {
-			console.log(specification, 32);
 			return this.setData({
 				specification: specification,
 				specificationDialog: true,
@@ -130,6 +132,37 @@ Page({
 		this.buy(addCarNum, specificationActiveData.price, specificationActiveData.name);
 	},
 
+	// 关闭数量选择框
+	onCloseNumDialog() {
+		this.setData({
+			numDialogVisible: false,
+		});
+	},
+
+	// 确定数字选择框
+	onSureNumDialog() {
+		let goodsNum = this.data.goodsNum;
+		let goods = this.data.data;
+		this.setData({
+			numDialogVisible: false,
+		}, () => {
+			this.buy(goodsNum, goods.price, "");
+		});
+	},
+
+	// 加减数字
+	onAddNum(e) {
+		let data = e.currentTarget.dataset.data;
+		let goodsNum = this.data.goodsNum;
+		if(data == 1 && goodsNum == 1) return;
+		let num = data == 1 ? goodsNum - 1 : goodsNum + 1;
+		let goodsNumPrice = Number(num * Number(this.data.data.price)).toFixed(2);
+		this.setData({
+			goodsNum: num,
+			goodsNumPrice: goodsNumPrice
+		});
+	},
+
 
 	// 点击收藏 addCollection
 	addCollection() {
@@ -179,16 +212,18 @@ Page({
 		let goods_id = this.data.goods_id;
 		let specification = JSON.parse(goodsData.specification) || [];
 		if(specification && specification.length != 0) {
-			console.log(specification, 32);
 			return this.setData({
 				specification: specification,
 				specificationDialog: true,
 				goodsidForSpecification: goods_id,
 				shopidForSpecification: goodsData.shopid
 			});
+		} else {
+			this.setData({
+				numDialogVisible: true,
+				goodsNumPrice: this.data.price
+			});
 		}
-		let goods = this.data.data;
-		this.buy(1, goods.price, "");
 	},
 
 	// 购买
