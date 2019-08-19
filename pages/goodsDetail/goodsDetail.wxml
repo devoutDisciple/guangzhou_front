@@ -90,15 +90,12 @@
 	<!-- 规格弹出框 -->
 	<van-popup custom-class="goods_dialog_specification" show="{{ specificationDialog }}" bind:close="onCloseSpecificationDialog">
 		<van-row custom-class="goods_dialog_specification_header">
-			<val-col custom-class="goods_dialog_specification_header_label">规格 </val-col>
-			<van-col custom-class="goods_dialog_specification_header_content" wx:for="{{specification}}" wx:key="{{index}}">
+			<van-col custom-class="goods_dialog_specification_header_label">规格 </van-col>
+			<van-col custom-class="goods_dialog_specification_header_content">
 				<view
+				 wx:for="{{specification}}" wx:key="{{index}}"
 				class="{{specificationActiveIndex != index ? 'goods_dialog_specification_header_content_tag_no' : 'goods_dialog_specification_header_content_tag_no goods_dialog_specification_header_content_tag_select'}}"
 				data-data="{{item}}" data-index="{{index}}" bindtap="selectSpecification">{{item.name}}</view>
-				<!-- <view class="goods_dialog_specification_header_content_tag_no">小份</view>
-				<view class="goods_dialog_specification_header_content_tag_no">大份</view>
-				<view class="goods_dialog_specification_header_content_tag_no">大份</view>
-				<view class="goods_dialog_specification_header_content_tag_no goods_dialog_specification_header_content_tag_select">小份</view> -->
 			</van-col>
 		</van-row>
 		<van-row custom-class="goods_dialog_specification_desc">

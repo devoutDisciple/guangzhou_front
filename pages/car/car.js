@@ -1,5 +1,6 @@
 const request = require("../../utils/request");
 const moment = require("../../utils/moment.min");
+import Toast from "../../dist/toast/toast";
 
 Page({
 	/**
@@ -18,15 +19,12 @@ Page({
 			url: "/car/getByOpenid",
 		}).then(res => {
 			let data = res.data || [];
-			console.log(data);
 			data.map(item => {
 				let start_time = item.start_time;
 				let end_time = item.end_time;
 				start_time = moment(moment().format("YYYY-MM-DD ") + start_time).valueOf();
 				end_time = moment(moment().format("YYYY-MM-DD ") + end_time).valueOf();
-				console.log(item.specification, 11);
 				item.specification = JSON.parse(item.specification);
-				console.log(item.specification, 22);
 				if(start_time >= end_time) {
 					end_time = moment(moment(end_time).add(1, "days")).valueOf();
 				}
@@ -134,7 +132,6 @@ Page({
 	// 计算价格
 	countPrice() {
 		let data = this.data.data;
-		console.log(data, 999);
 		let totalPrice = 0;
 		data.map(item => {
 			if(item.select) totalPrice = totalPrice + item.num * item.price;
@@ -148,7 +145,7 @@ Page({
 	onSubmitOrder() {
 		let data = this.data.data;
 		let orderList = data.filter(item => {
-			item.specification = item.specification.name;
+			item.specification = item.specification ? item.specification.name : "";
 			if(item.select) return item;
 		});
 		if(orderList.length == 0) return wx.showModal({
@@ -164,6 +161,25 @@ Page({
 				return dataItem.shopid == item;
 			}));
 		});
+		console.log(result, 566);
+		let flag = false;
+		let goodsName = "";
+		result.map(goods => {
+			let countPrice = 0;
+			let start_price = 0;
+			let tempName = "";
+			goods.map(item => {
+				countPrice = countPrice + Number(item.num) * Number(item.price);
+				start_price = item.start_price;
+				tempName = tempName + item.goodsName + " ";
+			});
+			if(countPrice < start_price) {
+				console.log(tempName, 111222);
+				goodsName = tempName;
+				return flag = true;
+			}
+		});
+		if(flag) return Toast.fail(`${goodsName} 等食物未超过商店起送价格!`);
 		this.setData({orderList: result}, () => {
 			wx.navigateTo({
 				url: "/pages/accounts/accounts?type=car"
@@ -174,7 +190,6 @@ Page({
 	// 提交删除
 	onDeleteCar: function(e) {
 		let data = e.currentTarget.dataset.item;
-		console.log(data, 333);
 		let id = data.id;
 		request.post({
 			url: "/car/delteItem",
@@ -182,7 +197,6 @@ Page({
 				id: id,
 			}
 		}).then(res => {
-			console.log(res);
 			if(res.data == "success") this.getCarDetail();
 		});
 	},

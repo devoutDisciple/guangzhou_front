@@ -16,7 +16,8 @@
 			<van-row custom-class="address_row">
 				<van-col custom-class="address_row_label">学校：</van-col>
 				<van-col custom-class="address_row_input">
-					<input value="{{campus}}" bind:tap="onShowPositionDialog" disabled name="campus" placeholder="请选择学校" />
+					<!-- <input value="{{campus}}" bind:tap="onShowPositionDialog" disabled name="campus" placeholder="请选择学校" /> -->
+					<input value="{{campus}}" disabled />
 				</van-col>
 			</van-row>
 			<van-row custom-class="address_row">

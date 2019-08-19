@@ -19,20 +19,10 @@ Page({
 		],
 	},
 
-	// 位置相关---------------------
-	// 位置弹框的开关
-	onShowPositionDialog() {
-		this.setData({
-			positionDialogVisible: !this.data.positionDialogVisible
-		});
-	},
-
 	// 选取位置确定
-	onConfirmPosition(event) {
-		// 关闭弹框
-		this.onShowPositionDialog();
+	onConfirmPosition() {
 		// 设置学校取餐点
-		let value = event.detail.value, campus = value[0], position = this.data.position, floorColumns = [], floorData = {};
+		let campus = this.data.campus, position = this.data.position, floorColumns = [], floorData = {};
 		position.map(item => {
 			if(item.name == campus) {
 				try {
@@ -74,7 +64,7 @@ Page({
 			}
 		});
 		this.setData({
-			campus: event.detail.value.join(" "),
+			campus: campus,
 			floorColumns,
 			floorData,
 			floor: ""
@@ -85,13 +75,7 @@ Page({
 	// 位置弹框的开关
 	onShowFloorDialog() {
 		let floorDialogVisible = this.data.floorDialogVisible;
-		if(!floorDialogVisible && !this.data.campus) {
-			return wx.showModal({
-				title: "提示",
-				content: "请选择学校地址",
-				showCancel: false
-			});
-		}
+		this.onConfirmPosition();
 		this.setData({
 			floorDialogVisible: !floorDialogVisible
 		});
@@ -115,18 +99,20 @@ Page({
 
 	// 表单提交
 	formSubmit(e) {
+		console.log(this.data.campus, 88877);
 		let value = e.detail.value;
 		// 选择校内
 		if(!value.username) return this.formMessage("请输入联系人姓名");
 		if(!value.phone) return this.formMessage("请输入手机号");
-		if(!value.campus) return this.formMessage("请选择学校");
 		if(!value.floor) return this.formMessage("请选择取餐点");
+		let campus = this.data.campus;
 		let type = this.data.type;
+		value.campus = campus;
 		if(type == "create") {
 			let params = {
 				username: value.username,
 				phone: value.phone,
-				campus: value.campus,
+				campus: campus,
 				address: JSON.stringify(value),
 			};
 			return request.post({
@@ -193,9 +179,11 @@ Page({
 		}
 		// 如果是编辑
 		if(type == "edit") {
+
 			let pages = getCurrentPages();
 			let prevPage = pages[pages.length - 2];  //上一个页面
 			let data = prevPage.data, editData = data.editData;
+			console.log(editData, 56776);
 			this.setData({
 				type: "edit",
 				username: editData.username,
@@ -242,7 +230,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
 	onShow: function () {
-
+		let position = wx.getStorageSync("campus");
+		this.setData({
+			campus: position || ""
+		}, () => {
+			this.onConfirmPosition();
+		});
 	},
 
 	/**

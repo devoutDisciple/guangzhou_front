@@ -173,7 +173,6 @@
 	width: 50px;
 	height: 100%;
 	line-height: 30px;
-	font-size: 18px;
 }
 .goods_dialog_specification_header_content{
 	float: left;

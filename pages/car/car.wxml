@@ -52,4 +52,5 @@
 	<view class="car_empty" wx:if="{{data.length == 0}}">
 		暂无商品
 	</view>
+	<van-toast id="van-toast" />
 </view>

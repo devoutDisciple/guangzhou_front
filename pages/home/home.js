@@ -136,7 +136,6 @@ Page({
 		}
 		let goods_id = data.id;
 		let create_time = (new Date()).getTime();
-		console.log(data, 88888);
 		request.post({
 			url: "/car/addCarGoods",
 			data: {
@@ -236,6 +235,8 @@ Page({
 		setTimeout(() => {
 			// 重新查询页面
 			this.getHomeMessage();
+			// 获取购物车数据
+			this.countCarNum();
 		}, 0);
 
 	},
@@ -263,11 +264,11 @@ Page({
 	},
 
 	// 计算购物车数量
-	countCarNum(openid) {
+	countCarNum() {
 		// getCarNumByOpenid
 		request.get({
 			url: "/car/getCarNumByOpenid"
-		}, {openid: openid}).then(res => {
+		}).then(res => {
 			this.setData({
 				carNum: res.data || 0
 			});
@@ -384,7 +385,7 @@ Page({
 								nickName: user.name
 							}
 						};
-						this.countCarNum(user.openid);
+						this.countCarNum();
 					},
 					fail: err => {
 						console.log(err, 80);

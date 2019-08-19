@@ -1,4 +1,5 @@
 const request = require("../../utils/request");
+import Toast from "../../dist/toast/toast";
 
 // pages/accounts/accounts.js
 Page({
@@ -71,15 +72,20 @@ Page({
 
 	// 支付订单
 	submitOrder() {
+		// 判断是否在派送范围
 		let self = this;
 		let {address, orderList} = this.data;
-		console.log(address, 79);
 		if(!address.phone) {
 			wx.showModal({
 				title: "请填写收货地址",
 				confirmText: "确定"
 			});
 			return;
+		}
+		let campus = wx.getStorageSync("campus");
+		console.log(address, campus, 99);
+		if(address.campus != campus) {
+			return Toast.fail("超出配送范围!");
 		}
 		console.log(self.data.totalPrice, 789);
 
@@ -134,7 +140,7 @@ Page({
 		request.get({
 			url: "/pay/order",
 			data: {
-				total_fee: self.data.totalPrice,
+				total_fee: Number(self.data.totalPrice).toFixed(2),
 				// total_fee: 0.01,
 			}
 		}).then((res) => {
@@ -266,7 +272,7 @@ Page({
 						name: item[0].shopName,
 						send_price: item[0].send_price
 					},
-					totalPrice: totalPrice,
+					totalPrice: Number(totalPrice).toFixed(2),
 					goods: item,
 					showComment: "口味,偏好等要求",
 				});
@@ -275,7 +281,7 @@ Page({
 			this.setData({
 				type: "car",
 				orderList: newOderList,
-				totalPrice: globalPrice,
+				totalPrice: Number(globalPrice).toFixed(2),
 			});
 		}
 

@@ -90,4 +90,5 @@
 		bind:confirm="confirmComment">
 		<textarea class="accounts_comment_textarea" auto-focus bindinput="textareaInput"></textarea>
 	</van-dialog>
+	<van-toast id="van-toast" />
 </view>
