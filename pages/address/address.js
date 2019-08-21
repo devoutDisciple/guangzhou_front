@@ -99,7 +99,6 @@ Page({
 
 	// 表单提交
 	formSubmit(e) {
-		console.log(this.data.campus, 88877);
 		let value = e.detail.value;
 		// 选择校内
 		if(!value.username) return this.formMessage("请输入联系人姓名");
@@ -183,7 +182,6 @@ Page({
 			let pages = getCurrentPages();
 			let prevPage = pages[pages.length - 2];  //上一个页面
 			let data = prevPage.data, editData = data.editData;
-			console.log(editData, 56776);
 			this.setData({
 				type: "edit",
 				username: editData.username,

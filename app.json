@@ -1,10 +1,11 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/my/my",
+    "pages/order/order",
     "pages/test/test",
     "pages/address/address",
     "pages/car/car",
-    "pages/order/order",
     "pages/accounts/accounts",
     "pages/myAddress/myAddress",
     "pages/goodsDetail/goodsDetail",
@@ -13,7 +14,6 @@
     "pages/goods/goods",
     "pages/orderEvaluate/orderEvaluate",
     "pages/orderDetail/orderDetail",
-    "pages/my/my",
     "pages/custom/custom",
     "pages/option/option",
     "pages/evaluateList/evaluateList"

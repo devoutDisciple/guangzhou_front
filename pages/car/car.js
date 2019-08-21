@@ -144,12 +144,10 @@ Page({
 	// 提交订单
 	onSubmitOrder() {
 		let data = this.data.data;
-		console.log(data, 9999);
 		let orderList = data.filter(item => {
 			item.specification = item.specification ? item.specification.name : "";
 			if(item.select) return item;
 		});
-		console.log(orderList, 678);
 		if(orderList.length == 0) return wx.showModal({
 			content: "请选择购买的物品",
 			showCancel: false
@@ -160,6 +158,7 @@ Page({
 		});
 		shopids.map(item => {
 			result.push(orderList.filter(dataItem => {
+				dataItem.origin_price = dataItem.price;
 				return dataItem.shopid == item;
 			}));
 		});

@@ -230,6 +230,7 @@ Page({
 	buy(num, price, specification) {
 		let goods = this.data.data, shopDetail = this.data.shopDetail;
 		goods.num = num;
+		goods.origin_price = goods.price;
 		goods.price = Number(price) * Number(num);
 		goods.specification = specification;
 		let totalPrice = Number(goods.price) + Number(shopDetail.send_price) + Number(goods.package_cost);

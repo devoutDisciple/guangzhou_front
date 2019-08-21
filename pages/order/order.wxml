@@ -1,33 +1,48 @@
 <view class="order">
-	<!-- <van-row custom-class="order_item"></van-row> -->
-	<scroll-view class="order_content" scroll-y>
-		<van-row custom-class="order_content_item" wx:for="{{list}}" wx:if="{{list.length != 0}}" wx:key="{{index}}">
-			<van-row bind:tap="onSearchOrderDetail" data-orderItem="{{item}}">
-				<van-row custom-class="order_content_item_title">
-					<van-col custom-class="order_content_item_title_img">
-						<image src="{{item.url}}" />
-					</van-col>
-					<van-col custom-class="order_content_item_title_name">
-						<van-row custom-class="order_content_item_title_name_shop">{{item.shopName}}</van-row>
-						<van-row custom-class="order_content_item_title_name_time">{{item.order_time}}</van-row>
-					</van-col>
-					<van-col custom-class="order_content_item_title_state">
-						{{item.status_cn}}
-					</van-col>
-				</van-row>
-				<van-row custom-class="order_content_item_desc">
-					<van-col custom-class="order_content_item_desc_type">{{item.order_list[0].goodsName}}...</van-col>
-					<van-col custom-class="order_content_item_desc_price">￥{{item.total_price}}</van-col>
-				</van-row>
+	<van-tabs custom-class="order_header" active="{{ active }}" bind:change="onChange">
+		<van-tab title="全部" />
+		<van-tab title="待评价" />
+		<van-tab title="退款" />
+	</van-tabs>
+	<scroll-view scroll-y class='order_content'>
+		<van-row custom-class='order_item' wx:for="{{list}}" wx:key="{{index}}" wx:if="{{list.length != 0}}">
+			<van-row custom-class='order_item_title'>
+				<van-col custom-class='order_item_title_left'>
+					{{item.shopName}}
+				</van-col>
+				<van-col custom-class='order_item_title_right'>
+					{{item.status_cn}}
+				</van-col>
 			</van-row>
-
-			<van-row custom-class="order_content_item_footer">
-				<!-- <text>再来一单</text> -->
-				<text wx:if="{{item.status == 4}}">已完成</text>
-				<text wx:if="{{item.status == 4}}" bindtap="goGrade" data-orderItem="{{item}}">评价</text>
-				<text wx:if="{{item.status == 6}}">已评价</text>
+			<van-row custom-class='order_item_content' wx:for="{{item.order_list}}" wx:key="{{index}}" wx:for-item="order">
+				<van-col custom-class='order_item_content_left'>
+					<image src="{{order.goodsUrl}}" />
+				</van-col>
+				<van-col custom-class='order_item_content_center'>
+					<van-row custom-class='order_item_content_center_name'>{{order.goodsName}}</van-row>
+					<van-row custom-class='order_item_content_center_desc'>{{order.specification}}</van-row>
+				</van-col>
+				<van-col custom-class='order_item_content_right'>
+					<van-row custom-class='order_item_content_right_price'>￥ {{order.origin_price}}</van-row>
+					<van-row custom-class='order_item_content_right_num'>x {{order.num}}</van-row>
+				</van-col>
+			</van-row>
+			<van-row custom-class='order_item_footer'>
+				<van-row custom-class='order_item_footer_total'>餐盒费: ￥ {{item.package_cost}}</van-row>
+				<van-row custom-class='order_item_footer_total'>运送费: ￥ {{item.send_price}}</van-row>
+				<van-row custom-class='order_item_footer_total'>合计: ￥ {{item.total_price}}</van-row>
+				<van-row custom-class='order_item_footer_btn'>
+					<van-col custom-class='order_item_footer_btn_left'>{{item.order_time}}</van-col>
+					<van-col custom-class='order_item_footer_btn_right'>
+						<text>联系商家</text> <text>评论</text>
+					</van-col>
+				</van-row>
 			</van-row>
 		</van-row>
-		<van-row wx:if="{{list.length == 0}}" custom-class="otder_content_empty">暂无订单</van-row>
+		<van-row custom-class='order_item_empty' wx:if="{{list.length == 0}}">
+			暂无记录
+		</van-row>
 	</scroll-view>
 </view>
+
+

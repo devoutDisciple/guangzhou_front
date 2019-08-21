@@ -3,25 +3,25 @@ module.exports = {
 		let result = "订单已完成";
 		switch(Number(type)) {
 		case 1:
-			result = "商家未接单";
+			result = "未派送";
 			break;
 		case 2:
-			result = "已接单";
-			break;
-		case 3:
 			result = "派送中";
 			break;
-		case 4:
-			result = "订单完成";
+		case 3:
+			result = "已完成";
 			break;
-		case 5:
+		case 4:
 			result = "已取消";
 			break;
-		case 6:
+		case 5:
 			result = "已评价";
 			break;
+		case 6:
+			result = "退款中";
+			break;
 		default:
-			result = "订单已完成";
+			result = "退款完成";
 		}
 		return result;
 	}

@@ -75,6 +75,7 @@ Page({
 		// 判断是否在派送范围
 		let self = this;
 		let {address, orderList} = this.data;
+		console.log(orderList, 67838282);
 		if(!address.phone) {
 			wx.showModal({
 				title: "请填写收货地址",
@@ -101,6 +102,7 @@ Page({
 		// 			goodsName: good.name,
 		// 			goodsUrl: good.url,
 		// 			num: good.num,
+		// 			origin_price: good.origin_price,
 		// 			specification: good.specification,
 		// 			price: good.price,
 		// 		});
@@ -162,6 +164,7 @@ Page({
 									goodsid: good.id,
 									goodsName: good.name,
 									goodsUrl: good.url,
+									origin_price: good.origin_price,
 									num: good.num,
 									specification: good.specification,
 									price: good.price,
