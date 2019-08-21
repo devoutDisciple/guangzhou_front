@@ -153,7 +153,7 @@ Page({
 			showCancel: false
 		});
 		let shopids = [], result = [];
-		data.map(item => {
+		orderList.map(item => {
 			shopids.includes(item.shopid) ? null : shopids.push(item.shopid);
 		});
 		shopids.map(item => {
@@ -161,7 +161,6 @@ Page({
 				return dataItem.shopid == item;
 			}));
 		});
-		console.log(result, 566);
 		let flag = false;
 		let goodsName = "";
 		result.map(goods => {
@@ -174,7 +173,6 @@ Page({
 				tempName = tempName + item.goodsName + " ";
 			});
 			if(countPrice < start_price) {
-				console.log(tempName, 111222);
 				goodsName = tempName;
 				return flag = true;
 			}
