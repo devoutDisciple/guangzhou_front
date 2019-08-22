@@ -1,42 +1,35 @@
-<van-row custom-class="orderEvaluate">
-	<van-row custom-class="orderEvaluate_content">
-		<van-row custom-class="orderEvaluate_people">
-			<van-row custom-class="orderEvaluate_people_title">
-				<van-col custom-class="orderEvaluate_people_title_image">
-					<image src="/asserts/imgs/sendPeople.png" />
-				</van-col>
-				<van-col custom-class="orderEvaluate_people_title_name">
-					马云
-				</van-col>
-				<van-col custom-class="orderEvaluate_people_title_desc">
-					已对骑手匿名
-				</van-col>
-			</van-row>
-			<van-row custom-class="orderEvaluate_people_grade">
-				<van-rate value="{{peopleGrade}}" size="{{30}}" bind:change="onPeopleGradeChange" />
-			</van-row>
-		</van-row>
-		<van-row custom-class="orderEvaluate_people">
-			<van-row custom-class="orderEvaluate_people_title">
-				<van-col custom-class="orderEvaluate_people_title_image">
-					<image src="{{shopDetail.url}}" />
-				</van-col>
-				<van-col custom-class="orderEvaluate_people_title_name">
-					{{shopDetail.name}}
-				</van-col>
-				<van-col custom-class="orderEvaluate_people_title_desc">
-					匿名评价
-				</van-col>
-			</van-row>
-			<van-row custom-class="orderEvaluate_people_grade">
-				<van-rate value="{{shopGrade}}" size="{{30}}" bind:change="onShopGradeChange" />
-			</van-row>
-		</van-row>
-	</van-row>
+<scroll-view scroll-y class="orderEvaluate">
 	<form bindsubmit="submit">
-		<textarea class='orderEvaluate_text_area' placeholder="请输入您的意见，方便我们为您提供更好的服务！" name="textarea"/>
+		<van-row custom-class="orderEvaluate_item" wx:for="{{orderList}}" wx:key="{{index}}">
+			<van-row custom-class="orderEvaluate_content">
+				<van-row custom-class="orderEvaluate_people">
+					<van-row custom-class="orderEvaluate_people_title">
+						<van-col custom-class="orderEvaluate_people_title_image">
+							<image src="{{item.goodsUrl}}" />
+						</van-col>
+						<van-col custom-class="orderEvaluate_people_title_name">
+							{{item.goodsName}}
+						</van-col>
+						<!-- <van-col custom-class="orderEvaluate_people_title_desc">
+							已对商家匿名
+						</van-col> -->
+					</van-row>
+					<van-row custom-class="orderEvaluate_people_text">
+						{{gradeList[index] == 1 ? "很差" : ''}}
+						{{gradeList[index] == 2 ? "一般" : ''}}
+						{{gradeList[index] == 3 ? "满意" : ''}}
+						{{gradeList[index] == 4 ? "非常满意" : ''}}
+						{{gradeList[index] == 5 ? "无可挑剔" : ''}}
+					</van-row>
+					<van-row custom-class="orderEvaluate_people_grade">
+						<van-rate value="{{gradeList[index]}}" size="{{30}}" data-index="{{index}}" bind:change="onGradeChange" />
+					</van-row>
+				</van-row>
+				<textarea wx:key="{{index}}" class='orderEvaluate_text_area' placeholder="请输入您的意见，方便我们为您提供更好的服务！" name="textarea_{{index}}"/>
+			</van-row>
+		</van-row>
 		<van-row custom-class="orderEvaluate_btn">
-			<button form-type="submit" class="{{success ? 'orderEvaluate_btn_active' : ''}}" disabled="{{!success}}">提交评价</button>
+			<button form-type="submit" class="orderEvaluate_btn_active">提交评价</button>
 		</van-row>
 	</form>
-</van-row>
+</scroll-view>

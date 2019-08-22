@@ -5,14 +5,18 @@
 	font-size: 14px;
 	color: #333;
 }
+.orderEvaluate_item{
+	background:#f9f9f9;
+	min-height: 100px;
+}
 .orderEvaluate_content{
 	width: calc(100vw - 20px);
 	margin-left: 10px;
+	background: #fff;
 }
 .orderEvaluate_people{
 	min-height: 90px;
 	background: #fff;
-	box-shadow: 1px 1px 5px #efefef;
 	margin-top: 20px;
 }
 .orderEvaluate_people_title{
@@ -32,16 +36,18 @@
 .orderEvaluate_people_title_name{
 	width: calc(100vw - 150px);
 	margin-left: 10px;
+	color: #96a1a6;
 }
 .orderEvaluate_people_title_desc{
 	width: 80px;
 	text-align: center;
 	font-size: 12px;
-	color: #bebebe;
+	color: #eeeeee;
 }
 .orderEvaluate_people_grade{
 	text-align: center;
 	margin: 30px;
+	margin-top: 10px;
 }
 .orderEvaluate_btn{
 	margin: 10px 20px;
@@ -55,10 +61,14 @@
 /* height: calc(100vh - 20px); */
 	/* width: calc(100vw - 20px); */
 .orderEvaluate_text_area{
-	width: calc(100vw - 40px);
-	margin: 10px;
-	background: #fff;
+	width: calc(100vw - 60px);
+	margin-left: 10px;
+	background: gary;
 	height: 150px;
-	box-shadow: 1px 1px 5px #efefef;
 	padding: 10px;
+	background: #eeeeee;
+}
+.orderEvaluate_people_text{
+	text-align: center;
+	color: #fdd21f;
 }

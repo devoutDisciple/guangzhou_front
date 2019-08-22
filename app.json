@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/orderEvaluate/orderEvaluate",
     "pages/my/my",
     "pages/order/order",
     "pages/test/test",
@@ -12,7 +13,6 @@
     "pages/shop/shop",
     "pages/collection/collection",
     "pages/goods/goods",
-    "pages/orderEvaluate/orderEvaluate",
     "pages/orderDetail/orderDetail",
     "pages/custom/custom",
     "pages/option/option",

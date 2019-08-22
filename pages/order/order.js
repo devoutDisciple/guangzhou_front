@@ -1,6 +1,9 @@
 const request = require("../../utils/request");
 const orderUtil = require("../../utils/orderUtil");
 const moment = require("../../utils/moment.min");
+import Dialog from "../../dist/dialog/dialog";
+import Toast from "../../dist/toast/toast";
+
 Page({
 
 	/**
@@ -9,6 +12,14 @@ Page({
 	data: {
 		activeBar: 1, // 应该显示的订单bar
 		list: [], // 显示的订单
+		actions: [ // 联系商家按钮
+			{
+				name: "联系商家"
+			},
+			{
+				name: "申请退款"
+			},
+		],
 	},
 
 	// 点击切换bar
@@ -30,6 +41,100 @@ Page({
 				})
 			});
 		});
+	},
+
+	// 进入商店主页
+	goToShop(e) {
+		console.log(e.currentTarget.dataset.data);
+		let data = e.currentTarget.dataset.data;
+		let shopid = data.shopid;
+		wx.navigateTo({
+			url: `/pages/shop/shop?id=${shopid}`
+		});
+	},
+
+	// 进入菜品主页
+	goToGoodsDetail(e) {
+		let data = e.currentTarget.dataset.data;
+		let goodsid = data.goodsid;
+		wx.navigateTo({
+			url: `/pages/goodsDetail/goodsDetail?id=${goodsid}`
+		});
+	},
+
+	// 确认收货
+	getGoods(e) {
+		let data = e.currentTarget.dataset.data;
+		console.log(data, 1111);
+		Dialog.confirm({
+			cancelButtonText: "取消",
+			message: "确认商品已送达?"
+		}).then(() => {
+			// on close  updateOrderStatus
+			request.post({url: "/order/updateOrderStatus", data: {status: 3, id: data.id}}).then(res => {
+				console.log(res.data, 888);
+				if(res.data == "success") {
+					this.onSearchOrder(1);
+					wx.navigateTo({
+						url: `/pages/orderEvaluate/orderEvaluate?id=${data.id}`
+					});
+					Toast.success("确认收货成功");
+				}
+			});
+		}).catch(() => {
+			// on cancel
+		});
+	},
+
+	// 点击评价
+	evaluateOrder(e) {
+		let data = e.currentTarget.dataset.data;
+		console.log(data, 1111);
+		wx.navigateTo({
+			url: `/pages/orderEvaluate/orderEvaluate?id=${data.id}`
+		});
+	},
+
+	// 点击联系商家
+	connectShop(e) {
+		let data = e.currentTarget.dataset.data;
+		console.log(data, 577);
+		this.setData({
+			show: true
+		});
+	},
+
+	onClose() {
+		this.setData({
+			show: false
+		});
+	},
+
+	// 联系商家选择
+	onSelect(event) {
+		console.log(event.detail);
+		let value = event.detail;
+		if(value.name == "联系商家") {
+			wx.makePhoneCall({
+				phoneNumber: "18210619398" // 仅为示例，并非真实的电话号码
+			});
+		}
+		if(value.name == "申请退款") {
+			Dialog.confirm({
+				title: "建议联系商家",
+				confirmButtonText: "申请退款",
+				cancelButtonText: "联系商家",
+				message: "提前联系商家可以提高退款效率哦"
+			}).then(() => {
+				console.log("申请退款");
+				Toast.success("申请成功!");
+			}).catch(() => {
+				wx.makePhoneCall({
+					phoneNumber: "18210619398" // 仅为示例，并非真实的电话号码
+				});
+			});
+		}
+
 	},
 
 	/**

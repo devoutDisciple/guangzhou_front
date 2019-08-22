@@ -38,7 +38,7 @@
 									{{item.username}}
 								</van-row>
 								<van-row custom-class="goodsDetail_content_evaluate_item_title_right_name_grade">
-									<van-rate color="#f44" value="{{item.shop_grade}}" size="{{12}}" readonly />
+									<van-rate color="#f44" value="{{item.goods_grade}}" size="{{12}}" readonly />
 								</van-row>
 							</van-col>
 							<van-col custom-class="goodsDetail_content_evaluate_item_title_right_time">
@@ -56,7 +56,7 @@
 					</van-row>
 				</van-row>
 			</van-row>
-			<van-row custom-class="goodsDetail_content_evaluate_empty">暂无评价</van-row>
+			<van-row  wx:if="{{evaluateList.length == 0}}" custom-class="goodsDetail_content_evaluate_empty">暂无评价</van-row>
 			<van-row custom-class="goodsDetail_content_evaluate_more" bindtap="onSearchMore" wx:if="{{evaluateList.length > 1}}">
 				<van-col custom-class="goodsDetail_content_evaluate_more_text">
 					查看更多

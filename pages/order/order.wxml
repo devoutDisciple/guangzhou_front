@@ -6,7 +6,7 @@
 	</van-tabs>
 	<scroll-view scroll-y class='order_content'>
 		<van-row custom-class='order_item' wx:for="{{list}}" wx:key="{{index}}" wx:if="{{list.length != 0}}">
-			<van-row custom-class='order_item_title'>
+			<van-row bindtap="goToShop" data-data="{{item}}" custom-class='order_item_title'>
 				<van-col custom-class='order_item_title_left'>
 					{{item.shopName}}
 				</van-col>
@@ -14,7 +14,7 @@
 					{{item.status_cn}}
 				</van-col>
 			</van-row>
-			<van-row custom-class='order_item_content' wx:for="{{item.order_list}}" wx:key="{{index}}" wx:for-item="order">
+			<van-row bindtap="goToGoodsDetail" data-data="{{order}}" custom-class='order_item_content' wx:for="{{item.order_list}}" wx:key="{{index}}" wx:for-item="order">
 				<van-col custom-class='order_item_content_left'>
 					<image src="{{order.goodsUrl}}" />
 				</van-col>
@@ -34,7 +34,14 @@
 				<van-row custom-class='order_item_footer_btn'>
 					<van-col custom-class='order_item_footer_btn_left'>{{item.order_time}}</van-col>
 					<van-col custom-class='order_item_footer_btn_right'>
-						<text>联系商家</text> <text>评论</text>
+						<text bindtap="connectShop" data-data="{{item}}">联系商家</text>
+						<text bindtap="getGoods" data-data="{{item}}" wx:if="{{item.status == 1 || item.status == 2}}">确认收货</text>
+						<!-- 1-未派送 2-派送中 3-订单完成 4-已取消 5-已评价 6-退款中 7-退款完成 -->
+						<text bindtap="evaluateOrder" data-data="{{item}}" wx:if="{{item.status == 3}}">评论</text>
+						<text wx:if="{{item.status == 4}}">已取消</text>
+						<text wx:if="{{item.status == 5}}">已评论</text>
+						<text wx:if="{{item.status == 6}}">退款中</text>
+						<text wx:if="{{item.status == 7}}">订单关闭</text>
 					</van-col>
 				</van-row>
 			</van-row>
@@ -42,6 +49,15 @@
 		<van-row custom-class='order_item_empty' wx:if="{{list.length == 0}}">
 			暂无记录
 		</van-row>
+		<van-action-sheet
+			show="{{ show }}"
+			actions="{{ actions }}"
+			cancel-text="取消"
+			bind:select="onSelect"
+			bind:close="onClose"
+			bind:cancel="onClose"/>
+		<van-dialog id="van-dialog" />
+		<van-toast id="van-toast" />
 	</scroll-view>
 </view>
 
