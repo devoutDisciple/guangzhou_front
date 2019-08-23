@@ -20,6 +20,7 @@ Page({
 				name: "申请退款"
 			},
 		],
+		orderid: "", // 正在操作的商家id
 	},
 
 	// 点击切换bar
@@ -100,8 +101,8 @@ Page({
 		let data = e.currentTarget.dataset.data;
 		console.log(data, 577);
 		this.setData({
-			show: true
-		});
+			orderid: data.id
+		}, () =>this.setData({show: true,}));
 	},
 
 	onClose() {
@@ -112,29 +113,37 @@ Page({
 
 	// 联系商家选择
 	onSelect(event) {
-		console.log(event.detail);
-		let value = event.detail;
-		if(value.name == "联系商家") {
-			wx.makePhoneCall({
-				phoneNumber: "18210619398" // 仅为示例，并非真实的电话号码
-			});
-		}
-		if(value.name == "申请退款") {
-			Dialog.confirm({
-				title: "建议联系商家",
-				confirmButtonText: "申请退款",
-				cancelButtonText: "联系商家",
-				message: "提前联系商家可以提高退款效率哦"
-			}).then(() => {
-				console.log("申请退款");
-				Toast.success("申请成功!");
-			}).catch(() => {
+		let orderid = this.data.orderid;
+		console.log(orderid, 999);
+		request.get({url: "/order/getOrderById", data: {id: orderid}}).then(res => {
+			console.log(res.data, 888);
+			let data = res.data || {};
+			let phone = data.shopPhone || "13670716668";
+			let value = event.detail;
+			console.log(value, 444);
+			if(value.name == "联系商家") {
 				wx.makePhoneCall({
-					phoneNumber: "18210619398" // 仅为示例，并非真实的电话号码
+					phoneNumber: phone // 仅为示例，并非真实的电话号码
 				});
-			});
-		}
-
+			}
+			if(value.name == "申请退款") {
+				Dialog.confirm({
+					title: "建议联系商家",
+					confirmButtonText: "申请退款",
+					cancelButtonText: "联系商家",
+					message: "提前联系商家可以提高退款效率哦"
+				}).then(() => {
+					console.log("申请退款");
+					request.post({url: "/pay/getBackPayMoney", data: {id: orderid}}).then(res => {
+						console.log(res.data, 888);
+					});
+				}).catch(() => {
+					wx.makePhoneCall({
+						phoneNumber: phone // 仅为示例，并非真实的电话号码
+					});
+				});
+			}
+		});
 	},
 
 	/**
