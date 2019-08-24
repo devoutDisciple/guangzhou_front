@@ -138,11 +138,12 @@ Page({
 
 		// // ----------------------  end ---------------------
 
+		let money = Number(self.data.totalPrice).toFixed(2);
 		// 付钱
 		request.get({
 			url: "/pay/order",
 			data: {
-				total_fee: Number(self.data.totalPrice).toFixed(2),
+				total_fee: money,
 				// total_fee: 0.01,
 			}
 		}).then((res) => {
@@ -181,6 +182,7 @@ Page({
 								code: data.code,
 								people: address.username,
 								phone: address.phone,
+								back_money: money,
 								address: `${address.campus ? address.campus : ""} ${address.floor ? address.floor : ""}`,
 								send_price: String(item.shopDetail.send_price),
 								package_cost: String(item.package_cost),

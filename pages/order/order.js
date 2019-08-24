@@ -26,7 +26,12 @@ Page({
 	// 点击切换bar
 	onChange(event) {
 		let type = event.detail.index + 1;
-		this.onSearchOrder(type);
+		this.setData({
+			activeBar: type
+		}, () => {
+			this.onSearchOrder(type);
+		});
+
 	},
 
 	// 查询订单
@@ -135,7 +140,10 @@ Page({
 				}).then(() => {
 					console.log("申请退款");
 					request.post({url: "/pay/getBackPayMoney", data: {id: orderid}}).then(res => {
-						console.log(res.data, 888);
+						this.onSearchOrder(this.data.activeBar);
+						this.setData({show: false});
+						if(res.data == "退款成功") return Toast.success(res.data);
+						return Toast.fail(res.data);
 					});
 				}).catch(() => {
 					wx.makePhoneCall({
