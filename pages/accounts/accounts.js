@@ -15,6 +15,7 @@ Page({
 		address: {}, // 默认收货地址
 		show: false, // 备注信息弹框是否开启
 		commentId: "", // 备注信息id
+		dataForDeleteCar: [], // 要删除的购物车信息
 	},
 
 	// 点击新增收货地址
@@ -27,10 +28,10 @@ Page({
 	// 点击新增备注
 	addComment(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data);
+		console.log(data,9999);
 		this.setData({
 			show: !this.data.show,
-			commentId: data.shop_id
+			commentId: data.shopDetail.id
 		});
 	},
 
@@ -44,8 +45,10 @@ Page({
 	// 备注信息点击取消的时候
 	cancelComment() {
 		let orderList = this.data.orderList, commentId = this.data.commentId;
+		console.log(orderList, 111);
+		console.log(commentId, 222);
 		orderList.map(item => {
-			if(item.shop_id == commentId) {
+			if(item.shopDetail.id == commentId) {
 				item.comment = "";
 				item.showComment = "口味,偏好等要求";
 			}
@@ -59,8 +62,10 @@ Page({
 	textareaInput(e) {
 		let value = e.detail.value;
 		let orderList = this.data.orderList, commentId = this.data.commentId;
+		console.log(orderList, 3333);
+		console.log(commentId, 444);
 		orderList.map(item => {
-			if(item.shop_id == commentId) {
+			if(item.shopDetail.id == commentId) {
 				item.comment = value;
 				item.showComment = value.length > 7 ? value.slice(0, 7) + "..." : value;
 			}
@@ -74,8 +79,7 @@ Page({
 	submitOrder() {
 		// 判断是否在派送范围
 		let self = this;
-		let {address, orderList} = this.data;
-		console.log(orderList, 67838282);
+		let {address, orderList, type} = this.data;
 		if(!address.phone) {
 			wx.showModal({
 				title: "请填写收货地址",
@@ -88,7 +92,7 @@ Page({
 		if(address.campus != campus) {
 			return Toast.fail("超出配送范围!");
 		}
-		console.log(self.data.totalPrice, 789);
+		console.log(orderList, 789);
 
 		// -------------------------- start ---------------------
 
@@ -195,11 +199,27 @@ Page({
 								data: reqParams
 							}
 						}).then(() => {
-							// 支付订单跳转到订单页面
-							wx.navigateTo({
-								url: "/pages/order/order"
-							});
+							if(type == "car") {
+								// orderList
+								let orderIdList = [];
+								let dataForDeleteCar = self.data.dataForDeleteCar;
+								dataForDeleteCar.map(item => {
+									orderIdList.push(item.id);
+								});
+								request.post({
+									url: "/car/deleteMany",
+									data: {
+										orderIdList: orderIdList
+									}
+								}).then(() => {
+									// 支付订单跳转到订单页面
+									wx.navigateTo({
+										url: "/pages/order/order"
+									});
+								});
+							}
 						});
+
 					} else {
 						wx.showModal({
 							title: "支付失败",
@@ -288,6 +308,7 @@ Page({
 			console.log(newOderList, "orderlist ---- car");
 			this.setData({
 				type: "car",
+				dataForDeleteCar: data.dataForDeleteCar,
 				orderList: newOderList,
 				totalPrice: Number(globalPrice).toFixed(2),
 			});

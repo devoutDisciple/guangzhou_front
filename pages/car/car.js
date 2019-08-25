@@ -11,6 +11,7 @@ Page({
 		data: [], // 购物车数据
 		totalPrice: 0.00, // 总金额
 		orderList: [], // 提交的订单
+		dataForDeleteCar: [], // 结算成功要输出的购物车信息
 	},
 
 	// 获取购物车信息
@@ -179,7 +180,8 @@ Page({
 			}
 		});
 		if(flag) return Toast.fail(`${goodsName} 等食物未超过商店起送价格!`);
-		this.setData({orderList: result}, () => {
+		console.log(orderList, 888);
+		this.setData({orderList: result, dataForDeleteCar: orderList}, () => {
 			wx.navigateTo({
 				url: "/pages/accounts/accounts?type=car"
 			});
