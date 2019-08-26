@@ -139,10 +139,10 @@ Page({
 					message: "提前联系商家可以提高退款效率哦"
 				}).then(() => {
 					console.log("申请退款");
-					request.post({url: "/pay/getBackPayMoney", data: {id: orderid}}).then(res => {
+					request.post({url: "/pay/getBackMoneyStatus", data: {id: orderid}}).then(res => {
 						this.onSearchOrder(this.data.activeBar);
 						this.setData({show: false});
-						if(res.data == "退款成功") return Toast.success(res.data);
+						if(res.data == "success") return Toast.success("申请成功, 等待商家确认!");
 						return Toast.fail(res.data);
 					});
 				}).catch(() => {

@@ -339,6 +339,7 @@ Page({
 			if(value) {
 				this.getHomeMessage();
 			}else{
+				// this.setData({positionDialogVisible: true});
 				wx.setStorageSync("campus", res.data[0].name);
 				this.getHomeMessage();
 				// this.getLoactionByUser();
