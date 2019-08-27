@@ -13,13 +13,12 @@
 			</van-col>
 		</van-row>
 		<van-row>
-			<van-row custom-class="address_row">
+			<!-- <van-row custom-class="address_row">
 				<van-col custom-class="address_row_label">学校：</van-col>
 				<van-col custom-class="address_row_input">
-					<!-- <input value="{{campus}}" bind:tap="onShowPositionDialog" disabled name="campus" placeholder="请选择学校" /> -->
 					<input value="{{campus}}" disabled />
 				</van-col>
-			</van-row>
+			</van-row> -->
 			<van-row custom-class="address_row">
 				<van-col custom-class="address_row_label">取餐点：</van-col>
 				<van-col custom-class="address_row_input">
@@ -48,9 +47,9 @@
     	bind:close="onShowFloorDialog">
     	<van-picker
       		show-toolbar="{{true}}"
+			title="{{campus}}"
       		columns="{{ floorColumns }}"
 			bind:change="floorChange"
-      		title=""
       		bind:cancel="onShowFloorDialog"
 	  		bind:confirm="onConfirmFloor" />
   </van-action-sheet>

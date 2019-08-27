@@ -38,5 +38,6 @@
     border-bottom: none;
 }
 .my_list_item_icon{
-    color: #5df3d4;
+	color: #5df3d4;
+	margin-top: 1px;
 }

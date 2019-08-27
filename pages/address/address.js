@@ -178,7 +178,6 @@ Page({
 		}
 		// 如果是编辑
 		if(type == "edit") {
-
 			let pages = getCurrentPages();
 			let prevPage = pages[pages.length - 2];  //上一个页面
 			let data = prevPage.data, editData = data.editData;
@@ -229,6 +228,7 @@ Page({
    */
 	onShow: function () {
 		let position = wx.getStorageSync("campus");
+		console.log(position, 78999);
 		this.setData({
 			campus: position || ""
 		}, () => {
