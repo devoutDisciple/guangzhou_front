@@ -28,7 +28,6 @@ Page({
 	// 点击新增备注
 	addComment(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data,9999);
 		this.setData({
 			show: !this.data.show,
 			commentId: data.shopDetail.id
@@ -45,8 +44,6 @@ Page({
 	// 备注信息点击取消的时候
 	cancelComment() {
 		let orderList = this.data.orderList, commentId = this.data.commentId;
-		console.log(orderList, 111);
-		console.log(commentId, 222);
 		orderList.map(item => {
 			if(item.shopDetail.id == commentId) {
 				item.comment = "";
@@ -62,8 +59,6 @@ Page({
 	textareaInput(e) {
 		let value = e.detail.value;
 		let orderList = this.data.orderList, commentId = this.data.commentId;
-		console.log(orderList, 3333);
-		console.log(commentId, 444);
 		orderList.map(item => {
 			if(item.shopDetail.id == commentId) {
 				item.comment = value;
@@ -160,7 +155,6 @@ Page({
 				signType: "MD5",
 				paySign: data.paySign,
 				success(res2) {
-					console.log(res2, 777);
 					if (res2.errMsg == "requestPayment:ok") {
 						console.log("支付成功");
 						let reqParams = [];
@@ -206,7 +200,7 @@ Page({
 								dataForDeleteCar.map(item => {
 									orderIdList.push(item.id);
 								});
-								request.post({
+								return request.post({
 									url: "/car/deleteMany",
 									data: {
 										orderIdList: orderIdList
@@ -218,6 +212,9 @@ Page({
 									});
 								});
 							}
+							wx.navigateTo({
+								url: "/pages/order/order"
+							});
 						});
 
 					} else {

@@ -62,7 +62,9 @@ Page({
 	// 进入菜品主页
 	goToGoodsDetail(e) {
 		let data = e.currentTarget.dataset.data;
+		console.log(data, 777);
 		let goodsid = data.goodsid;
+		console.log(goodsid, 666);
 		wx.navigateTo({
 			url: `/pages/goodsDetail/goodsDetail?id=${goodsid}`
 		});
@@ -104,10 +106,24 @@ Page({
 	// 点击联系商家
 	connectShop(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data, 577);
+		let actions = [ // 联系商家按钮
+			{
+				name: "联系商家"
+			},
+			{
+				name: "申请退款"
+			},
+		];
+		if(data.status == 4) {
+			actions = [ // 联系商家按钮
+				{
+					name: "联系商家"
+				},
+			];
+		}
 		this.setData({
 			orderid: data.id
-		}, () =>this.setData({show: true,}));
+		}, () =>this.setData({show: true, actions}));
 	},
 
 	onClose() {
@@ -119,13 +135,10 @@ Page({
 	// 联系商家选择
 	onSelect(event) {
 		let orderid = this.data.orderid;
-		console.log(orderid, 999);
 		request.get({url: "/order/getOrderById", data: {id: orderid}}).then(res => {
-			console.log(res.data, 888);
 			let data = res.data || {};
 			let phone = data.shopPhone || "13670716668";
 			let value = event.detail;
-			console.log(value, 444);
 			if(value.name == "联系商家") {
 				wx.makePhoneCall({
 					phoneNumber: phone // 仅为示例，并非真实的电话号码

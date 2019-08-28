@@ -330,7 +330,9 @@ Page({
    */
 	onLoad: function (options) {
 		let id = options.id || 1;
+		console.log(options, 111);
 		let type = options.type;
+		console.log(id, 999);
 		// 获取商品数据
 		request.get({
 			url: "/goods/getById",
@@ -341,7 +343,6 @@ Page({
 			let data = res.data;
 			data.desc = data.desc ? JSON.parse(data.desc) : [];
 			data.num = 1;
-			console.log(data.leave, data, 90);
 			this.setData({
 				data: data || {},
 				orderList: [data],

@@ -38,7 +38,6 @@
 			</van-cell-group>
 			<view slot="right" bindtap="onDeleteCar" data-item="{{item}}" class="van-swipe-cell__right">删除</view>
 		</van-swipe-cell>
-
 	</scroll-view>
 	<view class="car_footer" wx:if="{{data.length != 0}}">
 	<!-- disabled="{{orderList && orderList.length == 0 ? true : false}}" -->
@@ -46,7 +45,7 @@
 			price="{{ totalPrice }}"
 			button-text="结算"
 			bind:submit="onSubmitOrder">
-			<radio class="car_footer_radio" bindtap="allSelectChange" checked="{{allSelect ? true : false}}" color="#f72728"/>全选
+			<radio class="car_footer_radio" bindtap="allSelectChange" checked="{{allSelect ? true : false}}" color="#f72728">全选</radio>
 			</van-submit-bar>
 	</view>
 	<view class="car_empty" wx:if="{{data.length == 0}}">
