@@ -147,7 +147,6 @@ Page({
 			}
 		}).then((res) => {
 			let data = res.data;
-			console.log(data, 1111);
 			wx.requestPayment({
 				timeStamp: String(data.timeStamp),
 				nonceStr: data.nonceStr,
@@ -181,7 +180,7 @@ Page({
 								people: address.username,
 								phone: address.phone,
 								back_money: money,
-								address: `${address.campus ? address.campus : ""} ${address.floor ? address.floor : ""}`,
+								address: `${address.campus ? address.campus : ""} ${address.floor ? address.floor : ""} ${address.room ? address.room : ""}`,
 								send_price: String(item.shopDetail.send_price),
 								package_cost: String(item.package_cost),
 								order_list: JSON.stringify(order_list)

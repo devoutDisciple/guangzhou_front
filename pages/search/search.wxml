@@ -1,0 +1,85 @@
+<!--pages/home/home.wxml-->
+<view class="home">
+  <scroll-view
+    scroll-y
+    class="home_content">
+    <van-row custom-class="home_content_shop">
+		<van-row custom-class="goods_today" wx:if="{{type == 1 ? goodsList.length != 0 : sortGoodsList.length != 0 }}">
+			<van-col custom-class="goods_item" wx:for="{{type == 1 ? goodsList : sortGoodsList}}" wx:key="{{index}}">
+				<van-row  bindtap="onSearchGoodsDetail" data-data="{{item}}" custom-class="{{index % 2 == 0 ? 'goods_item_img' : 'goods_item_img goods_item_img_right'}}">
+					<image src="{{item.url}}" />
+				</van-row>
+				<van-row custom-class="goods_item_name">{{item.name}}</van-row>
+				<van-row custom-class="goods_item_title">
+					{{item.title ? item.title : ''}}
+				</van-row>
+				<van-row custom-class="goods_item_price">
+					<van-col custom-class="goods_item_price_left">￥{{item.price}}</van-col>
+					<van-col custom-class="goods_item_price_right">月售: {{item.sales}}</van-col>
+				</van-row>
+				<view class="add_car" bindtap="goodsGoCar" data-data="{{item}}">
+					<image src="/asserts/imgs/plus.png" />
+				</view>
+				<view wx:if="{{item.leave == 2 || !item.open}}"  bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no"></view>
+				<view wx:if="{{item.leave == 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已售罄</view>
+				<view wx:if="{{!item.open && item.leave != 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已关闭</view>
+			</van-col>
+		</van-row>
+		<van-row wx:else  custom-class="empty">
+			暂无数据
+		</van-row>
+    </van-row>
+  </scroll-view>
+
+	<!-- 购物车 -->
+	<view class='fixed_car' bindtap="goCar">
+		<image src="/asserts/imgs/car.png" />
+		<view wx:if="{{carNum != 0}}" class="fixed_car_num">{{carNum}}</view>
+	</view>
+	<!-- 登录弹出框 -->
+	<van-popup
+		show="{{ loginPopup }}"
+		position="right"
+		custom-class="login_popup"
+		overlay="{{ false }}"
+		close-on-click-overlay="{{false}}">
+		<button type="primary" class="login_popup_btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+	</van-popup>
+
+	<!-- 规格弹出框 -->
+	<van-popup custom-class="goods_dialog_specification" show="{{ specificationDialog }}" bind:close="onCloseSpecificationDialog">
+		<van-row custom-class="goods_dialog_specification_header">
+			<van-col custom-class="goods_dialog_specification_header_label">规格 </van-col>
+			<van-col custom-class="goods_dialog_specification_header_content">
+				<view
+					wx:for="{{specification}}" wx:key="{{index}}"
+					class="{{specificationActiveIndex != index ? 'goods_dialog_specification_header_content_tag_no' : 'goods_dialog_specification_header_content_tag_no goods_dialog_specification_header_content_tag_select'}}"
+					data-data="{{item}}" data-index="{{index}}" bindtap="selectSpecification">
+					{{item.name}}
+				</view>
+			</van-col>
+		</van-row>
+		<van-row custom-class="goods_dialog_specification_desc">
+			<van-row custom-class="goods_dialog_specification_desc_price">
+				<van-col custom-class="goods_dialog_specification_desc_price_left">￥{{specificationActiveData.price || 0}}</van-col>
+				<van-col custom-class="goods_dialog_specification_desc_price_right">
+					<van-col
+						custom-class="goods_dialog_specification_desc_price_right_img">
+						<image src="/asserts/imgs/sub.png" data-data="{{1}}" bindtap="addGoodsForCarNum"/>
+					</van-col>
+					<van-col custom-class="goods_dialog_specification_desc_price_right_num">{{addCarNum}}</van-col>
+					<van-col
+						custom-class="goods_dialog_specification_desc_price_right_img">
+						<image src="/asserts/imgs/add.png" data-data="{{2}}" bindtap="addGoodsForCarNum"/>
+					</van-col>
+				</van-col>
+			</van-row>
+			<van-row custom-class="goods_dialog_specification_desc_name">{{goodsName}} {{specificationActiveData.name}} ￥{{addCarNum * specificationActiveData.price || 0}}</van-row>
+		</van-row>
+		<van-row custom-class="goods_dialog_specification_desc_btn">
+			<van-button custom-class="goods_dialog_specification_desc_btn1" type="default" bind:click="onCloseSpecificationDialog">取消</van-button>
+			<van-button custom-class="goods_dialog_specification_desc_btn2" type="primary" bind:click="sureSpecificationDialog">确认</van-button>
+		</van-row>
+		<van-toast id="van-toast" />
+	</van-popup>
+</view>

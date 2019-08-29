@@ -207,7 +207,7 @@ Page({
 		let value = e.detail;
 		// 跳转到type页面
 		wx.navigateTo({
-			url: `/pages/type/type?value=${value}&type=search`
+			url: `/pages/search/search?name=${value}`
 		});
 	},
 

@@ -9,6 +9,7 @@
 				<van-row custom-class="myAddress_content_item_desc_address">
 					<van-col custom-class="myAddress_content_item_desc_address_item">{{item.campus}}</van-col>
 					<van-col custom-class="myAddress_content_item_desc_address_item">{{item.floor}}</van-col>
+					<van-col custom-class="myAddress_content_item_desc_address_item">{{item.room}}</van-col>
 				</van-row>
 				<van-row custom-class="myAddress_content_item_desc_person">
 					<van-col custom-class="myAddress_content_item_desc_name">{{item.username}}</van-col>

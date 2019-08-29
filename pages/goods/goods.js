@@ -20,6 +20,7 @@ Page({
 			url: `/pages/goodsDetail/goodsDetail?id=${data.id}`
 		});
 	},
+
 	// 当点击tab的时候
 	onClickTab(e) {
 		let type = e.detail.title, data = this.data.data, showData = [];

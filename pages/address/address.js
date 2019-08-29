@@ -9,6 +9,7 @@ Page({
 		floorDialogVisible: false, // 取餐点的弹框
 		username: "",
 		phone: "",
+		room: "",
 		campus: "",
 		floor: "",
 		position: [], // 全部位置
@@ -104,6 +105,7 @@ Page({
 		if(!value.username) return this.formMessage("请输入联系人姓名");
 		if(!value.phone) return this.formMessage("请输入手机号");
 		if(!value.floor) return this.formMessage("请选择取餐点");
+		if(!value.room) return this.formMessage("请输入房间号");
 		let campus = this.data.campus;
 		let type = this.data.type;
 		value.campus = campus;
@@ -113,6 +115,7 @@ Page({
 				phone: value.phone,
 				campus: campus,
 				address: JSON.stringify(value),
+				room: value.room
 			};
 			return request.post({
 				url: "/user/addAddress",
@@ -185,6 +188,7 @@ Page({
 				type: "edit",
 				username: editData.username,
 				phone: editData.phone,
+				room: editData.room,
 				campus: editData.campus || "",
 				floor: editData.floor || "",
 			});

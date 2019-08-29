@@ -11,8 +11,10 @@
 				<van-row>
 					<van-col custom-class="accounts_content_address_desc">
 						<van-row custom-class="accounts_content_address_desc_address">
+							<van-col custom-class="accounts_content_address_desc_address_item">收货点: </van-col>
 							<van-col custom-class="accounts_content_address_desc_address_item">{{address.campus}}</van-col>
 							<van-col custom-class="accounts_content_address_desc_address_item">{{address.floor}}</van-col>
+							<van-col custom-class="accounts_content_address_desc_address_item">{{address.room}}</van-col>
 						</van-row>
 						<van-row custom-class="accounts_content_address_desc_person">
 							<van-col custom-class="accounts_content_address_desc_name">{{address.username}}</van-col>
