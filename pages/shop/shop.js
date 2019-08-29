@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
 	data: {
-		data: []
+		data: [],
+		shopid: ""
 	},
 
 	// 点击商品的时候，前往商品详情页面
@@ -95,7 +96,18 @@ Page({
 				}
 			});
 			console.log(data, 8999);
-			this.setData({data});
+			this.setData({data, shopid: id});
 		});
 	},
+
+	/**
+   * 用户点击右上角分享
+   */
+	onShareAppMessage: function () {
+		return {
+			title: "青年移动餐厅",
+			path: `/pages/goodsDetail/goodsDetail?id=${this.data.shopid}`,
+			imageUrl: "http://www.bws666.com/LOGO.png"
+		};
+	}
 });

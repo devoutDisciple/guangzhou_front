@@ -115,5 +115,16 @@ Page({
 				console.log(res, "loginFail");
 			}
 		});
+	},
+
+	/**
+   * 用户点击右上角分享
+   */
+	onShareAppMessage: function () {
+		return {
+			title: "青年移动餐厅",
+			path: "/pages/home/home",
+			imageUrl: "http://www.bws666.com/LOGO.png"
+		};
 	}
 });

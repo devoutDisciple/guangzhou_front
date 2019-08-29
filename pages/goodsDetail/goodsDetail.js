@@ -330,9 +330,7 @@ Page({
    */
 	onLoad: function (options) {
 		let id = options.id || 1;
-		console.log(options, 111);
 		let type = options.type;
-		console.log(id, 999);
 		// 获取商品数据
 		request.get({
 			url: "/goods/getById",
@@ -369,5 +367,16 @@ Page({
 			frontColor: "#000000",//前景颜色值
 			backgroundColor: "#ffffff"//背景颜色值
 		});
+	},
+
+	/**
+   * 用户点击右上角分享
+   */
+	onShareAppMessage: function () {
+		return {
+			title: "青年移动餐厅",
+			path: `/pages/goodsDetail/goodsDetail?id=${this.data.goods_id}`,
+			imageUrl: this.data.data.url
+		};
 	}
 });

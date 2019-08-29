@@ -552,9 +552,9 @@ Page({
    */
 	onShareAppMessage: function () {
 		return {
-			title: "贝沃思美食",
+			title: "青年移动餐厅",
 			path: "/pages/home/home",
-			imageUrl: "http://www.bws666.com/goods/K9B47WOAZCA1-1564311179900.jpg"
+			imageUrl: "http://www.bws666.com/LOGO.png"
 		};
 	}
 });
