@@ -95,8 +95,8 @@ Page({
 					}
 				});
 			},
-			fail: res => {
-				console.log(res, "loginFail");
+			fail: err => {
+				console.log(err);
 			}
 		});
 	},
@@ -125,7 +125,6 @@ Page({
 		let data = e.currentTarget.dataset.data;
 		let specification = JSON.parse(data.specification) || [];
 		if(specification && specification.length != 0) {
-			console.log(specification, 32);
 			return this.setData({
 				goodsName: data.name,
 				specification: specification,
@@ -244,7 +243,6 @@ Page({
 	// 点击轮播图
 	swiperClick(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data, 999);
 		// 商店
 		if(data.type == 1) return wx.navigateTo({
 			url: `/pages/shop/shop?id=${data.shopid}`
@@ -389,7 +387,7 @@ Page({
 						this.countCarNum();
 					},
 					fail: err => {
-						console.log(err, 80);
+						console.log(err);
 						wx.showModal({
 							title: "提示",
 							content: "网络异常",
@@ -398,8 +396,8 @@ Page({
 					}
 				});
 			},
-			fail: res => {
-				console.log(res, "loginFail");
+			fail: err => {
+				console.log(err);
 				return this.setData({
 					loginPopup: true
 				});

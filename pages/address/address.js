@@ -184,7 +184,6 @@ Page({
 			let pages = getCurrentPages();
 			let prevPage = pages[pages.length - 2];  //上一个页面
 			let data = prevPage.data, editData = data.editData;
-			console.log(data, editData, 999);
 			this.setData({
 				type: "edit",
 				username: editData.username,

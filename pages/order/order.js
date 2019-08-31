@@ -38,7 +38,6 @@ Page({
 	onSearchOrder(type) {
 		request.get({url: "/order/getListByOpenid", data: {type: type}}).then(res => {
 			let data = res.data || [];
-			console.log(data, 888);
 			this.setData({
 				list: data.map(item => {
 					item.status_cn = orderUtil.filterStatus(item.status);
@@ -51,7 +50,6 @@ Page({
 
 	// 进入商店主页
 	goToShop(e) {
-		console.log(e.currentTarget.dataset.data);
 		let data = e.currentTarget.dataset.data;
 		let shopid = data.shopid;
 		wx.navigateTo({
@@ -62,9 +60,7 @@ Page({
 	// 进入菜品主页
 	goToGoodsDetail(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data, 777);
 		let goodsid = data.goodsid;
-		console.log(goodsid, 666);
 		wx.navigateTo({
 			url: `/pages/goodsDetail/goodsDetail?id=${goodsid}`
 		});
@@ -95,7 +91,6 @@ Page({
 	// 点击评价
 	evaluateOrder(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data, 1111);
 		wx.navigateTo({
 			url: `/pages/orderEvaluate/orderEvaluate?id=${data.id}`
 		});
@@ -149,7 +144,6 @@ Page({
 					cancelButtonText: "联系商家",
 					message: "提前联系商家可以提高退款效率哦"
 				}).then(() => {
-					console.log("申请退款");
 					request.post({url: "/pay/getBackMoneyStatus", data: {id: orderid}}).then(res => {
 						this.onSearchOrder(this.data.activeBar);
 						this.setData({show: false});

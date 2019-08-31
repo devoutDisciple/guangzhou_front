@@ -83,11 +83,9 @@ Page({
 			return;
 		}
 		let campus = wx.getStorageSync("campus");
-		console.log(address, campus, 99);
 		if(address.campus != campus) {
 			return Toast.fail("超出配送范围,请更改收货点");
 		}
-		console.log(orderList, 789);
 
 		// -------------------------- start ---------------------
 
@@ -155,7 +153,6 @@ Page({
 				paySign: data.paySign,
 				success(res2) {
 					if (res2.errMsg == "requestPayment:ok") {
-						console.log("支付成功");
 						let reqParams = [];
 						orderList.map(item => {
 							let order_list = [];
@@ -265,7 +262,6 @@ Page({
 				item.package_cost = item.goods[0].package_cost;
 				item.showComment = "口味,偏好等要求";
 			});
-			console.log(orderList, "orderlist---detail");
 			this.setData({
 				type: "shop",
 				orderList: data.orderList,
@@ -301,7 +297,6 @@ Page({
 					showComment: "口味,偏好等要求",
 				});
 			});
-			console.log(newOderList, "orderlist ---- car");
 			this.setData({
 				type: "car",
 				dataForDeleteCar: data.dataForDeleteCar,

@@ -15,7 +15,6 @@ Page({
 	//  当商品列表点击的时候
 	onGoodsItemClick(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data);
 		wx.navigateTo({
 			url: `/pages/goodsDetail/goodsDetail?id=${data.id}`
 		});
@@ -40,8 +39,7 @@ Page({
 	/**
    * 生命周期函数--监听页面加载
    */
-	onLoad: function (options) {
-		console.log(options);
+	onLoad: function () {
 	},
 
 	// 获取商品数据
@@ -50,7 +48,6 @@ Page({
 		request.get({
 			url: "/type/all"
 		}).then(res => {
-			console.log(res.data);
 			let data = res.data || [];
 			if(data) {
 				data.unshift({
@@ -66,7 +63,6 @@ Page({
 		request.get({
 			url: "/goods/getByCampus"
 		}).then(res => {
-			console.log(res.data);
 			let data = res.data;
 			this.setData({
 				data: data,

@@ -180,7 +180,6 @@ Page({
 			}
 		});
 		if(flag) return Toast.fail(`${goodsName} 等食物未超过商店起送价格!`);
-		console.log(orderList, 888);
 		this.setData({orderList: result, dataForDeleteCar: orderList}, () => {
 			wx.navigateTo({
 				url: "/pages/accounts/accounts?type=car"

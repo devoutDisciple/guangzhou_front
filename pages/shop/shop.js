@@ -14,7 +14,6 @@ Page({
 
 	// 点击商品的时候，前往商品详情页面
 	onSearchGoodsDetail(e) {
-		console.log(e.currentTarget.dataset);
 		let data = e.currentTarget.dataset.data;
 		wx.navigateTo({
 			url: `/pages/goodsDetail/goodsDetail?id=${data.id}&type=shop`
@@ -24,7 +23,6 @@ Page({
 	// 加入购物车
 	goodsGoCar(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data, 99);
 		let goods_id = data.id;
 		let create_time = (new Date()).getTime();
 		request.post({
@@ -81,7 +79,6 @@ Page({
 			url: `/goods/getByShopId?id=${id}`
 		}).then(res => {
 			let data = res.data || [];
-			console.log(data, 999);
 			data.map(item => {
 				let start_time = item.start_time;
 				let end_time = item.end_time;
@@ -95,7 +92,6 @@ Page({
 					item.open = true;
 				}
 			});
-			console.log(data, 8999);
 			this.setData({data, shopid: id});
 		});
 	},

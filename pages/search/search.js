@@ -56,7 +56,6 @@ Page({
 		let data = e.currentTarget.dataset.data;
 		let specification = JSON.parse(data.specification) || [];
 		if(specification && specification.length != 0) {
-			console.log(specification, 32);
 			return this.setData({
 				goodsName: data.name,
 				specification: specification,

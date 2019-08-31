@@ -47,7 +47,6 @@ Page({
 				shopidForSpecification: goodsData.shopid
 			});
 		}
-		console.log(this.data, 999);
 		this.addCar(1, this.data.data.price, {});
 	},
 

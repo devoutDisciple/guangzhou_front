@@ -10,7 +10,6 @@ Page({
 
 	// 点击radio
 	changeRadio: function (e) {
-		console.log(e);
 		let selectIndex = e.currentTarget.dataset.index;
 		let addressList = this.data.addressList;
 		addressList.map((item, index) => {
@@ -25,7 +24,7 @@ Page({
 					address: JSON.stringify(addressList)
 				}
 			}).then(res => {
-				console.log(res, 6378);
+				console.log(res);
 			});
 		});
 	},
@@ -53,8 +52,7 @@ Page({
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function (options) {
-		console.log(options);
+	onLoad: function () {
 		// 设置标题
 		wx.setNavigationBarTitle({
 			title: "我的收货地址"
@@ -68,7 +66,6 @@ Page({
 		request.get({
 			url: "/user/getUserByOpenid"
 		}).then(res => {
-			console.log(res);
 			let address = JSON.parse(res.data.address || []);
 			this.setData({
 				addressList: address

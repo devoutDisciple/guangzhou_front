@@ -26,7 +26,6 @@ Page({
 			// 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
 			// 所以此处加入 callback 以防止这种情况
 			app.userInfoReadyCallback = res => {
-				console.log(res, 34567);
 				this.setData({
 					userInfo: res.userInfo,
 					hasUserInfo: true
@@ -36,7 +35,6 @@ Page({
 			// 在没有 open-type=getUserInfo 版本的兼容处理
 			wx.getUserInfo({
 				success: res => {
-					console.log(res, 2355);
 					app.globalData.userInfo = res.userInfo;
 					this.setData({
 						userInfo: res.userInfo,
@@ -111,8 +109,8 @@ Page({
 					}
 				});
 			},
-			fail: res => {
-				console.log(res, "loginFail");
+			fail: err => {
+				console.log(err);
 			}
 		});
 	},

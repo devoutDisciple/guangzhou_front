@@ -16,7 +16,6 @@ Page({
 
 	// 对商家评价改变
 	onGradeChange(e) {
-		console.log(e, 332);
 		let gradeList = this.data.gradeList;
 		let index = e.currentTarget.dataset.index;
 		let detail = e.detail;

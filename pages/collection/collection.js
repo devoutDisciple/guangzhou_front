@@ -10,7 +10,6 @@ Page({
 
 	// 点击商品的时候
 	onSearchGoodsDetail(e) {
-		console.log(e);
 		let data = e.currentTarget.dataset.data;
 		wx.navigateTo({
 			url: `/pages/goodsDetail/goodsDetail?id=${data.goods_id}`
