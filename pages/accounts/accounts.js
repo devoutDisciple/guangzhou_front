@@ -85,7 +85,7 @@ Page({
 		let campus = wx.getStorageSync("campus");
 		console.log(address, campus, 99);
 		if(address.campus != campus) {
-			return Toast.fail("超出配送范围!");
+			return Toast.fail("超出配送范围,请更改收货点");
 		}
 		console.log(orderList, 789);
 

@@ -14,13 +14,13 @@
 		</van-row>
 		<van-row>
 			<van-row custom-class="address_row">
-				<van-col custom-class="address_row_label">取餐点：</van-col>
+				<van-col custom-class="address_row_label">楼号：</van-col>
 				<van-col custom-class="address_row_input">
 					<input value="{{floor}}" bind:tap="onShowFloorDialog" disabled name="floor" placeholder="请选择取餐点" />
 				</van-col>
 			</van-row>
 			<van-row custom-class="address_row">
-			<van-col custom-class="address_row_label">房间号：</van-col>
+			<van-col custom-class="address_row_label">房号：</van-col>
 			<van-col custom-class="address_row_input">
 				<input name="room" value="{{room}}" placeholder="请填写房间号"/>
 			</van-col>
