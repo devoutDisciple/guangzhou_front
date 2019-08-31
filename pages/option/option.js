@@ -1,4 +1,7 @@
 // pages/opinion/opinion.js
+const request = require("../../utils/request");
+import Toast from "../../dist/toast/toast";
+
 Page({
 
 	/**
@@ -9,15 +12,21 @@ Page({
 	},
 
 	// 表单提交
-	formSubmit() {
-		wx.showModal({
-			title: "提示",
-			content: "提交成功",
-			showCancel: false,
-			success: ({confirm}) => {
-				if(confirm) wx.switchTab({
-					url: "/pages/my/my"
-				});
+	formSubmit(e) {
+		let value = e.detail.value;
+		request.post({
+			url: "/option/add",
+			data: {
+				text: value.text
+			}
+		}).then((res) => {
+			if(res.data == "success") {
+				Toast.success("提交成功!");
+				setTimeout(() => {
+					wx.switchTab({
+						url: "/pages/my/my"
+					});
+				}, 1000);
 			}
 		});
 	},

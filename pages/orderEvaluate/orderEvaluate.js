@@ -48,7 +48,7 @@ Page({
 				}
 			});
 		});
-		wx.navigateTo({
+		wx.redirectTo({
 			url: "/pages/order/order",
 			success: () => {
 				wx.showToast({

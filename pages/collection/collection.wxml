@@ -2,14 +2,19 @@
 	<scroll-view
     scroll-y
 	class="collection_content">
-		<van-row custom-class="collection_content_list" bindtap="onSearchGoodsDetail" data-data="{{item}}" wx:for="{{data}}" wx:key="{{index}}">
-			<van-col custom-class="collection_content_list_img">
-				<image src="{{item.goodsDetail.url}}" />
-			</van-col>
-			<van-col custom-class="collection_content_list_intro">
-				<van-row custom-class="collection_content_list_intro_title">{{item.goodsDetail.name}}</van-row>
-				<van-row custom-class="collection_content_list_intro_price">￥{{item.goodsDetail.price}}</van-row>
-			</van-col>
+		<block wx:if="{{data && data.length != 0}}" wx:for="{{data}}" wx:key="{{index}}">
+			<van-row custom-class="collection_content_list" bindtap="onSearchGoodsDetail" data-data="{{item}}">
+				<van-col custom-class="collection_content_list_img">
+					<image src="{{item.goodsDetail.url}}" />
+				</van-col>
+				<van-col custom-class="collection_content_list_intro">
+					<van-row custom-class="collection_content_list_intro_title">{{item.goodsDetail.name}}</van-row>
+					<van-row custom-class="collection_content_list_intro_price">￥{{item.goodsDetail.price}}</van-row>
+				</van-col>
+			</van-row>
+		</block>
+		<van-row custom-class='collection_item_empty' wx:if="{{list.length == 0}}">
+			暂无记录
 		</van-row>
 	</scroll-view>
 </view>

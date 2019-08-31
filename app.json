@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/option/option",
     "pages/search/search",
     "pages/address/address",
     "pages/orderEvaluate/orderEvaluate",
@@ -16,7 +17,6 @@
     "pages/goods/goods",
     "pages/orderDetail/orderDetail",
     "pages/custom/custom",
-    "pages/option/option",
     "pages/evaluateList/evaluateList"
   ],
   "window": {

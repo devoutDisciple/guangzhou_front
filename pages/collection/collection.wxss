@@ -38,3 +38,12 @@
 	line-height: 20px;
 	color: red;
 }
+.collection_item_empty{
+	height: 100%;
+	width: 100%;
+	color: #fff;
+	text-align: center;
+	line-height: calc(100vh - 44px);
+	font-size: 26px;
+	color: gray;
+}

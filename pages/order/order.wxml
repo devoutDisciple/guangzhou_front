@@ -14,7 +14,22 @@
 					{{item.status_cn}}
 				</van-col>
 			</van-row>
-			<van-row bindtap="goToGoodsDetail" data-data="{{order}}" custom-class='order_item_content' wx:for="{{item.order_list}}" wx:key="{{index}}" wx:for-item="order">
+			<block wx:for="{{item.order_list}}" wx:key="{{index}}" wx:for-item="order">
+				<van-row bindtap="goToGoodsDetail" data-data="{{order}}" custom-class='order_item_content'>
+					<van-col custom-class='order_item_content_left'>
+						<image src="{{order.goodsUrl}}" />
+					</van-col>
+					<van-col custom-class='order_item_content_center'>
+						<van-row custom-class='order_item_content_center_name'>{{order.goodsName}}</van-row>
+						<van-row custom-class='order_item_content_center_desc'>{{order.specification}}</van-row>
+					</van-col>
+					<van-col custom-class='order_item_content_right'>
+						<van-row custom-class='order_item_content_right_price'>￥ {{order.origin_price}}</van-row>
+						<van-row custom-class='order_item_content_right_num'>x {{order.num}}</van-row>
+					</van-col>
+				</van-row>
+			</block>
+			<!-- <van-row bindtap="goToGoodsDetail" data-data="{{order}}" custom-class='order_item_content' wx:for="{{item.order_list}}" wx:key="{{index}}" wx:for-item="order">
 				<van-col custom-class='order_item_content_left'>
 					<image src="{{order.goodsUrl}}" />
 				</van-col>
@@ -26,7 +41,7 @@
 					<van-row custom-class='order_item_content_right_price'>￥ {{order.origin_price}}</van-row>
 					<van-row custom-class='order_item_content_right_num'>x {{order.num}}</van-row>
 				</van-col>
-			</van-row>
+			</van-row> -->
 			<van-row custom-class='order_item_footer'>
 				<van-row custom-class='order_item_footer_total'>餐盒费: ￥ {{item.package_cost}}</van-row>
 				<van-row custom-class='order_item_footer_total'>运送费: ￥ {{item.send_price}}</van-row>

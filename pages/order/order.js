@@ -73,17 +73,15 @@ Page({
 	// 确认收货
 	getGoods(e) {
 		let data = e.currentTarget.dataset.data;
-		console.log(data, 1111);
 		Dialog.confirm({
 			cancelButtonText: "取消",
 			message: "确认商品已送达?"
 		}).then(() => {
 			// on close  updateOrderStatus
 			request.post({url: "/order/updateOrderStatus", data: {status: 3, id: data.id}}).then(res => {
-				console.log(res.data, 888);
 				if(res.data == "success") {
 					this.onSearchOrder(1);
-					wx.navigateTo({
+					wx.redirectTo({
 						url: `/pages/orderEvaluate/orderEvaluate?id=${data.id}`
 					});
 					Toast.success("确认收货成功");

@@ -33,13 +33,13 @@ Page({
 	// 点击新增地址
 	addAddress: function () {
 		// 跳转到新增地址表单页面
-		wx.navigateTo({
+		wx.redirectTo({
 			url: "/pages/address/address?type=create"
 		});
 	},
+
 	// 编辑收货地址
 	goEditPage: function (e) {
-		console.log(e.currentTarget.dataset.item, "editData-----");
 		this.setData({
 			editData: e.currentTarget.dataset.item,
 			editIndex: e.currentTarget.dataset.index,
@@ -70,7 +70,6 @@ Page({
 		}).then(res => {
 			console.log(res);
 			let address = JSON.parse(res.data.address || []);
-			console.log(address, 999);
 			this.setData({
 				addressList: address
 			});

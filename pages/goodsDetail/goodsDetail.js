@@ -47,7 +47,8 @@ Page({
 				shopidForSpecification: goodsData.shopid
 			});
 		}
-		this.addCar(1, this.data.price, {});
+		console.log(this.data, 999);
+		this.addCar(1, this.data.data.price, {});
 	},
 
 	// 加入购物车

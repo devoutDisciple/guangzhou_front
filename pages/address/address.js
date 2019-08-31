@@ -122,7 +122,7 @@ Page({
 				data: params
 			}).then(() => {
 				// 跳转到我的地址页面
-				wx.navigateTo({
+				wx.redirectTo({
 					url: "/pages/myAddress/myAddress"
 				});
 			});
@@ -147,7 +147,7 @@ Page({
 				}
 			}).then(() => {
 				// 跳转到详情页
-				wx.navigateTo({
+				wx.redirectTo({
 					url: "/pages/myAddress/myAddress"
 				});
 			});
@@ -184,6 +184,7 @@ Page({
 			let pages = getCurrentPages();
 			let prevPage = pages[pages.length - 2];  //上一个页面
 			let data = prevPage.data, editData = data.editData;
+			console.log(data, editData, 999);
 			this.setData({
 				type: "edit",
 				username: editData.username,
@@ -232,7 +233,6 @@ Page({
    */
 	onShow: function () {
 		let position = wx.getStorageSync("campus");
-		console.log(position, 78999);
 		this.setData({
 			campus: position || ""
 		}, () => {
