@@ -369,6 +369,14 @@ Page({
 		});
 	},
 
+	//
+	// onShow: function() {
+	// 	this.setData({
+	// 		specificationDialog: false,
+	// 		numDialogVisible: false
+	// 	});
+	// },
+
 	/**
    * 用户点击右上角分享
    */

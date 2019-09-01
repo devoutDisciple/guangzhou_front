@@ -216,7 +216,7 @@
     width: 80rpx;
     height: 80rpx;
     position: fixed;
-    bottom: 20px;
+    bottom: 1px;
     right: 10px;
     border-radius: 100%;
     background: #333333;

@@ -125,11 +125,10 @@ Page({
 		// 	}
 		// }).then(() => {
 		// 	// 支付订单跳转到订单页面
-		// 	wx.navigateTo({
+		// 	wx.redirectTo({
 		// 		url: "/pages/order/order"
 		// 	});
 		// });
-
 		// return;
 
 
@@ -141,7 +140,6 @@ Page({
 			url: "/pay/order",
 			data: {
 				total_fee: money,
-				// total_fee: 0.01,
 			}
 		}).then((res) => {
 			let data = res.data;
@@ -203,12 +201,12 @@ Page({
 									}
 								}).then(() => {
 									// 支付订单跳转到订单页面
-									wx.navigateTo({
+									wx.redirectTo({
 										url: "/pages/order/order"
 									});
 								});
 							}
-							wx.navigateTo({
+							wx.redirectTo({
 								url: "/pages/order/order"
 							});
 						});

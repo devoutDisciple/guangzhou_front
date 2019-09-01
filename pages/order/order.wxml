@@ -10,7 +10,7 @@
 				<van-col custom-class='order_item_title_left'>
 					{{item.shopName}}
 				</van-col>
-				<van-col custom-class='order_item_title_right'>
+				<van-col custom-class="{{item.status == 1 || item.status == 2 ? 'order_item_title_right order_item_title_right_color' : 'order_item_title_right'}}">
 					{{item.status_cn}}
 				</van-col>
 			</van-row>
