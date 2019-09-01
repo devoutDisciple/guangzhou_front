@@ -16,6 +16,10 @@ Page({
 
 	// 获取购物车信息
 	getCarDetail() {
+		wx.showLoading({
+			title: "加载中",
+			mask: true
+		});
 		request.get({
 			url: "/car/getByOpenid",
 		}).then(res => {
@@ -37,6 +41,8 @@ Page({
 			});
 			this.setData({
 				data: data
+			}, () => {
+				wx.hideLoading();
 			});
 		});
 	},

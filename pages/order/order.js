@@ -36,6 +36,10 @@ Page({
 
 	// 查询订单
 	onSearchOrder(type) {
+		wx.showLoading({
+			title: "加载中",
+			mask: true
+		});
 		request.get({url: "/order/getListByOpenid", data: {type: type}}).then(res => {
 			let data = res.data || [];
 			this.setData({
@@ -44,6 +48,8 @@ Page({
 					item.order_time = moment(item.order_time).format("YYYY-MM-DD HH:mm:ss");
 					return item;
 				})
+			}, () => {
+				wx.hideLoading();
 			});
 		});
 	},
