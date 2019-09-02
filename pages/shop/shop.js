@@ -102,7 +102,7 @@ Page({
 	onShareAppMessage: function () {
 		return {
 			title: "青年移动餐厅",
-			path: `/pages/shop/shop?id=${this.data.shopid}`,
+			path: `/pages/home/home?type=shop&id=${this.data.shopid}`,
 			imageUrl: "http://www.bws666.com/LOGO.png"
 		};
 	}

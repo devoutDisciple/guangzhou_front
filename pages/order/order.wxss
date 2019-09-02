@@ -102,19 +102,19 @@
 }
 .order_item_footer_btn_left{
 	font-size: 12px;
-	width: 150px;
+	width: 130px;
 	color: #c8c8c8;
 	margin-top: 3px;
 }
 .order_item_footer_btn_right{
 	text-align: right;
 	color: #3e3e3e;
-	width: calc(100vw - 210px);
+	width: calc(100vw - 190px);
 }
 .order_item_footer_btn_right text{
 	padding: 3px 8px;
 	border: 1px solid #333;
-	margin-left: 10px;
+	/* margin-left: 10px; */
 	display: inline-block;
 	border-radius: 15px;
 }

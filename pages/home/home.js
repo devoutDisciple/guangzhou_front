@@ -38,6 +38,9 @@ Page({
 		goodsidForSpecification: "", // 选择规格的菜品信息
 		shopidForSpecification: "", // 选择规格的菜品信息
 		goodsName: "",
+		shareParams: {
+
+		}
 	},
 
 	// 点击购物车
@@ -354,8 +357,7 @@ Page({
 		});
 	},
 
-	// 获取首页信息
-	getHomeMessage: function() {
+	onIsLogin: function() {
 		// 判断是否存在该用户
 		wx.login({
 			success: data => {
@@ -384,6 +386,23 @@ Page({
 								nickName: user.name
 							}
 						};
+						let sharePrams = this.data.shareParams;
+						if(sharePrams.type && sharePrams.id && sharePrams.show) {
+							this.setData({
+								sharePrams: {}
+							}, () => {
+								if(sharePrams.type == "shop") {
+									wx.navigateTo({
+										url: `/pages/shop/shop?id=${sharePrams.id}`
+									});
+								}
+								if(sharePrams.type == "goods") {
+									wx.navigateTo({
+										url: `/pages/goodsDetail/goodsDetail?id=${sharePrams.id}`
+									});
+								}
+							});
+						}
 						this.countCarNum();
 					},
 					fail: err => {
@@ -403,7 +422,10 @@ Page({
 				});
 			}
 		});
+	},
 
+	// 获取首页信息
+	getHomeMessage: function() {
 		// 获取轮播图数据
 		request.get({
 			url: "/swiper/all"
@@ -505,7 +527,19 @@ Page({
 		});
 	},
 
-	onLoad: function() {
+	onLoad: function(options) {
+		this.onIsLogin();
+		if (options.type && options.id) {
+			let id = options.id;
+			let type = options.type;
+			this.setData({
+				shareParams: {
+					type: type,
+					id: id,
+					show: true
+				}
+			});
+		}
 		// 获取广告图
 		request.get({
 			url: "/adver/getAll"
