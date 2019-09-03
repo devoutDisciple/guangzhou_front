@@ -307,7 +307,14 @@ Page({
 			}
 		}).then(res => {
 			let data = res.data.result, sumEvaluate = res.data.sumEvaluate, evaluateList = [];
+			console.log(data, 111);
 			data.map((item, index) => {
+				if(item.show == 2) {
+					let username = item.username;
+					if(username.length == 1) item.username = "**";
+					if(username.length == 2) item.username = username.slice(0, 1) + "**";
+					if(username.length >= 3) item.username = username.slice(0, 1) + "**" + username.slice(username.length - 1, username.length);
+				}
 				index < 2 ? evaluateList.push(item) : null;
 				item.create_time = moment(Number(item.create_time)).format("YYYY-MM-DD HH:mm:ss");
 			});

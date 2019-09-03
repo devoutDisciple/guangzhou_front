@@ -88,14 +88,15 @@ Page({
 		}
 
 		// -------------------------- start ---------------------
-		let debug = false;
+		let debug = true;
+
 		if(debug) {
 			let reqParams = [];
 			orderList.map(item => {
 				let order_list = [];
 				item.goods.map(good => {
 					order_list.push({
-						goodsid: good.id,
+						goodsid: type == "car" ? good.goodsid : good.id,
 						goodsName: good.name,
 						goodsUrl: good.url,
 						num: good.num,
@@ -156,7 +157,7 @@ Page({
 							let order_list = [];
 							item.goods.map(good => {
 								order_list.push({
-									goodsid: good.id,
+									goodsid: type == "car" ? good.goodsid : good.id,
 									goodsName: good.name,
 									goodsUrl: good.url,
 									origin_price: good.origin_price,

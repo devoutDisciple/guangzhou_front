@@ -11,7 +11,8 @@ Page({
 		success: false,
 		order: {},
 		orderList: [],
-		gradeList: []
+		gradeList: [],
+		radioList: [],
 	},
 
 	// 对商家评价改变
@@ -25,12 +26,21 @@ Page({
 		});
 	},
 
+	// 改变radio选择
+	onRadioChange(e) {
+		let index = e.currentTarget.dataset.data;
+		let radioList = this.data.radioList;
+		radioList[index] = !radioList[index];
+		this.setData({radioList});
+	},
+
 	submit(e) {
 		// 跳转订单页面
 		let order = this.data.order;
 		let value = e.detail.value;
 		let orderList = this.data.orderList;
 		let gradeList = this.data.gradeList;
+		let radioList = this.data.radioList;
 		gradeList.map((item, index) => {
 			let key = "textarea_" + index;
 			request.post({
@@ -44,6 +54,7 @@ Page({
 					create_time: (new Date()).getTime(),
 					avatarUrl: app.globalData.userInfo.avatarUrl,
 					username: app.globalData.userInfo.nickName,
+					show: radioList[index] ? 2 : 1
 				}
 			});
 		});
@@ -69,13 +80,16 @@ Page({
 			let data = res.data || {order_list: []};
 			let orderList = JSON.parse(data.order_list);
 			let gradeList = [];
+			let radioList = [];
 			orderList.map(() => {
 				gradeList.push(3);
+				radioList.push(false);
 			});
 			this.setData({
 				order: data,
 				orderList: orderList,
-				gradeList
+				gradeList,
+				radioList
 			});
 		});
 		// 设置标题

@@ -34,7 +34,7 @@
 	width: 30px;
 }
 .orderEvaluate_people_title_name{
-	width: calc(100vw - 150px);
+	width: calc(100vw - 160px);
 	margin-left: 10px;
 	color: #96a1a6;
 }
@@ -43,6 +43,8 @@
 	text-align: center;
 	font-size: 12px;
 	color: #eeeeee;
+	margin-top: 13px;
+	margin-right: 5px;
 }
 .orderEvaluate_people_grade{
 	text-align: center;

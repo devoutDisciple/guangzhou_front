@@ -10,9 +10,16 @@
 						<van-col custom-class="orderEvaluate_people_title_name">
 							{{item.goodsName}}
 						</van-col>
-						<!-- <van-col custom-class="orderEvaluate_people_title_desc">
-							已对商家匿名
-						</van-col> -->
+						<van-col custom-class="orderEvaluate_people_title_desc">
+							<van-checkbox
+								checked-color="#fdd21f"
+								data-data="{{index}}"
+								value="{{ radioList[index] }}"
+								name="radio_{{index}}"
+								bind:change="onRadioChange">
+								匿名评价
+							</van-checkbox>
+						</van-col>
 					</van-row>
 					<van-row custom-class="orderEvaluate_people_text">
 						{{gradeList[index] == 1 ? "很差" : ''}}

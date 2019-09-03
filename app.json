@@ -1,10 +1,11 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/orderEvaluate/orderEvaluate",
+    "pages/evaluateList/evaluateList",
     "pages/option/option",
     "pages/search/search",
     "pages/address/address",
-    "pages/orderEvaluate/orderEvaluate",
     "pages/my/my",
     "pages/order/order",
     "pages/test/test",
@@ -16,8 +17,7 @@
     "pages/collection/collection",
     "pages/goods/goods",
     "pages/orderDetail/orderDetail",
-    "pages/custom/custom",
-    "pages/evaluateList/evaluateList"
+    "pages/custom/custom"
   ],
   "window": {
     "backgroundTextStyle": "light",
