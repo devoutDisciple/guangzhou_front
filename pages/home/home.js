@@ -257,8 +257,9 @@ Page({
 	},
 
 	// tab切换
-	changeSortType() {
+	changeSortType(e) {
 		let type = this.data.type;
+		console.log(e);
 		this.setData({
 			type: type == 1 ? 2 : 1
 		});

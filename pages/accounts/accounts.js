@@ -88,7 +88,7 @@ Page({
 		}
 
 		// -------------------------- start ---------------------
-		let debug = true;
+		let debug = false;
 
 		if(debug) {
 			let reqParams = [];
