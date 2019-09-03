@@ -96,6 +96,10 @@
 	text-align: right;
 	font-size: 14px;
 }
+.order_item_footer_total_first{
+	font-size: 12px;
+	color: #c8c8c8;
+}
 .order_item_footer_btn{
 	margin-top: 10px;
 	font-size: 12px;

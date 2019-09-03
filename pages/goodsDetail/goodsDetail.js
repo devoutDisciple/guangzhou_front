@@ -10,7 +10,9 @@ Page({
 		data: {}, // 商品详情数据
 		goods_id: 1, // 商品id
 		shop_id: "1", //商店id
-		shopDetail: {},// 商店详情
+		shopDetail: {
+			open: true
+		},// 商店详情
 		type: "detail", // 正常是商品详情页面，但是从商店点击进来为shop，不显示更多按钮
 		isCollection: false, // 是否已经收藏  默认没有收藏
 		orderList: [], // 订单页面所需要的数据
@@ -286,10 +288,10 @@ Page({
 				end_time = moment(moment(end_time).add(1, "days")).valueOf();
 			}
 			let now = moment(new Date().getTime());
+			data.open = false;
 			if((now >= start_time && now <= end_time) && data.status == 1) {
 				data.open = true;
 			}
-
 			this.setData({
 				shopDetail: data
 			});
