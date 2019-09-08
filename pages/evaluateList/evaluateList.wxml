@@ -10,7 +10,7 @@
 						{{item.username}}
 					</van-row>
 					<van-row custom-class="evaluate_item_title_right_name_grade">
-						<van-rate color="#f44" value="{{item.shop_grade}}" size="{{12}}" readonly />
+						<van-rate color="#f44" value="{{item.goods_grade}}" size="{{12}}" readonly />
 					</van-row>
 				</van-col>
 				<van-col custom-class="evaluate_item_title_right_time">

@@ -43,10 +43,10 @@
 				</van-col>
 			</van-row> -->
 			<van-row custom-class='order_item_footer'>
-				<van-row custom-class='order_item_footer_total order_item_footer_total_first'>共 {{item.order_list.length}} 件商品</van-row>
+				<!-- <van-row custom-class='order_item_footer_total order_item_footer_total_first'>共 {{item.order_list.length}} 件商品</van-row> -->
 				<van-row custom-class='order_item_footer_total'>餐盒费: ￥ {{item.package_cost}}</van-row>
 				<van-row custom-class='order_item_footer_total'>运送费: ￥ {{item.send_price}}</van-row>
-				<van-row custom-class='order_item_footer_total'>合计: ￥ {{item.total_price}}</van-row>
+				<van-row custom-class='order_item_footer_total'>共 {{item.order_list.length}} 件商品 合计: ￥ {{item.total_price}}</van-row>
 				<van-row custom-class='order_item_footer_btn'>
 					<van-col custom-class='order_item_footer_btn_left'>{{item.order_time}}</van-col>
 					<van-col custom-class='order_item_footer_btn_right'>

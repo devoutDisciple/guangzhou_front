@@ -82,8 +82,8 @@ Page({
 			let gradeList = [];
 			let radioList = [];
 			orderList.map(() => {
-				gradeList.push(3);
-				radioList.push(false);
+				gradeList.push(5);
+				radioList.push(true);
 			});
 			this.setData({
 				order: data,

@@ -347,6 +347,11 @@ Page({
 				// this.getLoactionByUser();
 			}
 		});
+		// 是否查询购物车
+		// this.countCarNum();
+		if(app.globalData.openid) {
+			this.countCarNum();
+		}
 		// 设置标题
 		wx.setNavigationBarTitle({
 			title: "贝沃思美食"
