@@ -16,6 +16,7 @@ Page({
 		show: false, // 备注信息弹框是否开启
 		commentId: "", // 备注信息id
 		dataForDeleteCar: [], // 要删除的购物车信息
+		commentValue: "",
 	},
 
 	// 点击新增收货地址
@@ -28,9 +29,11 @@ Page({
 	// 点击新增备注
 	addComment(e) {
 		let data = e.currentTarget.dataset.data;
+		console.log(data, 11);
 		this.setData({
 			show: !this.data.show,
-			commentId: data.shopDetail.id
+			commentId: data.shopDetail.id,
+			commentValue: data.comment
 		});
 	},
 
@@ -88,7 +91,7 @@ Page({
 		}
 
 		// -------------------------- start ---------------------
-		let debug = false;
+		let debug = true;
 
 		if(debug) {
 			let reqParams = [];
