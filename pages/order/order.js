@@ -105,24 +105,20 @@ Page({
 	// 点击联系商家
 	connectShop(e) {
 		let data = e.currentTarget.dataset.data;
-		let actions = [ // 联系商家按钮
-			{
-				name: "联系商家"
-			},
-			{
-				name: "申请退款"
-			},
-		];
-		if(data.status == 4 || data.status == 3) {
-			actions = [ // 联系商家按钮
-				{
-					name: "联系商家"
-				},
-			];
+		let orderid = data.id;
+		console.log(orderid, 999);
+		if(data.status == 4 || data.status == 3 || data.status == 5) {
+			return request.get({url: "/order/getOrderById", data: {id: orderid}}).then(res => {
+				let data = res.data || {};
+				let phone = data.shopPhone || "13670716668";
+				wx.makePhoneCall({
+					phoneNumber: phone // 仅为示例，并非真实的电话号码
+				});
+			});
 		}
 		this.setData({
 			orderid: data.id
-		}, () =>this.setData({show: true, actions}));
+		}, () =>this.setData({show: true}));
 	},
 
 	onClose() {
@@ -183,6 +179,14 @@ Page({
    * 生命周期函数--监听页面显示
    */
 	onShow: function () {
+		wx.setNavigationBarTitle({
+			title: "我的订单"
+		});
+		// 设置导航栏颜色
+		wx.setNavigationBarColor({
+			frontColor: "#f9f9f9", //前景颜色值
+			backgroundColor: "#f9f9f9" //背景颜色值
+		});
 		this.onSearchOrder(1);
 	},
 });

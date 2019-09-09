@@ -62,15 +62,7 @@ Page({
 			frontColor: "#000000", //前景颜色值
 			backgroundColor: "#fff" //背景颜色值
 		});
-		// getUserByOpenid
-		request.get({
-			url: "/user/getUserByOpenid"
-		}).then(res => {
-			let address = JSON.parse(res.data.address || []);
-			this.setData({
-				addressList: address
-			});
-		});
+
 	},
 
 	/**
@@ -84,7 +76,15 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function () {
-
+		// getUserByOpenid
+		request.get({
+			url: "/user/getUserByOpenid"
+		}).then(res => {
+			let address = JSON.parse(res.data.address || []);
+			this.setData({
+				addressList: address
+			});
+		});
 	},
 
 	/**
