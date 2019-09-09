@@ -76,7 +76,7 @@
     <van-row custom-class="home_content_shop">
 		<van-row custom-class="home_content_today" bindtap="changeSortType">
 			<!-- <van-col custom-class="home_content_today_line home_content_today_line_first"></van-col> -->
-			<van-col custom-class="home_content_today_text home_content_today_text_select">{{type == 1 ? "综合排序" : "销量最高"}}</van-col>
+			<van-col custom-class="home_content_today_text2 home_content_today_text_select">{{type == 1 ? "综合排序" : "销量最高"}}</van-col>
 			<van-icon custom-class="home_content_today_text_icon" name="play" />
 			<!-- <van-col custom-class="home_content_today_line"></van-col> -->
 		</van-row>

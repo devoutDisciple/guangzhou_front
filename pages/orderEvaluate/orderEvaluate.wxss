@@ -1,9 +1,16 @@
 .orderEvaluate{
 	height: 100vh;
 	width: 100vw;
-	background: #f9f9f9;
 	font-size: 14px;
+	background: #f9f9f9;
 	color: #333;
+  	overflow: hidden;
+}
+.orderEvaluate_scroll{
+	height: 100vh;
+	width: calc(100vw - 20px);
+	background: #fff;
+	margin-left: 10px;
 }
 .orderEvaluate_item{
 	background:#f9f9f9;
@@ -11,7 +18,6 @@
 }
 .orderEvaluate_content{
 	width: calc(100vw - 20px);
-	margin-left: 10px;
 	background: #fff;
 }
 .orderEvaluate_people{

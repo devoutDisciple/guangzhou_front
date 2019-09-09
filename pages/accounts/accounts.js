@@ -91,7 +91,7 @@ Page({
 		}
 
 		// -------------------------- start ---------------------
-		let debug = true;
+		let debug = false;
 
 		if(debug) {
 			let reqParams = [];
@@ -129,7 +129,7 @@ Page({
 				}
 			}).then(() => {
 			// 支付订单跳转到订单页面
-				wx.redirectTo({
+				wx.switchTab({
 					url: "/pages/order/order"
 				});
 			});
@@ -205,12 +205,12 @@ Page({
 									}
 								}).then(() => {
 									// 支付订单跳转到订单页面
-									wx.redirectTo({
+									wx.switchTab({
 										url: "/pages/order/order"
 									});
 								});
 							}
-							wx.redirectTo({
+							wx.switchTab({
 								url: "/pages/order/order"
 							});
 						});

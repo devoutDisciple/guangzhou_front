@@ -58,7 +58,7 @@ Page({
 				}
 			});
 		});
-		wx.redirectTo({
+		wx.switchTab({
 			url: "/pages/order/order",
 			success: () => {
 				wx.showToast({

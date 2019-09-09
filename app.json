@@ -34,6 +34,12 @@
         "text": "主页",
         "iconPath": "asserts/imgs/home.png",
         "selectedIconPath": "asserts/imgs/homeSelect.png"
+	  },
+	  {
+        "pagePath": "pages/order/order",
+        "text": "订单",
+        "iconPath": "asserts/imgs/order.png",
+        "selectedIconPath": "asserts/imgs/orderSelect.png"
       },
       {
         "pagePath": "pages/my/my",

@@ -67,7 +67,7 @@ Page({
 	},
 	// 点击我的订单
 	onClickMyOrder() {
-		wx.navigateTo({
+		wx.switchTab({
 			url: "/pages/order/order"
 		});
 	},

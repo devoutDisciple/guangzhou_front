@@ -1,42 +1,48 @@
-<scroll-view scroll-y class="orderEvaluate">
-	<form bindsubmit="submit">
-		<van-row custom-class="orderEvaluate_item" wx:for="{{orderList}}" wx:key="{{index}}">
-			<van-row custom-class="orderEvaluate_content">
-				<van-row custom-class="orderEvaluate_people">
-					<van-row custom-class="orderEvaluate_people_title">
-						<van-col custom-class="orderEvaluate_people_title_image">
-							<image src="{{item.goodsUrl}}" />
-						</van-col>
-						<van-col custom-class="orderEvaluate_people_title_name">
-							{{item.goodsName}}
-						</van-col>
-						<van-col custom-class="orderEvaluate_people_title_desc">
-							<van-checkbox
-								checked-color="#fdd21f"
-								data-data="{{index}}"
-								value="{{ radioList[index] }}"
-								name="radio_{{index}}"
-								bind:change="onRadioChange">
-								匿名评价
-							</van-checkbox>
-						</van-col>
-					</van-row>
-					<van-row custom-class="orderEvaluate_people_text">
-						{{gradeList[index] == 1 ? "很差" : ''}}
-						{{gradeList[index] == 2 ? "一般" : ''}}
-						{{gradeList[index] == 3 ? "满意" : ''}}
-						{{gradeList[index] == 4 ? "非常满意" : ''}}
-						{{gradeList[index] == 5 ? "无可挑剔" : ''}}
-					</van-row>
-					<van-row custom-class="orderEvaluate_people_grade">
-						<van-rate value="{{gradeList[index]}}" size="{{30}}" data-index="{{index}}" bind:change="onGradeChange" />
+<view class="orderEvaluate">
+	<scroll-view scroll-y class="orderEvaluate_scroll">
+		<form bindsubmit="submit">
+			<block wx:for="{{orderList}}" wx:key="{{index}}">
+				<van-row custom-class="orderEvaluate_item">
+					<van-row custom-class="orderEvaluate_content">
+						<van-row custom-class="orderEvaluate_people">
+							<van-row custom-class="orderEvaluate_people_title">
+								<van-col custom-class="orderEvaluate_people_title_image">
+									<image src="{{item.goodsUrl}}" />
+								</van-col>
+								<van-col custom-class="orderEvaluate_people_title_name">
+									{{item.goodsName}}
+								</van-col>
+								<van-col custom-class="orderEvaluate_people_title_desc">
+									<van-checkbox
+										checked-color="#fdd21f"
+										data-data="{{index}}"
+										value="{{ radioList[index] }}"
+										name="radio_{{index}}"
+										bind:change="onRadioChange">
+										匿名评价
+									</van-checkbox>
+								</van-col>
+							</van-row>
+							<van-row custom-class="orderEvaluate_people_text">
+								{{gradeList[index] == 1 ? "很差" : ''}}
+								{{gradeList[index] == 2 ? "一般" : ''}}
+								{{gradeList[index] == 3 ? "满意" : ''}}
+								{{gradeList[index] == 4 ? "非常满意" : ''}}
+								{{gradeList[index] == 5 ? "无可挑剔" : ''}}
+							</van-row>
+							<van-row custom-class="orderEvaluate_people_grade">
+								<van-rate value="{{gradeList[index]}}" size="{{30}}" data-index="{{index}}" bind:change="onGradeChange" />
+							</van-row>
+						</van-row>
+						<textarea wx:key="{{index}}" class='orderEvaluate_text_area' placeholder="请输入您的意见，方便我们为您提供更好的服务！" name="textarea_{{index}}"/>
 					</van-row>
 				</van-row>
-				<textarea wx:key="{{index}}" class='orderEvaluate_text_area' placeholder="请输入您的意见，方便我们为您提供更好的服务！" name="textarea_{{index}}"/>
+			</block>
+
+			<van-row custom-class="orderEvaluate_btn">
+				<button form-type="submit" class="orderEvaluate_btn_active">提交评价</button>
 			</van-row>
-		</van-row>
-		<van-row custom-class="orderEvaluate_btn">
-			<button form-type="submit" class="orderEvaluate_btn_active">提交评价</button>
-		</van-row>
-	</form>
-</scroll-view>
+		</form>
+	</scroll-view>
+</view>
+

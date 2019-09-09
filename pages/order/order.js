@@ -113,7 +113,7 @@ Page({
 				name: "申请退款"
 			},
 		];
-		if(data.status == 4) {
+		if(data.status == 4 || data.status == 3) {
 			actions = [ // 联系商家按钮
 				{
 					name: "联系商家"
