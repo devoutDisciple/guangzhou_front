@@ -107,7 +107,7 @@
 	color: #333;
 }
 .home_content_today_text_select{
-	margin-left: calc(50vw - 40px);
+	margin-left: calc(50vw - 42px);
 	margin-right: 0;
 }
 .home_content_today_text_icon{
@@ -159,7 +159,7 @@
     width: 25px;
     height: 25px;
     right: 6px;
-    bottom: 6px;
+    bottom: 10px;
 }
 
 .add_car image {
@@ -206,26 +206,28 @@
     margin-left: 10px;
     position: relative;
     height: 30px;
-    line-height: 30px;
 }
 
 .goods_item_price_left {
 	float: left;
 	color: red;
-    font-size: 16px;
+	font-size: 16px;
+	height: 30px;
+	/* position: relative; */
 }
-
 .goods_item_price_right {
 	font-size: 10px;
 	color: gray;
 	text-align: center;
 	margin-left: 10px;
+	height: 30px;
+	padding-top: 6px;
+	/* position: relative; */
 }
 
 .home_content_shop {
     width: 100vw;
     min-height: 40px;
-    line-height: 40px;
     font-size: 14px;
 }
 
