@@ -82,7 +82,7 @@ Page({
 			let gradeList = [];
 			let radioList = [];
 			orderList.map(() => {
-				gradeList.push(0);
+				gradeList.push(5);
 				radioList.push(true);
 			});
 			this.setData({

@@ -16,7 +16,7 @@ module.exports = {
 			result = "已取消";
 			break;
 		case 5:
-			result = "已评论";
+			result = "已完成";
 			break;
 		case 6:
 			result = "退款中";

@@ -83,7 +83,7 @@ Page({
 			request.post({url: "/order/updateOrderStatus", data: {status: 3, id: data.id}}).then(res => {
 				if(res.data == "success") {
 					this.onSearchOrder(1);
-					wx.redirectTo({
+					wx.navigateTo({
 						url: `/pages/orderEvaluate/orderEvaluate?id=${data.id}`
 					});
 					Toast.success("确认收货成功");
@@ -106,7 +106,6 @@ Page({
 	connectShop(e) {
 		let data = e.currentTarget.dataset.data;
 		let orderid = data.id;
-		console.log(orderid, 999);
 		if(data.status == 4 || data.status == 3 || data.status == 5) {
 			return request.get({url: "/order/getOrderById", data: {id: orderid}}).then(res => {
 				let data = res.data || {};
@@ -165,14 +164,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
 	onLoad: function () {
-		wx.setNavigationBarTitle({
-			title: "我的订单"
-		});
-		// 设置导航栏颜色
-		wx.setNavigationBarColor({
-			frontColor: "#000000", //前景颜色值
-			backgroundColor: "#f2f2f2" //背景颜色值
-		});
 	},
 
 	/**
@@ -184,8 +175,8 @@ Page({
 		});
 		// 设置导航栏颜色
 		wx.setNavigationBarColor({
-			frontColor: "#f9f9f9", //前景颜色值
-			backgroundColor: "#f9f9f9" //背景颜色值
+			frontColor: "#000000", //前景颜色值
+			backgroundColor: "#f2f2f2" //背景颜色值
 		});
 		this.onSearchOrder(1);
 	},
