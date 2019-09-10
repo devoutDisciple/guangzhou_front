@@ -391,7 +391,7 @@ Page({
    */
 	onShareAppMessage: function () {
 		return {
-			title: "青年移动餐厅",
+			title: "专注每一道私房菜!",
 			path: `/pages/home/home?type=goods&id=${this.data.goods_id}`,
 			imageUrl: this.data.data.url
 		};

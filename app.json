@@ -22,7 +22,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "贝沃思美食",
+    "navigationBarTitleText": "贝沃思私厨",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

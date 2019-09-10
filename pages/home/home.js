@@ -354,7 +354,7 @@ Page({
 		}
 		// 设置标题
 		wx.setNavigationBarTitle({
-			title: "贝沃思美食"
+			title: "贝沃思私厨"
 		});
 		// 设置导航栏颜色
 		wx.setNavigationBarColor({
@@ -590,7 +590,7 @@ Page({
    */
 	onShareAppMessage: function () {
 		return {
-			title: "青年移动餐厅",
+			title: "注每一道私房菜!",
 			path: "/pages/home/home",
 			imageUrl: "http://www.bws666.com/LOGO.png"
 		};

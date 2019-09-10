@@ -120,7 +120,7 @@ Page({
    */
 	onShareAppMessage: function () {
 		return {
-			title: "青年移动餐厅",
+			title: "注每一道私房菜!",
 			path: "/pages/home/home",
 			imageUrl: "http://www.bws666.com/LOGO.png"
 		};
