@@ -14,15 +14,15 @@
 		</van-row>
 		<van-row>
 		<van-row custom-class="address_row">
-			<van-col custom-class="address_row_label">楼号：</van-col>
+			<van-col custom-class="address_row_label">小区：</van-col>
 			<van-col custom-class="address_row_input">
-				<input name="floor" value="{{floor}}" bind:tap="onShowFloorDialog" disabled="{{true}}"  placeholder="请选择取餐点" />
+				<input name="floor" value="{{floor}}" bind:tap="onShowFloorDialog" disabled="{{true}}"  placeholder="如果无可选小区请选择其它" />
 			</van-col>
 		</van-row>
 		<van-row custom-class="address_row">
-			<van-col custom-class="address_row_label">房号：</van-col>
+			<van-col custom-class="address_row_label">详细地址：</van-col>
 			<van-col custom-class="address_row_input">
-				<input name="room" value="{{room}}" placeholder="请填写房间号"/>
+				<input name="room" value="{{room}}" placeholder="例：5栋1梯301"/>
 			</van-col>
 		</van-row>
 			<van-row custom-class="address_row_btn">

@@ -50,7 +50,7 @@
 				<van-row custom-class='order_item_footer_btn'>
 					<van-col custom-class='order_item_footer_btn_left'>{{item.order_time}}</van-col>
 					<van-col custom-class='order_item_footer_btn_right'>
-						<text bindtap="connectShop" data-data="{{item}}" wx:if="{{item.status != 7}}">联系商家</text>
+						<text bindtap="connectShop" data-data="{{item}}" wx:if="{{item.status != 7}}">联系私厨</text>
 						<text bindtap="getGoods" data-data="{{item}}" wx:if="{{item.status == 1 || item.status == 2  || item.status == 8 || item.status == 6}}">确认收货</text>
 						<!-- 1-未派送 2-派送中 3-订单完成 4-已取消 5-已评价 6-退款中 7-退款完成 -->
 						<text bindtap="evaluateOrder" data-data="{{item}}" wx:if="{{item.status == 3}}">评论</text>

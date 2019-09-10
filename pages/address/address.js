@@ -103,8 +103,8 @@ Page({
 		// 选择校内
 		if(!value.username) return this.formMessage("请输入联系人姓名");
 		if(!value.phone) return this.formMessage("请输入手机号");
-		if(!value.floor) return this.formMessage("请选择取餐点");
-		if(!value.room) return this.formMessage("请输入房间号");
+		if(!value.floor) return this.formMessage("请选择小区");
+		if(!value.room) return this.formMessage("请输入详细地址");
 		let campus = this.data.campus;
 		let type = this.data.type;
 		value.campus = campus;

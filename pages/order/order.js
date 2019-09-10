@@ -12,9 +12,9 @@ Page({
 	data: {
 		activeBar: 1, // 应该显示的订单bar
 		list: [], // 显示的订单
-		actions: [ // 联系商家按钮
+		actions: [ // 联系私厨按钮
 			{
-				name: "联系商家"
+				name: "联系私厨"
 			},
 			{
 				name: "申请退款"
@@ -102,7 +102,7 @@ Page({
 		});
 	},
 
-	// 点击联系商家
+	// 点击联系私厨
 	connectShop(e) {
 		let data = e.currentTarget.dataset.data;
 		let orderid = data.id;
@@ -126,24 +126,24 @@ Page({
 		});
 	},
 
-	// 联系商家选择
+	// 联系私厨选择
 	onSelect(event) {
 		let orderid = this.data.orderid;
 		request.get({url: "/order/getOrderById", data: {id: orderid}}).then(res => {
 			let data = res.data || {};
 			let phone = data.shopPhone || "13670716668";
 			let value = event.detail;
-			if(value.name == "联系商家") {
+			if(value.name == "联系私厨") {
 				wx.makePhoneCall({
 					phoneNumber: phone // 仅为示例，并非真实的电话号码
 				});
 			}
 			if(value.name == "申请退款") {
 				Dialog.confirm({
-					title: "建议联系商家",
+					title: "建议联系私厨",
 					confirmButtonText: "申请退款",
-					cancelButtonText: "联系商家",
-					message: "提前联系商家可以提高退款效率哦"
+					cancelButtonText: "联系私厨",
+					message: "提前联系私厨可以提高退款效率哦"
 				}).then(() => {
 					request.post({url: "/pay/getBackMoneyStatus", data: {id: orderid}}).then(res => {
 						this.onSearchOrder(this.data.activeBar);

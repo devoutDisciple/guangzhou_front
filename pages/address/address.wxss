@@ -18,7 +18,7 @@
 	color: #fff;
 }
 .address_row_input{
-	width: calc(100vw - 80px);
+	width: calc(100vw - 90px);
 	margin-top: -4px;
 }
 .address_row_radio_col_second{
