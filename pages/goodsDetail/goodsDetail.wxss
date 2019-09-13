@@ -141,12 +141,12 @@
 /* 商品详情下面的图片 */
 .goodsDetail_content_detail{
 	min-height: 100px;
-	width: calc(100vw - 20px);
-	margin-left: 10px;
+	width: 100vw;
 }
 .goodsDetail_content_detail image{
-	width: calc(100vw - 20px);
+	width: 100vw;
 	overflow: hidden;
+	display: block;
 }
 .collection_red{
 	color: red;

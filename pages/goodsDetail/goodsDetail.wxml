@@ -76,7 +76,7 @@
 			<van-goods-action-icon icon-class="collection_red" wx:if="{{isCollection}}" icon="like" text="已收藏" bindtap="removeCollection"/>
 			<van-goods-action-icon wx:if="{{!isCollection}}" icon="like-o" text="收藏" bindtap="addCollection" color="#9b9b9b"/>
 			<van-goods-action-icon wx:if="{{type == 'detail'}}" icon="cart-o" text="加入购物车"  bindtap="onClickAddCarIcon"/>
-			<van-goods-action-button text="更多菜品" type="warning" bind:click="goShop"/>
+			<van-goods-action-button text="更多商品" type="warning" bind:click="goShop"/>
 			<van-goods-action-button text="立即购买" bind:click="onClickBuyIcon"/>
 		</van-goods-action>
 		<van-goods-action wx:if="{{!shopDetail.open}}">
