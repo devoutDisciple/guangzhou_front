@@ -101,7 +101,7 @@ Page({
    */
 	onShareAppMessage: function () {
 		return {
-			title: "注每一道私房菜!",
+			title: "专注每一道私房菜!",
 			path: `/pages/home/home?type=shop&id=${this.data.shopid}`,
 			imageUrl: "http://www.bws666.com/LOGO.png"
 		};

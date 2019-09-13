@@ -180,4 +180,15 @@ Page({
 		});
 		this.onSearchOrder(1);
 	},
+
+	/**
+   * 用户点击右上角分享
+   */
+	onShareAppMessage: function () {
+		return {
+			title: "专注每一道私房菜!",
+			path: "/pages/home/home",
+			imageUrl: "http://www.bws666.com/LOGO.png"
+		};
+	}
 });
