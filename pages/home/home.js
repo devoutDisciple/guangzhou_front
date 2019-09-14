@@ -75,7 +75,7 @@ Page({
 					data: Object.assign({
 						code: data.code,
 						appid: config.appid,
-						AppSecret: config.AppSecret,
+						secret: config.rand_string,
 						grant_type: config.grant_type,
 						avatarUrl: userInfo.avatarUrl,
 						name: userInfo.nickName
@@ -373,7 +373,7 @@ Page({
 					data: Object.assign({
 						code: data.code,
 						appid: config.appid,
-						AppSecret: config.AppSecret,
+						secret: config.rand_string,
 						grant_type: config.grant_type,
 					}),
 					success: res => {
