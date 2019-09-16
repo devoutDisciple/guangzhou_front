@@ -146,4 +146,25 @@
 	</van-popup>
 
 	<van-toast id="van-toast" />
+	<!-- 登录弹出框 -->
+	<!-- <van-popup
+		show="{{ loginPopup }}"
+		position="right"
+		custom-class="login_popup"
+		overlay="{{ false }}"
+		close-on-click-overlay="{{false}}">
+		<button type="primary" class="login_popup_btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+	</van-popup> -->
+	<van-popup
+		show="{{ loginPopup }}"
+		position="bottom"
+		custom-class="login_popup"
+		overlay="{{ true }}"
+		close-on-click-overlay="{{false}}">
+		<van-row custom-class="login_popup_title">
+			您还未登录,请先点击登录
+		</van-row>
+		<button type="default" bindtap="onCloseLoginDialog" size="mini" class="login_popup_btn"> 取消 </button>
+		<button type="primary" size="mini" class="login_popup_btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+	</van-popup>
 </van-col>

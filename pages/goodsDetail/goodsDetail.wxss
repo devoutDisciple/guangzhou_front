@@ -138,6 +138,21 @@
 	font-size: 14px;
 }
 
+
+.login_popup {
+    text-align: center;
+}
+.login_popup_title{
+	line-height: 50px;
+	color: #333;
+	font-size: 14px;
+}
+.login_popup_btn {
+	width: 100px;
+	display: inline-block;
+	margin: 10px;
+}
+
 /* 商品详情下面的图片 */
 .goodsDetail_content_detail{
 	min-height: 100px;

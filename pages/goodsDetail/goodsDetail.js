@@ -1,6 +1,9 @@
 const request = require("../../utils/request");
 const moment = require("../../utils/moment.min");
 import Toast from "../../dist/toast/toast";
+const config = require("../../utils/config");
+const app = getApp();
+
 Page({
 
 	/**
@@ -10,6 +13,7 @@ Page({
 		data: {}, // 商品详情数据
 		goods_id: 1, // 商品id
 		shop_id: "1", //商店id
+		loginPopup: false, // 登录弹出框
 		shopDetail: {
 			open: true
 		},// 商店详情
@@ -37,6 +41,11 @@ Page({
 
 	// 点击加入购物车
 	onClickAddCarIcon() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
 		this.setData({payType: 1});
 		let goods_id = this.data.goods_id;
 		let goodsData = this.data.data;
@@ -54,6 +63,11 @@ Page({
 
 	// 加入购物车
 	addCar(num, price, specification) {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
 		let goods_id = this.data.goods_id;
 		let create_time = (new Date()).getTime();
 		request.post({
@@ -165,9 +179,13 @@ Page({
 		});
 	},
 
-
 	// 点击收藏 addCollection
 	addCollection() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
 		let goods_id = this.data.goods_id;
 		let create_time = (new Date()).getTime();
 		request.post({
@@ -184,8 +202,21 @@ Page({
 		});
 	},
 
+	// 关闭登录弹框
+	onCloseLoginDialog(data) {
+		console.log(data, 123);
+		this.setData({
+			loginPopup: false,
+		});
+	},
+
 	// 移除收藏
 	removeCollection() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
 		let goods_id = this.data.goods_id;
 		request.post({
 			url: "/collection/removeCollectionGoods",
@@ -209,6 +240,11 @@ Page({
 
 	// 点击立即购买
 	onClickBuyIcon() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
 		this.setData({payType: 2});
 		let goodsData = this.data.data;
 		let goods_id = this.data.goods_id;
@@ -230,6 +266,11 @@ Page({
 
 	// 购买
 	buy(num, price, specification) {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
 		let goods = this.data.data, shopDetail = this.data.shopDetail;
 		goods.num = num;
 		goods.origin_price = price;
@@ -377,6 +418,50 @@ Page({
 			backgroundColor: "#ffffff"//背景颜色值
 		});
 	},
+
+	// 用户注册
+	getUserInfo(e) {
+		let userInfo = e.detail.userInfo;
+		app.globalData.userInfo = userInfo;
+		// 获取用户code
+		wx.login({
+			success: data => {
+				wx.request({
+					method: "POST",
+					url: config.baseUrl + "/user/register",
+					data: Object.assign({
+						code: data.code,
+						appid: config.appid,
+						secret: config.rand_string,
+						grant_type: config.grant_type,
+						avatarUrl: userInfo.avatarUrl,
+						name: userInfo.nickName
+					}),
+					success: res => {
+						console.log(res.data.data);
+						// 保存openid
+						app.globalData.openid = res.data.data.data;
+						// 关闭弹框
+						this.setData({
+							loginPopup: false
+						});
+					},
+					fail: err => {
+						console.log(err);
+						wx.showModal({
+							title: "提示",
+							content: "网络异常",
+							showCancel: false
+						});
+					}
+				});
+			},
+			fail: err => {
+				console.log(err);
+			}
+		});
+	},
+
 
 	//
 	// onShow: function() {

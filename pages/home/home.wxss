@@ -256,15 +256,17 @@
 }
 
 .login_popup {
-    width: 100vw;
-    height: 100vh;
-    line-height: 100vh;
     text-align: center;
 }
-
+.login_popup_title{
+	line-height: 50px;
+	color: #333;
+	font-size: 14px;
+}
 .login_popup_btn {
-    width: 50%;
-    margin-top: calc(50vh - 23px);
+	width: 100px;
+	display: inline-block;
+	margin: 10px;
 }
 
 .adver_popup{

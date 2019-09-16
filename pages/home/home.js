@@ -2,6 +2,7 @@ const request = require("../../utils/request");
 const config = require("../../utils/config");
 const moment = require("../../utils/moment.min");
 import Toast from "../../dist/toast/toast";
+
 const app = getApp();
 Page({
 	/**
@@ -45,6 +46,11 @@ Page({
 
 	// 点击购物车
 	goCar() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
 		wx.navigateTo({
 			url: "/pages/car/car"
 		});
@@ -81,8 +87,9 @@ Page({
 						name: userInfo.nickName
 					}),
 					success: res => {
+						console.log(res.data.data);
 						// 保存openid
-						app.globalData.openid = res.data.data;
+						app.globalData.openid = res.data.data.data;
 						// 关闭弹框
 						this.setData({
 							loginPopup: false
@@ -101,6 +108,14 @@ Page({
 			fail: err => {
 				console.log(err);
 			}
+		});
+	},
+
+	// 关闭登录弹框
+	onCloseLoginDialog(data) {
+		console.log(data, 123);
+		this.setData({
+			loginPopup: false,
 		});
 	},
 
@@ -123,8 +138,15 @@ Page({
 		});
 	},
 
+
+
 	// 加入购物车
 	goodsGoCar(e) {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
 		let data = e.currentTarget.dataset.data;
 		let specification = JSON.parse(data.specification) || [];
 		if(specification && specification.length != 0) {
@@ -377,14 +399,9 @@ Page({
 						grant_type: config.grant_type,
 					}),
 					success: res => {
-						// 该用户不存在
-						if(res.data.data == "nouser") {
-							return this.setData({
-								loginPopup: true
-							});
-						}
 						// 用户存在
 						let user = res.data.data;
+						console.log(user, 100099);
 						app.globalData = {
 							openid: user.openid,
 							userInfo: {
