@@ -1,4 +1,6 @@
 const request = require("../../utils/request");
+import Dialog from "../../dist/dialog/dialog";
+
 Page({
 
 	/**
@@ -49,6 +51,45 @@ Page({
 			});
 		});
 	},
+
+	onDeleteAdress(e) {
+		let addressList = this.data.addressList;
+		let currentIndex = e.currentTarget.dataset.index;
+		let newAddress = [];
+		Dialog.confirm({
+			title: "是否确认删除该地址",
+			message: "删除后将不可恢复"
+		}).then(() => {
+			wx.showLoading({
+				title: "加载中",
+				mask: true
+			});
+			addressList.map((item, index) => {
+				if(index != currentIndex) newAddress.push(item);
+			});
+			console.log(newAddress, 99);
+			request.post({
+				url: "/user/updateAddress",
+				data: {
+					address: JSON.stringify(newAddress)
+				}
+			}).then(() => {
+				request.get({
+					url: "/user/getUserByOpenid"
+				}).then(res => {
+					let address = JSON.parse(res.data.address || []);
+					this.setData({
+						addressList: address
+					});
+				});
+				wx.hideLoading();
+			});
+		}).catch(() => {
+			// on cancel
+			wx.hideLoading();
+		});
+	},
+
 	/**
 	 * 生命周期函数--监听页面加载
 	 */

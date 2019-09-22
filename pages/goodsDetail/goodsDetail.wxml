@@ -67,7 +67,9 @@
 			</van-row>
 		</van-row>
 		<van-row custom-class="goodsDetail_content_detail">
-			<image mode="widthFix" wx:for="{{data.desc}}" src="{{item}}" wx:key="{{index}}" alt="暂无数据" />
+			<block wx:for="{{data.desc}}" wx:key="{{index}}">
+				<image bind:tap="onPreviewImage" data-data="{{item}}"  mode="widthFix" src="{{item}}" alt="暂无数据" />
+			</block>
 		</van-row>
 	</scroll-view>
 

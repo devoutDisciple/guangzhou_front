@@ -203,10 +203,19 @@ Page({
 	},
 
 	// 关闭登录弹框
-	onCloseLoginDialog(data) {
-		console.log(data, 123);
+	onCloseLoginDialog() {
 		this.setData({
 			loginPopup: false,
+		});
+	},
+
+	// 图片预览
+	onPreviewImage(e) {
+		console.log(e);
+		let data = e.currentTarget.dataset.data;
+		wx.previewImage({
+			current: data, // 当前显示图片的http链接
+			urls: [data] // 需要预览的图片http链接列表
 		});
 	},
 

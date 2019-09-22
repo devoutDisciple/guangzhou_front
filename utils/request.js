@@ -9,7 +9,7 @@ module.exports = {
 				method: "GET",
 				url: baseUrl + params.url,
 				data: Object.assign({
-					openid: app.globalData.openid,
+					openid: app.globalData.openid || "oKw4p450ND5YU2HMpFZ0iPoVtd-I",
 					position: position
 				}, params.data),
 				success: function(res) {
@@ -44,7 +44,7 @@ module.exports = {
 				method: "POST",
 				url: baseUrl + params.url,
 				data: Object.assign({
-					openid: app.globalData.openid,
+					openid: app.globalData.openid || "oKw4p450ND5YU2HMpFZ0iPoVtd-I",
 					position: position
 				}, params.data),
 				success: function(res) {

@@ -1,27 +1,31 @@
 <!-- <van-row></van-row> -->
 <view class="myAddress">
 	<scroll-view class="myAddress_content" scroll-y>
-		<van-row custom-class="myAddress_content_item" wx:for="{{addressList}}" wx:key="{{index}}">
-			<van-col custom-class="myAddress_content_item_radio">
-				<van-checkbox bindtap="changeRadio" value="{{item.default}}" data-index="{{index}}" checked-color="#07c160"></van-checkbox>
-			</van-col>
-			<van-col custom-class="myAddress_content_item_desc">
-				<van-row custom-class="myAddress_content_item_desc_address">
-					<van-col custom-class="myAddress_content_item_desc_address_item">{{item.campus}}</van-col>
-					<van-col custom-class="myAddress_content_item_desc_address_item">{{item.floor}}</van-col>
-					<van-col custom-class="myAddress_content_item_desc_address_item">{{item.room}}</van-col>
-				</van-row>
-				<van-row custom-class="myAddress_content_item_desc_person">
-					<van-col custom-class="myAddress_content_item_desc_name">{{item.username}}</van-col>
-					<van-col custom-class="myAddress_content_item_desc_phone">{{item.phone}}</van-col>
-				</van-row>
-			</van-col>
-			<van-col custom-class="myAddress_content_item_edit" bindtap="goEditPage" data-item="{{item}}" data-index="{{index}}">
-				<image src="/asserts/imgs/edit.png" />
-			</van-col>
-		</van-row>
+		<van-swipe-cell right-width="{{ 65 }}" wx:for="{{addressList}}" wx:key="{{index}}">
+			<van-row custom-class="myAddress_content_item">
+				<van-col custom-class="myAddress_content_item_radio">
+					<van-checkbox bindtap="changeRadio" value="{{item.default}}" data-index="{{index}}" checked-color="#07c160"></van-checkbox>
+				</van-col>
+				<van-col custom-class="myAddress_content_item_desc">
+					<van-row custom-class="myAddress_content_item_desc_address">
+						<van-col custom-class="myAddress_content_item_desc_address_item">{{item.campus}}</van-col>
+						<van-col custom-class="myAddress_content_item_desc_address_item">{{item.floor}}</van-col>
+						<van-col custom-class="myAddress_content_item_desc_address_item">{{item.room}}</van-col>
+					</van-row>
+					<van-row custom-class="myAddress_content_item_desc_person">
+						<van-col custom-class="myAddress_content_item_desc_name">{{item.username}}</van-col>
+						<van-col custom-class="myAddress_content_item_desc_phone">{{item.phone}}</van-col>
+					</van-row>
+				</van-col>
+				<van-col custom-class="myAddress_content_item_edit" bindtap="goEditPage" data-item="{{item}}" data-index="{{index}}">
+					<image src="/asserts/imgs/edit.png" />
+				</van-col>
+			</van-row>
+			<view slot="right" bindtap="onDeleteAdress" data-data="{{item}}" data-index="{{index}}" class="van-swipe-cell__right">删除</view>
+		</van-swipe-cell>
 	</scroll-view>
 	<van-row custom-class="myAddress_footer" bindtap="addAddress">
 		＋ 新增收货地址
 	</van-row>
+	<van-dialog id="van-dialog" />
 </view>
