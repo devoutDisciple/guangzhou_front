@@ -268,7 +268,7 @@ Page({
 		} else {
 			this.setData({
 				numDialogVisible: true,
-				goodsNumPrice: this.data.price
+				goodsNumPrice: Number(this.data.data.price).toFixed(2)
 			});
 		}
 	},
