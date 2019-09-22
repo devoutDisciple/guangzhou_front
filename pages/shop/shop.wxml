@@ -18,5 +18,17 @@
 			<view wx:if="{{item.leave == 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已售罄</view>
 			<view wx:if="{{!item.open && item.leave != 2}}" bindtap="onSearchGoodsDetail" data-data="{{item}}" class="leave_no_text">已关闭</view>
 		</van-col>
+		<van-popup
+			show="{{ loginPopup }}"
+			position="bottom"
+			custom-class="login_popup"
+			overlay="{{ true }}"
+			close-on-click-overlay="{{false}}">
+			<van-row custom-class="login_popup_title">
+				您还未登录,请先点击登录
+			</van-row>
+			<button type="default" bindtap="onCloseLoginDialog" size="mini" class="login_popup_btn"> 取消 </button>
+			<button type="primary" size="mini" class="login_popup_btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 登录 </button>
+		</van-popup>
 	</scroll-view>
 </view>

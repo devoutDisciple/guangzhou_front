@@ -2,6 +2,9 @@
 // const app = getApp();
 const request = require("../../utils/request");
 const moment = require("../../utils/moment.min");
+const config = require("../../utils/config");
+const app = getApp();
+
 Page({
 
 	/**
@@ -22,6 +25,11 @@ Page({
 
 	// 加入购物车
 	goodsGoCar(e) {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
 		let data = e.currentTarget.dataset.data;
 		let goods_id = data.id;
 		let create_time = (new Date()).getTime();
@@ -93,6 +101,57 @@ Page({
 				}
 			});
 			this.setData({data, shopid: id});
+		});
+	},
+
+	// 用户注册
+	getUserInfo(e) {
+		let userInfo = e.detail.userInfo;
+		app.globalData.userInfo = userInfo;
+		// 获取用户code
+		wx.login({
+			success: data => {
+				wx.request({
+					method: "POST",
+					url: config.baseUrl + "/user/register",
+					data: Object.assign({
+						code: data.code,
+						appid: config.appid,
+						secret: config.rand_string,
+						grant_type: config.grant_type,
+						avatarUrl: userInfo.avatarUrl,
+						name: userInfo.nickName
+					}),
+					success: res => {
+						console.log(res.data.data);
+						// 保存openid
+						app.globalData.openid = res.data.data.data;
+						// 关闭弹框
+						this.setData({
+							loginPopup: false
+						});
+					},
+					fail: err => {
+						console.log(err);
+						wx.showModal({
+							title: "提示",
+							content: "网络异常",
+							showCancel: false
+						});
+					}
+				});
+			},
+			fail: err => {
+				console.log(err);
+			}
+		});
+	},
+
+	// 关闭登录弹框
+	onCloseLoginDialog(data) {
+		console.log(data, 123);
+		this.setData({
+			loginPopup: false,
 		});
 	},
 

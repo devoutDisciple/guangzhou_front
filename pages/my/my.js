@@ -9,15 +9,11 @@ Page({
 		hasUserInfo: false,
 		canIUse: wx.canIUse("button.open-type.getUserInfo")
 	},
-	// 点击新增收货地址
-	onClickAddAddress() {
-		wx.navigateTo({
-			url: "/pages/myAddress/myAddress"
-		});
-	},
+
 	//事件处理函数
 	onLoad: function () {
-		if (app.globalData.userInfo) {
+		console.log(app.globalData.userInfo);
+		if (app.globalData.userInfo && app.globalData.userInfo.avatarUrl && app.globalData.userInfo.nickName) {
 			this.setData({
 				userInfo: app.globalData.userInfo,
 				hasUserInfo: true
@@ -53,30 +49,77 @@ Page({
 			backgroundColor: "#fff"//背景颜色值
 		});
 	},
+
+	// 点击我的收货地址
+	onClickAddAddress() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return wx.showToast({
+				title: "请先登录!",
+				icon: "none",
+				duration: 1000
+			});
+		}
+		wx.navigateTo({
+			url: "/pages/myAddress/myAddress"
+		});
+	},
+
 	// 我的客服
 	onClickMyService() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return wx.showToast({
+				title: "请先登录!",
+				icon: "none",
+				duration: 1000
+			});
+		}
 		wx.navigateTo({
 			url: "/pages/custom/custom"
 		});
 	},
+
 	// 点击意见与反馈
 	onClickOption() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return wx.showToast({
+				title: "请先登录!",
+				icon: "none",
+				duration: 1000
+			});
+		}
 		wx.navigateTo({
 			url: "/pages/option/option"
 		});
 	},
+
 	// 点击我的订单
 	onClickMyOrder() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return wx.showToast({
+				title: "请先登录!",
+				icon: "none",
+				duration: 1000
+			});
+		}
 		wx.switchTab({
 			url: "/pages/order/order"
 		});
 	},
+
 	// 点击我的收藏
 	onClickMyCollect() {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return wx.showToast({
+				title: "请先登录!",
+				icon: "none",
+				duration: 1000
+			});
+		}
 		wx.navigateTo({
 			url: "/pages/collection/collection"
 		});
 	},
+
 	// 登录按钮点击的时候
 	getUserInfo: function(e) {
 		let userInfo = e.detail.userInfo;
@@ -96,8 +139,14 @@ Page({
 						name: userInfo.nickName
 					}),
 					success: res => {
+						console.log(res.data.data);
 						// 保存openid
-						app.globalData.openid = res.data.data;
+						app.globalData.openid = res.data.data.data;
+						// 关闭弹框
+						this.setData({
+							userInfo: app.globalData.userInfo,
+							hasUserInfo: true
+						});
 					},
 					fail: err => {
 						console.log(err);

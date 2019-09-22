@@ -2,8 +2,8 @@ const request = require("../../utils/request");
 const config = require("../../utils/config");
 const moment = require("../../utils/moment.min");
 import Toast from "../../dist/toast/toast";
-
 const app = getApp();
+
 Page({
 	/**
    * 页面的初始数据
@@ -401,7 +401,6 @@ Page({
 					success: res => {
 						// 用户存在
 						let user = res.data.data;
-						console.log(user, 100099);
 						app.globalData = {
 							openid: user.openid,
 							userInfo: {
