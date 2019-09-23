@@ -3,6 +3,7 @@
 const request = require("../../utils/request");
 const moment = require("../../utils/moment.min");
 const config = require("../../utils/config");
+import Toast from "../../dist/toast/toast";
 const app = getApp();
 
 Page({
@@ -12,7 +13,36 @@ Page({
    */
 	data: {
 		data: [],
-		shopid: ""
+		shopid: "",
+		goodsData: {},
+		specificationDialog: false, // 规格弹出框
+		addCarNum: 1, // 将要添加到购物车的数量
+		specification: [], // 规格信息
+		specificationActiveIndex: -1, // 默认选择的那个规格小标
+		specificationActiveData: {}, // 选择的规格信息
+		goodsidForSpecification: "", // 选择规格的菜品信息
+		shopidForSpecification: "", // 选择规格的菜品信息
+		goodsName: ""
+	},
+
+
+	// 改变要加入购物车的商品数量
+	addGoodsForCarNum(e) {
+		let data = e.currentTarget.dataset.data;
+		let num = this.data.addCarNum;
+		if(data == 1 && num == 1) return;
+		this.setData({
+			addCarNum: data == 1 ? this.data.addCarNum - 1 : this.data.addCarNum + 1
+		});
+	},
+
+	// 选择规格
+	selectSpecification(e) {
+		let {data, index} = e.currentTarget.dataset;
+		this.setData({
+			specificationActiveIndex: index,
+			specificationActiveData: data
+		});
 	},
 
 	// 点击商品的时候，前往商品详情页面
@@ -33,6 +63,18 @@ Page({
 		let data = e.currentTarget.dataset.data;
 		let goods_id = data.id;
 		let create_time = (new Date()).getTime();
+		let specification = JSON.parse(data.specification) || [];
+		if(specification && specification.length != 0) {
+			return this.setData({
+				specificationActiveIndex: 0,
+				goodsData: data,
+				specificationActiveData: specification[0],
+				specification: specification,
+				specificationDialog: true,
+				goodsidForSpecification: goods_id,
+				shopidForSpecification: data.shopid
+			});
+		}
 		request.post({
 			url: "/car/addCarGoods",
 			data: {
@@ -55,6 +97,71 @@ Page({
 				duration: 1000
 			});
 		});
+	},
+
+	// 关闭规格弹框
+	onCloseSpecificationDialog() {
+		this.setData({
+			specificationDialog: false, // 规格弹出框
+			addCarNum: 1, // 将要添加到购物车的数量
+			specification: [], // 规格信息
+			specificationActiveIndex: -1, // 默认选择的那个规格小标
+			specificationActiveData: {}, // 选择的规格信息
+			goodsidForSpecification: "", // 选择规格的菜品信息
+			shopidForSpecification: "", // 选择规格的菜品信息
+		});
+	},
+
+	// 加入购物车
+	addCar(num, price, specification) {
+		if(!app.globalData.userInfo || !app.globalData.userInfo.avatarUrl) {
+			return this.setData({
+				loginPopup: true
+			});
+		}
+		let goods_id = this.data.goodsData.id;
+		let create_time = (new Date()).getTime();
+		request.post({
+			url: "/car/addCarGoods",
+			data: {
+				goods_id,
+				create_time,
+				shop_id: this.data.goodsData.shopid,
+				num: num,
+				price: price,
+				specification: JSON.stringify(specification)
+			}
+		}).then((res) => {
+			if(res.data == "have one") {
+				return wx.showToast({
+					title: "已添加过该商品",
+					icon: "warn",
+					duration: 1000
+				});
+			}
+			wx.showToast({
+				title: "加入成功",
+				icon: "success",
+				duration: 1000
+			});
+		});
+	},
+
+	// 选择规格确认
+	sureSpecificationDialog() {
+		let {addCarNum, specificationActiveData} = this.data;
+		if(!specificationActiveData.name) return Toast.fail("请选择规格");
+		this.setData({
+			specificationDialog: false, // 规格弹出框
+		}, () => {
+			this.setData({
+				addCarNum: 1, // 将要添加到购物车的数量
+				specification: [], // 规格信息
+				specificationActiveIndex: -1, // 默认选择的那个规格小标
+				specificationActiveData: {}, // 选择的规格信息
+			});
+		});
+		return this.addCar(addCarNum, specificationActiveData.price, specificationActiveData);
 	},
 
 	/**
@@ -123,7 +230,6 @@ Page({
 						name: userInfo.nickName
 					}),
 					success: res => {
-						console.log(res.data.data);
 						// 保存openid
 						app.globalData.openid = res.data.data.data;
 						// 关闭弹框
@@ -148,8 +254,7 @@ Page({
 	},
 
 	// 关闭登录弹框
-	onCloseLoginDialog(data) {
-		console.log(data, 123);
+	onCloseLoginDialog() {
 		this.setData({
 			loginPopup: false,
 		});

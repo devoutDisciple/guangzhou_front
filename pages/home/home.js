@@ -152,6 +152,8 @@ Page({
 		if(specification && specification.length != 0) {
 			return this.setData({
 				goodsName: data.name,
+				specificationActiveIndex: 0,
+				specificationActiveData: specification[0],
 				specification: specification,
 				specificationDialog: true,
 				goodsidForSpecification: data.id,

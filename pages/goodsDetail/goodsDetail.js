@@ -52,6 +52,8 @@ Page({
 		let specification = JSON.parse(goodsData.specification) || [];
 		if(specification && specification.length != 0) {
 			return this.setData({
+				specificationActiveIndex: 0,
+				specificationActiveData: specification[0],
 				specification: specification,
 				specificationDialog: true,
 				goodsidForSpecification: goods_id,
@@ -260,6 +262,8 @@ Page({
 		let specification = JSON.parse(goodsData.specification) || [];
 		if(specification && specification.length != 0) {
 			return this.setData({
+				specificationActiveIndex: 0,
+				specificationActiveData: specification[0],
 				specification: specification,
 				specificationDialog: true,
 				goodsidForSpecification: goods_id,
