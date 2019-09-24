@@ -10,8 +10,7 @@ Page({
 		canIUse: wx.canIUse("button.open-type.getUserInfo")
 	},
 
-	//事件处理函数
-	onLoad: function () {
+	onShow: function () {
 		console.log(app.globalData.userInfo);
 		if (app.globalData.userInfo && app.globalData.userInfo.avatarUrl && app.globalData.userInfo.nickName) {
 			this.setData({
@@ -48,6 +47,16 @@ Page({
 			frontColor: "#000000",//前景颜色值
 			backgroundColor: "#fff"//背景颜色值
 		});
+	},
+
+	//事件处理函数
+	onLoad: function () {
+		if (app.globalData.userInfo && app.globalData.userInfo.avatarUrl && app.globalData.userInfo.nickName) {
+			this.setData({
+				userInfo: app.globalData.userInfo,
+				hasUserInfo: true
+			});
+		}
 	},
 
 	// 点击我的收货地址

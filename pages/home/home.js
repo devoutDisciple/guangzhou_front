@@ -87,9 +87,10 @@ Page({
 						name: userInfo.nickName
 					}),
 					success: res => {
-						console.log(res.data.data);
-						// 保存openid
-						app.globalData.openid = res.data.data.data;
+						app.globalData = {
+							userInfo: userInfo,
+							openid: res.data.data.data
+						};
 						// 关闭弹框
 						this.setData({
 							loginPopup: false
@@ -97,6 +98,7 @@ Page({
 					},
 					fail: err => {
 						console.log(err);
+						app.globalData.userInfo = userInfo;
 						wx.showModal({
 							title: "提示",
 							content: "网络异常",
@@ -137,8 +139,6 @@ Page({
 			specificationActiveData: data
 		});
 	},
-
-
 
 	// 加入购物车
 	goodsGoCar(e) {
